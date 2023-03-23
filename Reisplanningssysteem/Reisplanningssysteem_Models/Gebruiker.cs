@@ -38,6 +38,8 @@ namespace Reisplanningssysteem_Models
         [Required]
         public int GemeenteId { get; set; }
 
+        public string MedischeGegevens { get; set; }
+
         // Navigation properties
         public Gemeente Gemeente { get; set; }
 

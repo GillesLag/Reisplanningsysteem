@@ -92,6 +92,13 @@ namespace Reisplanningssysteem_DAL
                 .HasForeignKey(x => x.ReisId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Bestemming>()
+                .HasOne(x => x.Gemeente)
+                .WithMany(x => x.Bestemmingen)
+                .HasForeignKey(x => x.GemeenteId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

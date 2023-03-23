@@ -16,5 +16,6 @@ namespace Reisplanningssysteem_Models
 
         // Navigation properties
         public ICollection<Gebruiker> Gebruikers { get; set; }
+        public ICollection<Bestemming> Bestemmingen { get; set; }
     }
 }
