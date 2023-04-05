@@ -39,12 +39,22 @@
                 Width="200px"
                 HorizontalAlignment="Right"
                 Command="{Binding}" CommandParameter="Toevoegen" />
+
+
         <DataGrid x:Name="datagridStores"
-                  ItemsSource="{Binding Gebruikers}"
-                  SelectedItem="{Binding GeselecteerdeGebruiker}"
-                   Grid.Row="1" Grid.ColumnSpan="2" AutoGenerateColumns="True"
+                  ItemsSource="{Binding Bestemmingen}"
+                  SelectedItem="{Binding GeselecteerdeBestemming}"
+                  Grid.Row="1" Grid.ColumnSpan="2" AutoGenerateColumns="False"
                   IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Naam}" Header="Naam"/>
+                <DataGridTextColumn Binding="{Binding Land}" Header="Land"/>
+                <DataGridTextColumn Binding="{Binding Gemeente.Naam}" Header="Gemeente"/>
+                <DataGridTextColumn Binding="{Binding Straat}" Header="Straat"/>
+                <DataGridTextColumn Binding="{Binding Huisnummer}" Header="Huisnummer"/>
+            </DataGrid.Columns>
         </DataGrid>
+        
         <Button Grid.Column="0"
                 Grid.Row="2"
                 Style="{StaticResource MaterialDesignRaisedLightButton}"
