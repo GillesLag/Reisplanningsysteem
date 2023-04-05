@@ -42,8 +42,17 @@
         <DataGrid x:Name="datagridStores"
                   ItemsSource="{Binding Gebruikers}"
                   SelectedItem="{Binding GeselecteerdeGebruiker}"
-                   Grid.Row="1" Grid.ColumnSpan="2" AutoGenerateColumns="True"
+                  Grid.Row="1" Grid.ColumnSpan="2" AutoGenerateColumns="False"
                   IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Voornaam}" Header="Voornaam"/>
+                <DataGridTextColumn Binding="{Binding Achternaam}" Header="Familienaam"/>
+                <DataGridTextColumn Binding="{Binding Email}" Header="Email"/>
+                <DataGridTextColumn Binding="{Binding Straat}" Header="Straat"/>
+                <DataGridTextColumn Binding="{Binding Huisnummer}" Header="Nummer"/>
+                <DataGridTextColumn Binding="{Binding Gemeente.Naam}" Header="Gemeente"/>
+
+            </DataGrid.Columns>
         </DataGrid>
         <Button Grid.Column="0"
                 Grid.Row="2"
@@ -51,7 +60,7 @@
                 ToolTip="Resource name: MaterialDesignRaisedLightButton"
                 Content="Bewerken"
                 Margin="5"
-                Command="{Binding}" CommandParameter="OpenPersoonBewerken" />
+                Command="{Binding}" CommandParameter="Bewerken" />
         <Button Grid.Column="1"
                 Grid.Row="2"
                 Style="{StaticResource MaterialDesignOutlinedLightButton}"

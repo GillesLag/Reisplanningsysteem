@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Reisplanningssysteem_WPF.Views;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,12 +13,23 @@ namespace Reisplanningssysteem_WPF.ViewModels
 
         public override bool CanExecute(object parameter)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public override void Execute(object parameter)
         {
-            throw new NotImplementedException();
+            switch (parameter.ToString())
+            {
+                case "OpenPersonenBeheren": OpenPersonenBeherenView(); break;
+            }
+        }
+
+        private void OpenPersonenBeherenView()
+        {
+            var vm = new PersonenBeherenViewModel();
+            var view = new PersonenBeherenView();
+            view.DataContext = vm;
+            view.Show();
         }
     }
 }

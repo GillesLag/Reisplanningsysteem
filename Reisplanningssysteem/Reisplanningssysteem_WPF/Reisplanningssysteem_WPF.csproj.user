@@ -22,6 +22,9 @@
     <Compile Update="Views\PersonenBeherenView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\PersoonView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\ReizenBeherenView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -40,6 +43,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\PersonenBeherenView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\PersoonView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\ReizenBeherenView.xaml">
