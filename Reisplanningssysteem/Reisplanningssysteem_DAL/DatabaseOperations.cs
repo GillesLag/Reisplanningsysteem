@@ -33,5 +33,29 @@ namespace Reisplanningssysteem_DAL
                 return 0;
             }
         }
+
+        public static int BestemmingToevoegen(Bestemming bestemming)
+        {
+            try
+            {
+                using (ReisplanningssysteemContext ctx = new())
+                {
+                    ctx.Entry(bestemming).State = EntityState.Added;
+                    return ctx.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        public static List<Gemeente> GemeentenOphalen()
+        {
+            using (ReisplanningssysteemContext ctx = new())
+            {
+                return ctx.Gemeenten.ToList();
+            }
+        }
     }
 }

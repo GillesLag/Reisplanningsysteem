@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Reisplanningssysteem_Models
 {
-    public class Gemeente
+    public partial class Gemeente
     {
         [Key, Required]
         public int Id { get; set; }

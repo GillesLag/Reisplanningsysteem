@@ -19,6 +19,7 @@
             <RowDefinition Height="auto" />
             <RowDefinition />
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -31,6 +32,7 @@
                 Margin="5"
                 FontWeight="Bold"
                 FontSize="20px"/>
+        
         <Button Grid.Column="1"
                 Style="{StaticResource MaterialDesignRaisedLightButton}"
                 ToolTip="Resource name: MaterialDesignRaisedLightButton"
@@ -38,7 +40,7 @@
                 Margin="5"
                 Width="200px"
                 HorizontalAlignment="Right"
-                Command="{Binding}" CommandParameter="Toevoegen" />
+                Command="{Binding}" CommandParameter="OpenBestemmingToevoegen" />
 
 
         <DataGrid x:Name="datagridStores"
@@ -61,7 +63,8 @@
                 ToolTip="Resource name: MaterialDesignRaisedLightButton"
                 Content="Bewerken"
                 Margin="5"
-                Command="{Binding}" CommandParameter="OpenPersoonBewerken" />
+                Command="{Binding}" CommandParameter="OpenBestemmingBewerken" />
+        
         <Button Grid.Column="1"
                 Grid.Row="2"
                 Style="{StaticResource MaterialDesignOutlinedLightButton}"
@@ -69,5 +72,10 @@
                 Content="Verwijderen"
                 Margin="5"
                 Command="{Binding}" CommandParameter="Verwijderen" />
+
+        <Label Grid.ColumnSpan="2"
+               Grid.Row="3"
+               Content="{Binding Foutmelding}"
+               Foreground="Red"/>
     </Grid>
 </Window>

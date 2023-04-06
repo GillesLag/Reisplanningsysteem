@@ -17,6 +17,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
         {
             switch (parameter.ToString())
             {
+                case "OpenBestemmingBewerken":
                 case "Verwijderen": 
                     if (GeselecteerdeBestemming == null)
                     {
@@ -24,6 +25,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
                     }
 
                     return true;
+                case "OpenBestemmingToevoegen": return true;
             }
 
             return true;
@@ -33,8 +35,19 @@ namespace Reisplanningssysteem_WPF.ViewModels
             switch (parameter.ToString())
             {
                 case "Verwijderen": Verwijderen(); break;
+                case "OpenBestemmingToevoegen":  OpenBestemmingToevoegen(); break;
+                case "OpenBestemmingBewerken":  OpenBestemmingBewerken(); break;
             }
         }
+
+        private string _foutmelding;
+
+        public string Foutmelding
+        {
+            get { return _foutmelding; }
+            set { _foutmelding = value; }
+        }
+
 
         private ObservableCollection<Bestemming> _bestemmingen;
 
@@ -62,7 +75,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
         {
             if (GeselecteerdeBestemming == null)
             {
-                // TODO messagebox.show() implementeren
+                Foutmelding = "Selecteer eerst een bestemming!";
                 return;
             }
 
@@ -70,11 +83,27 @@ namespace Reisplanningssysteem_WPF.ViewModels
 
             if (ok == 0)
             {
-                // messagebox.show() implementeren
+                Foutmelding = "Bestemming is niet verwijderd kunnen worden";
                 return;
             }
 
             Wissen();
+        }
+
+        private void OpenBestemmingToevoegen()
+        {
+            BestemmingBewerkenToevoegenViewModel viewmodel = new();
+            Views.BestemmingBewerkenToevoegenView view = new();
+            view.DataContext = viewmodel;
+            view.Show();
+        }
+
+        private void OpenBestemmingBewerken()
+        {
+            BestemmingBewerkenToevoegenViewModel viewmodel = new(GeselecteerdeBestemming);
+            Views.BestemmingBewerkenToevoegenView view = new();
+            view.DataContext = viewmodel;
+            view.Show();
         }
 
         private void Wissen()
