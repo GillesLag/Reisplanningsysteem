@@ -27,7 +27,7 @@
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <Label  Content="Personen beheren"              
+        <Label  Content="Persoon"              
                 materialDesign:HintAssist.Hint="Zoekterm"
                 Style="{StaticResource MaterialDesignLabel}"
                 VerticalAlignment="Center"
@@ -72,16 +72,17 @@
                 Text="{Binding GebruikerRecord.Huisnummer, ValidatesOnDataErrors=True}" />
         </StackPanel>
 
-        <ComboBox HorizontalAlignment="Left" Grid.Row="3" Grid.Column="1" Name="cmbGemeentes"
-                      Margin="5"
+        <ComboBox HorizontalAlignment="Left" Grid.Row="3" Grid.Column="1" Name="cmbGemeentes"   
+                  Margin="5"
                       Width="190" 
                       ItemsSource="{Binding Gemeentes}"
-                      SelectedValue="{Binding GebruikerRecord.GemeenteId, ValidatesOnDataErrors=True}"
+                      SelectedItem="{Binding GeselecteerdGemeente}"
                       SelectedValuePath="Id"
                       materialDesign:HintAssist.Hint="Gemeente"
+                      Height="33px"
                       />
 
-        <CheckBox HorizontalAlignment="Left" Grid.Row="4" Content="Lid" Width="190" IsChecked="{Binding ProductRecord.IsLid}"/>
+        <CheckBox HorizontalAlignment="Left" Grid.Row="4" Content="Lid" Width="190" Margin="5" IsChecked="{Binding ProductRecord.IsLid}"/>
 
 
         <Button Grid.Column="0"
@@ -91,12 +92,5 @@
                 Content="Bevestig"
                 Margin="5"
                 Command="{Binding}" CommandParameter="Bevestig" />
-        <Button Grid.Column="1"
-                Grid.Row="6"
-                Style="{StaticResource MaterialDesignOutlinedLightButton}"
-                ToolTip="Resource name: MaterialDesignOutlinedLightButton"
-                Content="Annuleer"
-                Margin="5"
-                Command="{Binding}" CommandParameter="Annuleer" />
     </Grid>
 </Window>

@@ -16,7 +16,8 @@ namespace Reisplanningssysteem_DAL
         {
             using (ReisplanningssysteemContext ctx = new ReisplanningssysteemContext())
             {
-                return ctx.Gebruikers.ToList();
+                return ctx.Gebruikers.
+                Include(x => x.Gemeente).ToList();
             }
         }
 
@@ -35,6 +36,20 @@ namespace Reisplanningssysteem_DAL
             {
                 using ReisplanningssysteemContext ctx = new();
                 ctx.Entry(gebruiker).State = EntityState.Deleted;
+                return ctx.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        public static int VoegGebruikerToe(Gebruiker gebruikerRecord)
+        {
+            try
+            {
+                using ReisplanningssysteemContext ctx = new();
+                ctx.Gebruikers.Add(gebruikerRecord);
                 return ctx.SaveChanges();
             }
             catch (Exception)

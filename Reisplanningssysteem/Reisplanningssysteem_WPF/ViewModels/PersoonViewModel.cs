@@ -5,7 +5,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Reisplanningssysteem_WPF.ViewModels
 {
@@ -13,21 +15,28 @@ namespace Reisplanningssysteem_WPF.ViewModels
     {
         private Gebruiker _gebruikerRecord;
         private string _foutmelding;
-
         private ObservableCollection<Gemeente> _gemeentes;
-
+        public Gemeente _geselecteerdGemeente { get; set; }
+        
         public PersoonViewModel(Gebruiker gebruikerRecord)
         {
             GebruikerRecord = gebruikerRecord;
-
             List<Gemeente> gemeentes = DatabaseOperations.OphalenGemeentes();
             Gemeentes = new ObservableCollection<Gemeente>(gemeentes);
         }
 
+        public Gemeente GeselecteerdGemeente
+        {
+            get { return _geselecteerdGemeente; }
+            set
+            {
+                _geselecteerdGemeente = value;
+            }
+        }
+
         public PersoonViewModel()
         {
-            GebruikerRecord = null;
-
+            GebruikerRecord = new Gebruiker();
             List<Gemeente> gemeentes = DatabaseOperations.OphalenGemeentes();
             Gemeentes = new ObservableCollection<Gemeente>(gemeentes);
         }
@@ -69,9 +78,29 @@ namespace Reisplanningssysteem_WPF.ViewModels
 
         public void Toevoegen()
         {
+            if (GeselecteerdGemeente != null)
+            {
+                GebruikerRecord.GemeenteId = GeselecteerdGemeente.Id;
+                GebruikerRecord.BasisCursus = false;
+                GebruikerRecord.HoofmonitorCursus = false;
+                GebruikerRecord.MedischeGegevens = "";
 
+
+                if (GebruikerRecord.IsGeldig())
+                {
+                    int ok = DatabaseOperations.VoegGebruikerToe(GebruikerRecord);
+                    if (ok > 0)
+                    {
+                        MessageBox.Show($"{GebruikerRecord.Voornaam} {GebruikerRecord.Achternaam} is toegevoegd");
+                        Reset();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Gebruiker is niet toegevoegd");
+                    }
+                }
+            }
         }
-
 
         public void Aanpassen()
         {
@@ -80,26 +109,22 @@ namespace Reisplanningssysteem_WPF.ViewModels
 
         public override bool CanExecute(object parameter)
         {
-            switch (parameter.ToString())
-            {
-                case "Bewerken":
-                    return GebruikerRecord != null;
-
-                case "Toevoegen":
-                    return GebruikerRecord == null;
-
-                default:
-                    return true;
-            }
+            return true;
         }
 
         public override void Execute(object parameter)
         {
             switch (parameter.ToString())
             {
-                case "Toevoegen": Toevoegen(); break;
-                case "Aanpassen": Aanpassen(); break;
+                case "Bevestig": Toevoegen(); break;
             }
         }
+
+        public void Reset()
+        {
+            GebruikerRecord = null;
+            Foutmelding = "";
+        }
+
     }
 }

@@ -75,6 +75,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
             switch (parameter.ToString())
             {
                 case "Toevoegen": Toevoegen(); break;
+                case "Verwijderen": Verwijderen(); break;
                 case "OpenPersoonView": OpenPersoonView(); break;
             }
         }
@@ -102,6 +103,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
                 int ok = DatabaseOperations.VerwijderGebruiker(GeselecteerdeGebruiker);
                 if (ok > 0)
                 {
+                    Gebruikers = DatabaseOperations.OphalenLijstGebruikers();
                     GeselecteerdeGebruiker = null;
                     Foutmelding = "";
                 }

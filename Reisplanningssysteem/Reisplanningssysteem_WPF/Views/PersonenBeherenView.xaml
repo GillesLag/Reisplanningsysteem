@@ -50,7 +50,7 @@
                 <DataGridTextColumn Binding="{Binding Email}" Header="Email"/>
                 <DataGridTextColumn Binding="{Binding Straat}" Header="Straat"/>
                 <DataGridTextColumn Binding="{Binding Huisnummer}" Header="Nummer"/>
-                <DataGridTextColumn Binding="{Binding Gemeente.Naam}" Header="Gemeente"/>
+                <DataGridTextColumn Binding="{Binding Gemeente}" Header="Gemeente"/>
 
             </DataGrid.Columns>
         </DataGrid>
