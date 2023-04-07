@@ -50,6 +50,22 @@ namespace Reisplanningssysteem_DAL
             }
         }
 
+        public static int BestemmingBewerken(Bestemming bestemming)
+        {
+            try
+            {
+                using(ReisplanningssysteemContext ctx = new())
+                {
+                    ctx.Entry(bestemming).State = EntityState.Modified;
+                    return ctx.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
         public static List<Gemeente> GemeentenOphalen()
         {
             using (ReisplanningssysteemContext ctx = new())

@@ -30,6 +30,15 @@ namespace Reisplanningssysteem_WPF.ViewModels
             }
         }
 
+        private string _foutmelding;
+
+        public string Foutmelding
+        {
+            get { return _foutmelding; }
+            set { _foutmelding = value; }
+        }
+
+
         private string _bewerkengOfToevoegen;
 
         public string BewerkenOfToevoegen
@@ -80,6 +89,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
 
         public BestemmingBewerkenToevoegenViewModel(Bestemming bestemming)
         {
+            // TODO Problemen met gemeente te binden.
             Bestemming = bestemming;
             BewerkenOfToevoegen = "Bestemming bewerken";
             BewerkenOfToevoegenButton = "Bewerken";
@@ -89,12 +99,55 @@ namespace Reisplanningssysteem_WPF.ViewModels
 
         private void Toevoegen()
         {
+            if (Bestemming == null)
+            {
+                Foutmelding = "Er is iets mis gelopen!";
+                return;
+            }
 
+            if (!Bestemming.IsGeldig())
+            {
+                Foutmelding = "Vul alle velden correct in!";
+                return;
+            }
+
+            Bestemming.GemeenteId = GeselecteerdeGemeente.Id;
+
+            int ok = DatabaseOperations.BestemmingToevoegen(Bestemming);
+
+            if (ok == 0)
+            {
+                Foutmelding = "Het toevoegen van de bestemming is niet gelukt!";
+                return;
+            }
+
+            Bestemming = new Bestemming();
+            GeselecteerdeGemeente = null;
         }
 
         private void Bewerken()
         {
+            if (Bestemming == null)
+            {
+                Foutmelding = "Er is iets mis gelopen!";
+                return;
+            }
 
+            if (!Bestemming.IsGeldig())
+            {
+                Foutmelding = "Vul alle velden correct in!";
+                return;
+            }
+
+            Bestemming.GemeenteId = GeselecteerdeGemeente.Id;
+
+            int ok = DatabaseOperations.BestemmingBewerken(Bestemming);
+
+            if (ok == 0)
+            {
+                Foutmelding = "Het bewerken van de bestemming is niet gelukt!";
+                return;
+            }
         }
     }
 }

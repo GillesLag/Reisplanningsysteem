@@ -95,7 +95,9 @@ namespace Reisplanningssysteem_WPF.ViewModels
             BestemmingBewerkenToevoegenViewModel viewmodel = new();
             Views.BestemmingBewerkenToevoegenView view = new();
             view.DataContext = viewmodel;
-            view.Show();
+            view.ShowDialog();
+
+            Wissen();
         }
 
         private void OpenBestemmingBewerken()
@@ -103,7 +105,9 @@ namespace Reisplanningssysteem_WPF.ViewModels
             BestemmingBewerkenToevoegenViewModel viewmodel = new(GeselecteerdeBestemming);
             Views.BestemmingBewerkenToevoegenView view = new();
             view.DataContext = viewmodel;
-            view.Show();
+            view.ShowDialog();
+
+            Wissen();
         }
 
         private void Wissen()
