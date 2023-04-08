@@ -27,6 +27,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
             {
                 case "Toevoegen": Toevoegen(); break;
                 case "Bewerken": Bewerken(); break;
+                case "Test": Test(); break;
             }
         }
 
@@ -68,7 +69,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
         public Gemeente GeselecteerdeGemeente
         {
             get { return _geselecteerdeGemeente; }
-            set { _geselecteerdeGemeente = value; NotifyPropertyChanged(); }
+            set { _geselecteerdeGemeente = value; }
         }
 
         private Bestemming _bestemming;
@@ -89,7 +90,6 @@ namespace Reisplanningssysteem_WPF.ViewModels
 
         public BestemmingBewerkenToevoegenViewModel(Bestemming bestemming)
         {
-            // TODO Problemen met gemeente te binden.
             Bestemming = bestemming;
             BewerkenOfToevoegen = "Bestemming bewerken";
             BewerkenOfToevoegenButton = "Bewerken";
@@ -111,8 +111,6 @@ namespace Reisplanningssysteem_WPF.ViewModels
                 return;
             }
 
-            Bestemming.GemeenteId = GeselecteerdeGemeente.Id;
-
             int ok = DatabaseOperations.BestemmingToevoegen(Bestemming);
 
             if (ok == 0)
@@ -123,6 +121,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
 
             Bestemming = new Bestemming();
             GeselecteerdeGemeente = null;
+            Foutmelding = "";
         }
 
         private void Bewerken()
@@ -139,8 +138,6 @@ namespace Reisplanningssysteem_WPF.ViewModels
                 return;
             }
 
-            Bestemming.GemeenteId = GeselecteerdeGemeente.Id;
-
             int ok = DatabaseOperations.BestemmingBewerken(Bestemming);
 
             if (ok == 0)
@@ -148,6 +145,13 @@ namespace Reisplanningssysteem_WPF.ViewModels
                 Foutmelding = "Het bewerken van de bestemming is niet gelukt!";
                 return;
             }
+
+            Foutmelding = "";
+        }
+
+        private void Test ()
+        {
+            GeselecteerdeGemeente = Gemeenten[2];
         }
     }
 }

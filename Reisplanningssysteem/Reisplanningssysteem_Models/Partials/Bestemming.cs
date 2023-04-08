@@ -23,11 +23,10 @@ namespace Reisplanningssysteem_Models
                     return "Geef een land in!";
                 }
 
-                // TODO juiste error meegeven
-                /*if (columnName == nameof(GemeenteId) && GemeenteId == null)
+                if (columnName == nameof(GemeenteId) && GemeenteId == 0)
                 {
-                    return "Geef een gemeente in!";
-                }*/
+                    return "Selecteer een gemeente!";
+                }
 
                 if (columnName == nameof(Straat) && string.IsNullOrWhiteSpace(Straat))
                 {

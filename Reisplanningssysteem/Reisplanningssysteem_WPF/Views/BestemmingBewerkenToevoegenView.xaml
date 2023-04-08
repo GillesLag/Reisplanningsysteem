@@ -99,7 +99,9 @@
                   Margin="5"
                   FontSize="18"
                   ItemsSource="{Binding Gemeenten}"
-                  SelectedItem="{Binding GeselecteerdeGemeente, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+                  SelectedValue="{Binding Bestemming.GemeenteId, ValidatesOnDataErrors=True}"
+                  SelectedValuePath="Id"
+                  IsSynchronizedWithCurrentItem="True"/>
 
         <TextBox Grid.Column="1"
                  Grid.Row="4"
