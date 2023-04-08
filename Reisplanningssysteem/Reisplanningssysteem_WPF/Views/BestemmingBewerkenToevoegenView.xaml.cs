@@ -11,20 +11,17 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Reisplanningssysteem_WPF.ViewModels;
 
 namespace Reisplanningssysteem_WPF.Views
 {
     /// <summary>
-    /// Interaction logic for BestemmingenView.xaml
+    /// Interaction logic for BestemmingBewerkenToevoegenView.xaml
     /// </summary>
-    public partial class BestemmingenView : Window
+    public partial class BestemmingBewerkenToevoegenView : Window
     {
-        private readonly BestemmingenViewModel _vm = new BestemmingenViewModel();
-        public BestemmingenView()
+        public BestemmingBewerkenToevoegenView()
         {
             InitializeComponent();
-            DataContext = _vm;
         }
     }
 }

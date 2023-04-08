@@ -22,7 +22,7 @@ namespace Reisplanningssysteem_Models.Partials
             {
                 string foutmeldingen = "";
 
-                foreach (var item in this.GetType().GetProperties()) //reflection
+                foreach (var item in GetType().GetProperties()) //reflection
                 {
                     string fout = this[item.Name];
                     if (!string.IsNullOrWhiteSpace(fout))

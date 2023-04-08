@@ -12,12 +12,28 @@ namespace Reisplanningssysteem_WPF.ViewModels
 
         public override bool CanExecute(object parameter)
         {
-            throw new NotImplementedException();
+            switch (parameter.ToString())
+            {
+                case "Bestemmingen": return true;
+            }
+
+            return true;
         }
 
         public override void Execute(object parameter)
         {
-            throw new NotImplementedException();
+            switch (parameter.ToString())
+            {
+                case "Bestemmingen": BestemmingView(); break;
+            }
+        }
+
+        private void BestemmingView()
+        {
+            BestemmingenViewModel viewmodel = new BestemmingenViewModel();
+            Views.BestemmingenView view = new Views.BestemmingenView();
+            view.DataContext = viewmodel;
+            view.Show();
         }
     }
 }
