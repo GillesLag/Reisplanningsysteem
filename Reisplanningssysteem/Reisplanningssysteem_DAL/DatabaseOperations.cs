@@ -13,7 +13,7 @@ namespace Reisplanningssysteem_DAL
 {
     public class DatabaseOperations
     {
-        
+
 
         public static List<Gebruiker> OphalenLijstGebruikers()
         {
@@ -84,8 +84,6 @@ namespace Reisplanningssysteem_DAL
             }
         }
 
-    public static class DatabaseOperations
-    {
         public static List<Bestemming> BestemmingenOphalen()
         {
             using (ReisplanningssysteemContext ctx = new())
@@ -130,7 +128,7 @@ namespace Reisplanningssysteem_DAL
         {
             try
             {
-                using(ReisplanningssysteemContext ctx = new())
+                using (ReisplanningssysteemContext ctx = new())
                 {
                     ctx.Entry(bestemming).State = EntityState.Modified;
                     return ctx.SaveChanges();
