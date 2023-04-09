@@ -26,7 +26,8 @@
         <StackPanel VerticalAlignment="Center">
             <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
             Content="Personen Beheren"
-            Margin="5"/>
+            Margin="5"
+            Command="{Binding}" CommandParameter="OpenPersonenBeheren"/>
             <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
             Content="Leeftijds Categorieën"
             Margin="5"/>

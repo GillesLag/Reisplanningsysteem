@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Reisplanningssysteem_WPF.Views;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
             }
 
             return true;
+            return true;
         }
 
         public override void Execute(object parameter)
@@ -33,6 +35,18 @@ namespace Reisplanningssysteem_WPF.ViewModels
             BestemmingenViewModel viewmodel = new BestemmingenViewModel();
             Views.BestemmingenView view = new Views.BestemmingenView();
             view.DataContext = viewmodel;
+            view.Show();
+            switch (parameter.ToString())
+            {
+                case "OpenPersonenBeheren": OpenPersonenBeherenView(); break;
+            }
+        }
+
+        private void OpenPersonenBeherenView()
+        {
+            var vm = new PersonenBeherenViewModel();
+            var view = new PersonenBeherenView();
+            view.DataContext = vm;
             view.Show();
         }
     }

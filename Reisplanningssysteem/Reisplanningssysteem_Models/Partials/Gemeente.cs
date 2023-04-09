@@ -19,7 +19,7 @@ namespace Reisplanningssysteem_Models
                 }
 
                 if (columnName == nameof(Postcode) && string.IsNullOrWhiteSpace(Postcode))
-                {
+    {
                     return "geef een postcode in ";
                 }
 
