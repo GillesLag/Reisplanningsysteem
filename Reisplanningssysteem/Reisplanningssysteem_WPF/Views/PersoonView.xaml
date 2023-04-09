@@ -76,13 +76,22 @@
                   Margin="5"
                       Width="190" 
                       ItemsSource="{Binding Gemeentes}"
-                      SelectedItem="{Binding GeselecteerdGemeente}"
+                      SelectedValue="{Binding GebruikerRecord.GemeenteId, ValidatesOnDataErrors=True}"
                       SelectedValuePath="Id"
                       materialDesign:HintAssist.Hint="Gemeente"
                       Height="33px"
                       />
 
-        <CheckBox HorizontalAlignment="Left" Grid.Row="4" Content="Lid" Width="190" Margin="5" IsChecked="{Binding ProductRecord.IsLid}"/>
+        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Left" >
+            <CheckBox Content="Lid" Margin="5" IsChecked="{Binding GebruikerRecord.IsLid}"/>
+            <CheckBox Content="Basiscursus" Margin="5" IsChecked="{Binding GebruikerRecord.BasisCursus}"/>
+            <CheckBox Content="Hoofdmonitor" Margin="5" IsChecked="{Binding GebruikerRecord.HoofmonitorCursus}"/>
+        </StackPanel>
+
+        <TextBox  Grid.Row="4" Grid.Column="1" materialDesign:HintAssist.Hint="Medische gegevens"
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                Margin="5"
+                Text="{Binding GebruikerRecord.MedischeGegevens}" />
 
 
         <Button Grid.Column="0"

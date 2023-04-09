@@ -1,13 +1,17 @@
 ﻿using Reisplanningssysteem_DAL;
 using Reisplanningssysteem_Models;
+using Reisplanningssysteem_WPF.Utils;
+using Reisplanningssysteem_WPF.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Documents;
 
 namespace Reisplanningssysteem_WPF.ViewModels
 {
@@ -15,12 +19,14 @@ namespace Reisplanningssysteem_WPF.ViewModels
     {
         private Gebruiker _gebruikerRecord;
         private string _foutmelding;
+        private bool _bewerkModus;
         private ObservableCollection<Gemeente> _gemeentes;
         public Gemeente _geselecteerdGemeente { get; set; }
         
         public PersoonViewModel(Gebruiker gebruikerRecord)
         {
             GebruikerRecord = gebruikerRecord;
+            Bewerkmodus = true;
             List<Gemeente> gemeentes = DatabaseOperations.OphalenGemeentes();
             Gemeentes = new ObservableCollection<Gemeente>(gemeentes);
         }
@@ -37,6 +43,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
         public PersoonViewModel()
         {
             GebruikerRecord = new Gebruiker();
+            Bewerkmodus = false;
             List<Gemeente> gemeentes = DatabaseOperations.OphalenGemeentes();
             Gemeentes = new ObservableCollection<Gemeente>(gemeentes);
         }
@@ -45,6 +52,11 @@ namespace Reisplanningssysteem_WPF.ViewModels
         {
             get { return _foutmelding; }
             set { _foutmelding = value; NotifyPropertyChanged(); }
+        }
+        public bool Bewerkmodus
+        {
+            get { return _bewerkModus; }
+            set { _bewerkModus = value; }
         }
 
 
@@ -76,35 +88,44 @@ namespace Reisplanningssysteem_WPF.ViewModels
             }
         }
 
-        public void Toevoegen()
+        public void Bevestig()
         {
-            if (GeselecteerdGemeente != null)
+            if (GebruikerRecord.GemeenteId != null)
             {
-                GebruikerRecord.GemeenteId = GeselecteerdGemeente.Id;
-                GebruikerRecord.BasisCursus = false;
-                GebruikerRecord.HoofmonitorCursus = false;
-                GebruikerRecord.MedischeGegevens = "";
-
-
+                if (GebruikerRecord.MedischeGegevens==null)
+                {
+                    GebruikerRecord.MedischeGegevens = "";
+                }
                 if (GebruikerRecord.IsGeldig())
                 {
-                    int ok = DatabaseOperations.VoegGebruikerToe(GebruikerRecord);
-                    if (ok > 0)
+                    if (!Bewerkmodus)
                     {
-                        MessageBox.Show($"{GebruikerRecord.Voornaam} {GebruikerRecord.Achternaam} is toegevoegd");
-                        Reset();
+                        int ok = DatabaseOperations.VoegGebruikerToe(GebruikerRecord);
+                        if (ok > 0)
+                        {
+                            UpdateGebruikers();
+                            MessageBox.Show($"{GebruikerRecord.Voornaam} {GebruikerRecord.Achternaam} is toegevoegd");
+                            Reset();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Gebruiker is niet toegevoegd");
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("Gebruiker is niet toegevoegd");
+                        int ok = DatabaseOperations.UpdateGebruiker(GebruikerRecord);
+                        if (ok > 0)
+                        {
+                            MessageBox.Show($"{GebruikerRecord.Voornaam} {GebruikerRecord.Achternaam} is aangepast");
+                        }
+                        else
+                        {
+                            Foutmelding = "Gebruiker is niet aangepast!";
+                        }
                     }
                 }
             }
-        }
-
-        public void Aanpassen()
-        {
-
         }
 
         public override bool CanExecute(object parameter)
@@ -116,7 +137,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
         {
             switch (parameter.ToString())
             {
-                case "Bevestig": Toevoegen(); break;
+                case "Bevestig": Bevestig(); break;
             }
         }
 
@@ -126,5 +147,12 @@ namespace Reisplanningssysteem_WPF.ViewModels
             Foutmelding = "";
         }
 
+        public delegate void GebruikersUpdateEventHandler(object sender, GebruikersUpdateEventArgs e);
+        public event GebruikersUpdateEventHandler GebruikersUpdated;
+
+        private void UpdateGebruikers()
+        {
+            GebruikersUpdated?.Invoke(this, new GebruikersUpdateEventArgs(DatabaseOperations.OphalenLijstGebruikers()));
+        }
     }
 }

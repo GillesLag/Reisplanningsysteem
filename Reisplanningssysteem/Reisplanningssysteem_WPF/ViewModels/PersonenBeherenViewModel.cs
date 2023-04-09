@@ -1,5 +1,6 @@
 ﻿using Reisplanningssysteem_DAL;
 using Reisplanningssysteem_Models;
+using Reisplanningssysteem_WPF.Utils;
 using Reisplanningssysteem_WPF.Views;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Documents;
 
 namespace Reisplanningssysteem_WPF.ViewModels
 {
@@ -76,11 +78,11 @@ namespace Reisplanningssysteem_WPF.ViewModels
             {
                 case "Toevoegen": Toevoegen(); break;
                 case "Verwijderen": Verwijderen(); break;
-                case "OpenPersoonView": OpenPersoonView(); break;
+                case "Bewerken": Bewerken(); break;
             }
         }
 
-        private void OpenPersoonView()
+        private void Bewerken()
         {
             var vm = new PersoonViewModel(GeselecteerdeGebruiker);
             var view = new PersoonView();
@@ -93,6 +95,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
             var vm = new PersoonViewModel();
             var view = new PersoonView();
             view.DataContext = vm;
+            vm.GebruikersUpdated += GebruikersUpdated;
             view.Show();
         }
 
@@ -116,6 +119,11 @@ namespace Reisplanningssysteem_WPF.ViewModels
             {
                 Foutmelding = "Gelieven een persoon te selecteren!";
             }
+        }
+
+        private void GebruikersUpdated(object sender, GebruikersUpdateEventArgs e)
+        {
+            Gebruikers = e.UpdatedGebruikers;
         }
     }
 }
