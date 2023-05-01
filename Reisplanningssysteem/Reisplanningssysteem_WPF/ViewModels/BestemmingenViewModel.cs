@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Reisplanningssysteem_DAL;
 using Reisplanningssysteem_Models;
+using Reisplanningssysteem_WPF.Utils;
 
 namespace Reisplanningssysteem_WPF.ViewModels
 {
@@ -87,34 +88,34 @@ namespace Reisplanningssysteem_WPF.ViewModels
                 return;
             }
 
-            Wissen();
+            Bestemmingen = new ObservableCollection<Bestemming>(DatabaseOperations.BestemmingenOphalen());
+            GeselecteerdeBestemming = null;
         }
 
         private void OpenBestemmingToevoegen()
         {
-            BestemmingBewerkenToevoegenViewModel viewmodel = new();
-            Views.BestemmingBewerkenToevoegenView view = new();
-            view.DataContext = viewmodel;
-            view.ShowDialog();
-
-            Wissen();
+            BestemmingBeherenViewModel viewmodel = new();
+            ViewOpenen(viewmodel);
         }
 
         private void OpenBestemmingBewerken()
         {
-            BestemmingBewerkenToevoegenViewModel viewmodel = new(GeselecteerdeBestemming);
-            Views.BestemmingBewerkenToevoegenView view = new();
-            view.DataContext = viewmodel;
-            view.ShowDialog();
-
-            Wissen();
+            BestemmingBeherenViewModel viewmodel = new(GeselecteerdeBestemming);
+            ViewOpenen(viewmodel);
         }
 
-        private void Wissen()
+        private void ViewOpenen (BestemmingBeherenViewModel vm)
         {
+            Views.BestemmingBewerkenToevoegenView view = new();
+            vm.BestemmingenUpdatedEvent += Viewmodel_BestemmingenUpdatedEvent;
+            view.DataContext = vm;
+            view.ShowDialog();
+
             GeselecteerdeBestemming = null;
-            Bestemmingen = new ObservableCollection<Bestemming>(DatabaseOperations.BestemmingenOphalen());
-            return;
+        }
+        private void Viewmodel_BestemmingenUpdatedEvent(object sender, BestemmingenUpdateEventArgs e)
+        {
+            Bestemmingen = new ObservableCollection<Bestemming>(e.UpdatedBestemmingen);
         }
     }
 }

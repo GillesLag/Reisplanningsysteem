@@ -147,5 +147,61 @@ namespace Reisplanningssysteem_DAL
                 return ctx.Gemeenten.ToList();
             }
         }
+
+        public static List<LeeftijdsCategorie> LeeftijdsCategorieënOphalen()
+        {
+            using (ReisplanningssysteemContext ctx = new())
+            {
+                return ctx.LeeftijdsCategorieën.ToList();
+            }
+        }
+
+        public static int LeeftijdsCategorieToevoegen(LeeftijdsCategorie leeftijdsCategorie)
+        {
+            try
+            {
+                using (ReisplanningssysteemContext ctx = new())
+                {
+                    ctx.LeeftijdsCategorieën.Entry(leeftijdsCategorie).State = EntityState.Added;
+                    return ctx.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        public static int LeeftijdsCategorieVerwijderen(LeeftijdsCategorie leeftijdsCategorie)
+        {
+            try
+            {
+                using (ReisplanningssysteemContext ctx = new())
+                {
+                    ctx.LeeftijdsCategorieën.Entry(leeftijdsCategorie).State = EntityState.Deleted;
+                    return ctx.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        public static int LeeftijdsCategorieBewerken(LeeftijdsCategorie leeftijdsCategorie)
+        {
+            try
+            {
+                using (ReisplanningssysteemContext ctx = new())
+                {
+                    ctx.LeeftijdsCategorieën.Entry(leeftijdsCategorie).State = EntityState.Modified;
+                    return ctx.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
     }
 }

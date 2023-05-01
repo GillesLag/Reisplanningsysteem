@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Reisplanningssysteem_Models
 {
-    public class LeeftijdsCategorie
+    public partial class LeeftijdsCategorie
     {
         [Key, Required]
         public int Id { get; set; }

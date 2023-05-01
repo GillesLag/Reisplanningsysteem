@@ -6,10 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Reisplanningssysteem_Models;
 using Reisplanningssysteem_DAL;
+using Reisplanningssysteem_WPF.Utils;
 
 namespace Reisplanningssysteem_WPF.ViewModels
 {
-    public class BestemmingBewerkenToevoegenViewModel : BaseViewModel
+    public class BestemmingBeherenViewModel : BaseViewModel
     {
         public override string this[string columnName]
         {
@@ -27,9 +28,10 @@ namespace Reisplanningssysteem_WPF.ViewModels
             {
                 case "Toevoegen": Toevoegen(); break;
                 case "Bewerken": Bewerken(); break;
-                case "Test": Test(); break;
             }
         }
+
+
 
         private string _foutmelding;
 
@@ -80,7 +82,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
             set { _bestemming = value; }
         }
 
-        public BestemmingBewerkenToevoegenViewModel()
+        public BestemmingBeherenViewModel()
         {
             Bestemming = new Bestemming();
             BewerkenOfToevoegen = "Bestemming toevoegen";
@@ -88,7 +90,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
             Gemeenten = new ObservableCollection<Gemeente>(DatabaseOperations.GemeentenOphalen());
         }
 
-        public BestemmingBewerkenToevoegenViewModel(Bestemming bestemming)
+        public BestemmingBeherenViewModel(Bestemming bestemming)
         {
             Bestemming = bestemming;
             BewerkenOfToevoegen = "Bestemming bewerken";
@@ -107,7 +109,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
 
             if (!Bestemming.IsGeldig())
             {
-                Foutmelding = "Vul alle velden correct in!";
+                Foutmelding = Bestemming.Error;
                 return;
             }
 
@@ -122,6 +124,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
             Bestemming = new Bestemming();
             GeselecteerdeGemeente = null;
             Foutmelding = "";
+            UpdateBestemmingen();
         }
 
         private void Bewerken()
@@ -134,7 +137,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
 
             if (!Bestemming.IsGeldig())
             {
-                Foutmelding = "Vul alle velden correct in!";
+                Foutmelding = Bestemming.Error;
                 return;
             }
 
@@ -147,11 +150,15 @@ namespace Reisplanningssysteem_WPF.ViewModels
             }
 
             Foutmelding = "";
+            UpdateBestemmingen();
         }
 
-        private void Test ()
+        public delegate void BestemmingenUpdateEventHandler(object sender, BestemmingenUpdateEventArgs e);
+        public event BestemmingenUpdateEventHandler BestemmingenUpdatedEvent;
+
+        private void UpdateBestemmingen()
         {
-            GeselecteerdeGemeente = Gemeenten[2];
+            BestemmingenUpdatedEvent?.Invoke(this, new BestemmingenUpdateEventArgs(DatabaseOperations.BestemmingenOphalen()));
         }
     }
 }

@@ -12,20 +12,6 @@ C:\Users\Gilles Lagrilli\Documents\School\Agile en testing\Juiste project\Reispl
 C:\Users\Gilles Lagrilli\Documents\School\Agile en testing\Juiste project\Reisplanningssysteem\Reisplanningssysteem_Models\obj\Debug\net6.0\ref\Reisplanningssysteem_Models.dll
 C:\Users\Gilles Lagrilli\Documents\School\Agile en testing\Juiste project\Reisplanningssysteem\Reisplanningssysteem_Models\bin\Debug\net6.0\Reisplanningssysteem_Models.runtimeconfig.json
 C:\Users\Gilles Lagrilli\Documents\School\Agile en testing\Juiste project\Reisplanningssysteem\Reisplanningssysteem_Models\obj\Debug\net6.0\Reisplanningssysteem_Models.genruntimeconfig.cache
-C:\Users\Gilles Lagrilli\Documents\School\Agile en testing\Project\Reisplanningssysteem\Reisplanningssysteem_Models\bin\Debug\net6.0\Reisplanningssysteem_Models.deps.json
-C:\Users\Gilles Lagrilli\Documents\School\Agile en testing\Project\Reisplanningssysteem\Reisplanningssysteem_Models\bin\Debug\net6.0\Reisplanningssysteem_Models.runtimeconfig.json
-C:\Users\Gilles Lagrilli\Documents\School\Agile en testing\Project\Reisplanningssysteem\Reisplanningssysteem_Models\bin\Debug\net6.0\Reisplanningssysteem_Models.dll
-C:\Users\Gilles Lagrilli\Documents\School\Agile en testing\Project\Reisplanningssysteem\Reisplanningssysteem_Models\bin\Debug\net6.0\Reisplanningssysteem_Models.pdb
-C:\Users\Gilles Lagrilli\Documents\School\Agile en testing\Project\Reisplanningssysteem\Reisplanningssysteem_Models\obj\Debug\net6.0\Reisplanningssysteem_Models.csproj.AssemblyReference.cache
-C:\Users\Gilles Lagrilli\Documents\School\Agile en testing\Project\Reisplanningssysteem\Reisplanningssysteem_Models\obj\Debug\net6.0\Reisplanningssysteem_Models.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Gilles Lagrilli\Documents\School\Agile en testing\Project\Reisplanningssysteem\Reisplanningssysteem_Models\obj\Debug\net6.0\Reisplanningssysteem_Models.AssemblyInfoInputs.cache
-C:\Users\Gilles Lagrilli\Documents\School\Agile en testing\Project\Reisplanningssysteem\Reisplanningssysteem_Models\obj\Debug\net6.0\Reisplanningssysteem_Models.AssemblyInfo.cs
-C:\Users\Gilles Lagrilli\Documents\School\Agile en testing\Project\Reisplanningssysteem\Reisplanningssysteem_Models\obj\Debug\net6.0\Reisplanningssysteem_Models.csproj.CoreCompileInputs.cache
-C:\Users\Gilles Lagrilli\Documents\School\Agile en testing\Project\Reisplanningssysteem\Reisplanningssysteem_Models\obj\Debug\net6.0\Reisplanningssysteem_Models.dll
-C:\Users\Gilles Lagrilli\Documents\School\Agile en testing\Project\Reisplanningssysteem\Reisplanningssysteem_Models\obj\Debug\net6.0\refint\Reisplanningssysteem_Models.dll
-C:\Users\Gilles Lagrilli\Documents\School\Agile en testing\Project\Reisplanningssysteem\Reisplanningssysteem_Models\obj\Debug\net6.0\Reisplanningssysteem_Models.pdb
-C:\Users\Gilles Lagrilli\Documents\School\Agile en testing\Project\Reisplanningssysteem\Reisplanningssysteem_Models\obj\Debug\net6.0\Reisplanningssysteem_Models.genruntimeconfig.cache
-C:\Users\Gilles Lagrilli\Documents\School\Agile en testing\Project\Reisplanningssysteem\Reisplanningssysteem_Models\obj\Debug\net6.0\ref\Reisplanningssysteem_Models.dll
 C:\Users\Dre\OneDrive\Desktop\tm\agile\Reisplanningsysteem\Reisplanningssysteem\Reisplanningssysteem_Models\bin\Debug\net6.0\Reisplanningssysteem_Models.deps.json
 C:\Users\Dre\OneDrive\Desktop\tm\agile\Reisplanningsysteem\Reisplanningssysteem\Reisplanningssysteem_Models\bin\Debug\net6.0\Reisplanningssysteem_Models.runtimeconfig.json
 C:\Users\Dre\OneDrive\Desktop\tm\agile\Reisplanningsysteem\Reisplanningssysteem\Reisplanningssysteem_Models\bin\Debug\net6.0\Reisplanningssysteem_Models.dll
@@ -40,3 +26,17 @@ C:\Users\Dre\OneDrive\Desktop\tm\agile\Reisplanningsysteem\Reisplanningssysteem\
 C:\Users\Dre\OneDrive\Desktop\tm\agile\Reisplanningsysteem\Reisplanningssysteem\Reisplanningssysteem_Models\obj\Debug\net6.0\Reisplanningssysteem_Models.pdb
 C:\Users\Dre\OneDrive\Desktop\tm\agile\Reisplanningsysteem\Reisplanningssysteem\Reisplanningssysteem_Models\obj\Debug\net6.0\Reisplanningssysteem_Models.genruntimeconfig.cache
 C:\Users\Dre\OneDrive\Desktop\tm\agile\Reisplanningsysteem\Reisplanningssysteem\Reisplanningssysteem_Models\obj\Debug\net6.0\ref\Reisplanningssysteem_Models.dll
+C:\Users\Gilles Lagrilli\Documents\School\Agile en testing\Project\Reisplanningssysteem\Reisplanningssysteem_Models\obj\Debug\net6.0\Reisplanningssysteem_Models.csproj.AssemblyReference.cache
+C:\Users\Gilles Lagrilli\Documents\School\Agile en testing\Project\Reisplanningssysteem\Reisplanningssysteem_Models\obj\Debug\net6.0\Reisplanningssysteem_Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Gilles Lagrilli\Documents\School\Agile en testing\Project\Reisplanningssysteem\Reisplanningssysteem_Models\obj\Debug\net6.0\Reisplanningssysteem_Models.AssemblyInfoInputs.cache
+C:\Users\Gilles Lagrilli\Documents\School\Agile en testing\Project\Reisplanningssysteem\Reisplanningssysteem_Models\obj\Debug\net6.0\Reisplanningssysteem_Models.AssemblyInfo.cs
+C:\Users\Gilles Lagrilli\Documents\School\Agile en testing\Project\Reisplanningssysteem\Reisplanningssysteem_Models\obj\Debug\net6.0\Reisplanningssysteem_Models.csproj.CoreCompileInputs.cache
+C:\Users\Gilles Lagrilli\Documents\School\Agile en testing\Project\Reisplanningssysteem\Reisplanningssysteem_Models\bin\Debug\net6.0\Reisplanningssysteem_Models.deps.json
+C:\Users\Gilles Lagrilli\Documents\School\Agile en testing\Project\Reisplanningssysteem\Reisplanningssysteem_Models\bin\Debug\net6.0\Reisplanningssysteem_Models.runtimeconfig.json
+C:\Users\Gilles Lagrilli\Documents\School\Agile en testing\Project\Reisplanningssysteem\Reisplanningssysteem_Models\bin\Debug\net6.0\Reisplanningssysteem_Models.dll
+C:\Users\Gilles Lagrilli\Documents\School\Agile en testing\Project\Reisplanningssysteem\Reisplanningssysteem_Models\bin\Debug\net6.0\Reisplanningssysteem_Models.pdb
+C:\Users\Gilles Lagrilli\Documents\School\Agile en testing\Project\Reisplanningssysteem\Reisplanningssysteem_Models\obj\Debug\net6.0\Reisplanningssysteem_Models.dll
+C:\Users\Gilles Lagrilli\Documents\School\Agile en testing\Project\Reisplanningssysteem\Reisplanningssysteem_Models\obj\Debug\net6.0\refint\Reisplanningssysteem_Models.dll
+C:\Users\Gilles Lagrilli\Documents\School\Agile en testing\Project\Reisplanningssysteem\Reisplanningssysteem_Models\obj\Debug\net6.0\Reisplanningssysteem_Models.pdb
+C:\Users\Gilles Lagrilli\Documents\School\Agile en testing\Project\Reisplanningssysteem\Reisplanningssysteem_Models\obj\Debug\net6.0\Reisplanningssysteem_Models.genruntimeconfig.cache
+C:\Users\Gilles Lagrilli\Documents\School\Agile en testing\Project\Reisplanningssysteem\Reisplanningssysteem_Models\obj\Debug\net6.0\ref\Reisplanningssysteem_Models.dll
