@@ -10,7 +10,7 @@ using Reisplanningssysteem_WPF.Utils;
 
 namespace Reisplanningssysteem_WPF.ViewModels
 {
-    public class BestemmingBewerkenToevoegenViewModel : BaseViewModel
+    public class BestemmingBeherenViewModel : BaseViewModel
     {
         public override string this[string columnName]
         {
@@ -82,7 +82,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
             set { _bestemming = value; }
         }
 
-        public BestemmingBewerkenToevoegenViewModel()
+        public BestemmingBeherenViewModel()
         {
             Bestemming = new Bestemming();
             BewerkenOfToevoegen = "Bestemming toevoegen";
@@ -90,7 +90,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
             Gemeenten = new ObservableCollection<Gemeente>(DatabaseOperations.GemeentenOphalen());
         }
 
-        public BestemmingBewerkenToevoegenViewModel(Bestemming bestemming)
+        public BestemmingBeherenViewModel(Bestemming bestemming)
         {
             Bestemming = bestemming;
             BewerkenOfToevoegen = "Bestemming bewerken";
@@ -109,7 +109,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
 
             if (!Bestemming.IsGeldig())
             {
-                Foutmelding = "Vul alle velden correct in!";
+                Foutmelding = Bestemming.Error;
                 return;
             }
 
@@ -137,7 +137,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
 
             if (!Bestemming.IsGeldig())
             {
-                Foutmelding = "Vul alle velden correct in!";
+                Foutmelding = Bestemming.Error;
                 return;
             }
 

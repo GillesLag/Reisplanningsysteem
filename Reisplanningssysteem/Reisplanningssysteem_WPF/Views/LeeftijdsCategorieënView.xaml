@@ -38,12 +38,17 @@
                 Margin="5"
                 Width="200px"
                 HorizontalAlignment="Right"
-                Command="{Binding}" CommandParameter="Toevoegen" />
+                Command="{Binding}" CommandParameter="OpenCategorieToevoegen" />
         <DataGrid x:Name="datagridStores"
-                  ItemsSource="{Binding Gebruikers}"
-                  SelectedItem="{Binding GeselecteerdeGebruiker}"
-                   Grid.Row="1" Grid.ColumnSpan="2" AutoGenerateColumns="True"
+                  ItemsSource="{Binding Categorieën}"
+                  SelectedItem="{Binding GeselecteerdeCategorie}"
+                   Grid.Row="1" Grid.ColumnSpan="2" AutoGenerateColumns="False"
                   IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Naam}" Header="Naam"/>
+                <DataGridTextColumn Binding="{Binding LeeftijdMinimum}" Header="Min. leeftijd"/>
+                <DataGridTextColumn Binding="{Binding LeeftijdMaximum}" Header="Max. leeftijd"/>
+            </DataGrid.Columns>
         </DataGrid>
         <Button Grid.Column="0"
                 Grid.Row="2"
@@ -51,7 +56,7 @@
                 ToolTip="Resource name: MaterialDesignRaisedLightButton"
                 Content="Bewerken"
                 Margin="5"
-                Command="{Binding}" CommandParameter="OpenPersoonBewerken" />
+                Command="{Binding}" CommandParameter="OpenCategorieBewerken" />
         <Button Grid.Column="1"
                 Grid.Row="2"
                 Style="{StaticResource MaterialDesignOutlinedLightButton}"

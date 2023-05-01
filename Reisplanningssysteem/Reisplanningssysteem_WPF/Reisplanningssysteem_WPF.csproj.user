@@ -7,13 +7,16 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Views\BestemmingBewerkenToevoegenView.xaml.cs">
+    <Compile Update="Views\BestemmingBeherenView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\BestemmingenView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\CursussenView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\LeeftijdsCategorieBeherenView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\LeeftijdsCategorieënView.xaml.cs">
@@ -33,13 +36,16 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Views\BestemmingBewerkenToevoegenView.xaml">
+    <Page Update="Views\BestemmingBeherenView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\BestemmingenView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\CursussenView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\LeeftijdsCategorieBeherenView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\LeeftijdsCategorieënView.xaml">

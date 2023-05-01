@@ -30,7 +30,8 @@
             Command="{Binding}" CommandParameter="OpenPersonenBeheren"/>
             <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
             Content="Leeftijds Categorieën"
-            Margin="5"/>
+            Margin="5"
+            Command="{Binding}" CommandParameter="OpenLeeftijdsCategorieën"/>
             <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
             Content="Cursussen"
             Margin="5"/>
@@ -40,7 +41,7 @@
             <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
             Content="Bestemmingen"
             Margin="5"
-            Command="{Binding}" CommandParameter="Bestemmingen"/>
+            Command="{Binding}" CommandParameter="OpenBestemmingen"/>
         </StackPanel>
         
     </Grid>

@@ -41,8 +41,6 @@ namespace Reisplanningssysteem_WPF.ViewModels
             }
         }
 
-
-
         private string _foutmelding;
 
         public string Foutmelding
@@ -96,17 +94,17 @@ namespace Reisplanningssysteem_WPF.ViewModels
 
         private void OpenBestemmingToevoegen()
         {
-            BestemmingBewerkenToevoegenViewModel viewmodel = new();
+            BestemmingBeherenViewModel viewmodel = new();
             ViewOpenen(viewmodel);
         }
 
         private void OpenBestemmingBewerken()
         {
-            BestemmingBewerkenToevoegenViewModel viewmodel = new(GeselecteerdeBestemming);
+            BestemmingBeherenViewModel viewmodel = new(GeselecteerdeBestemming);
             ViewOpenen(viewmodel);
         }
 
-        private void ViewOpenen (BestemmingBewerkenToevoegenViewModel vm)
+        private void ViewOpenen (BestemmingBeherenViewModel vm)
         {
             Views.BestemmingBewerkenToevoegenView view = new();
             vm.BestemmingenUpdatedEvent += Viewmodel_BestemmingenUpdatedEvent;

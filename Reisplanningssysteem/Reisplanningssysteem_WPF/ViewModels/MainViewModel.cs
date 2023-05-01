@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Reisplanningssysteem_WPF.ViewModels
 {
@@ -13,11 +14,6 @@ namespace Reisplanningssysteem_WPF.ViewModels
 
         public override bool CanExecute(object parameter)
         {
-            switch (parameter.ToString())
-            {
-                case "Bestemmingen": return true;
-            }
-
             return true;
         }
 
@@ -25,24 +21,36 @@ namespace Reisplanningssysteem_WPF.ViewModels
         {
             switch (parameter.ToString())
             {
-                case "Bestemmingen": BestemmingView(); break;
+                case "OpenBestemmingen": OpenBestemmingView(); break;
                 case "OpenPersonenBeheren": OpenPersonenBeherenView(); break;
+                case "OpenLeeftijdsCategorieën": OpenLeeftijdsCategorieënView(); break;
             }
         }
 
-        private void BestemmingView()
+        private void OpenBestemmingView()
         {
-            BestemmingenViewModel viewmodel = new BestemmingenViewModel();
-            BestemmingenView view = new BestemmingenView();
-            view.DataContext = viewmodel;
-            view.Show();
+            var viewmodel = new BestemmingenViewModel();
+            var view = new BestemmingenView();
+            OpenView(ref viewmodel, view);
         }
 
         private void OpenPersonenBeherenView()
         {
-            var vm = new PersonenBeherenViewModel();
+            var viewmodel = new PersonenBeherenViewModel();
             var view = new PersonenBeherenView();
-            view.DataContext = vm;
+            OpenView(ref viewmodel, view);
+        }
+
+        private void OpenLeeftijdsCategorieënView()
+        {
+            var viewmodel = new LeeftijdsCategorieënViewModel();
+            var view = new LeeftijdsCategorieënView();
+            OpenView(ref viewmodel, view);
+        }
+
+        private void OpenView<T>(ref T viewmodel, Window view)
+        {
+            view.DataContext = viewmodel;
             view.Show();
         }
     }
