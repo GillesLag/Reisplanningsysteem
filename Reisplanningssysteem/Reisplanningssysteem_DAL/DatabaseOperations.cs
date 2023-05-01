@@ -203,5 +203,61 @@ namespace Reisplanningssysteem_DAL
                 return 0;
             }
         }
+
+        public static List<Cursus> CursussenOphalen()
+        {
+            using (ReisplanningssysteemContext ctx = new())
+            {
+                return ctx.Cursussen.ToList();
+            }
+        }
+
+        public static int CursusToevoegen(Cursus cursus)
+        {
+            try
+            {
+                using (ReisplanningssysteemContext ctx = new())
+                {
+                    ctx.Cursussen.Entry(cursus).State = EntityState.Added;
+                    return ctx.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        public static int CursusVerwijderen(Cursus cursus)
+        {
+            try
+            {
+                using (ReisplanningssysteemContext ctx = new())
+                {
+                    ctx.Cursussen.Entry(cursus).State = EntityState.Deleted;
+                    return ctx.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        public static int CursusBewerken(Cursus cursus)
+        {
+            try
+            {
+                using (ReisplanningssysteemContext ctx = new())
+                {
+                    ctx.Cursussen.Entry(cursus).State = EntityState.Modified;
+                    return ctx.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
     }
 }
