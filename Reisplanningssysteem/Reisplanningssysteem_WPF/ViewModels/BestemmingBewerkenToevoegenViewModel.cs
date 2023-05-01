@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Reisplanningssysteem_Models;
 using Reisplanningssysteem_DAL;
+using Reisplanningssysteem_WPF.Utils;
 
 namespace Reisplanningssysteem_WPF.ViewModels
 {
@@ -27,9 +28,10 @@ namespace Reisplanningssysteem_WPF.ViewModels
             {
                 case "Toevoegen": Toevoegen(); break;
                 case "Bewerken": Bewerken(); break;
-                case "Test": Test(); break;
             }
         }
+
+
 
         private string _foutmelding;
 
@@ -122,6 +124,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
             Bestemming = new Bestemming();
             GeselecteerdeGemeente = null;
             Foutmelding = "";
+            UpdateBestemmingen();
         }
 
         private void Bewerken()
@@ -147,11 +150,15 @@ namespace Reisplanningssysteem_WPF.ViewModels
             }
 
             Foutmelding = "";
+            UpdateBestemmingen();
         }
 
-        private void Test ()
+        public delegate void BestemmingenUpdateEventHandler(object sender, BestemmingenUpdateEventArgs e);
+        public event BestemmingenUpdateEventHandler BestemmingenUpdatedEvent;
+
+        private void UpdateBestemmingen()
         {
-            GeselecteerdeGemeente = Gemeenten[2];
+            BestemmingenUpdatedEvent?.Invoke(this, new BestemmingenUpdateEventArgs(DatabaseOperations.BestemmingenOphalen()));
         }
     }
 }
