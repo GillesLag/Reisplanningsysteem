@@ -32,7 +32,6 @@ namespace Reisplanningssysteem_WPF.ViewModels
         }
 
 
-
         private string _foutmelding;
 
         public string Foutmelding
@@ -87,7 +86,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
             Bestemming = new Bestemming();
             BewerkenOfToevoegen = "Bestemming toevoegen";
             BewerkenOfToevoegenButton = "Toevoegen";
-            Gemeenten = new ObservableCollection<Gemeente>(DatabaseOperations.GemeentenOphalen());
+            Gemeenten = new ObservableCollection<Gemeente>(DatabaseOperations.OphalenGemeentes());
         }
 
         public BestemmingBeherenViewModel(Bestemming bestemming)
@@ -95,7 +94,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
             Bestemming = bestemming;
             BewerkenOfToevoegen = "Bestemming bewerken";
             BewerkenOfToevoegenButton = "Bewerken";
-            Gemeenten = new ObservableCollection<Gemeente>(DatabaseOperations.GemeentenOphalen());
+            Gemeenten = new ObservableCollection<Gemeente>(DatabaseOperations.OphalenGemeentes());
             GeselecteerdeGemeente = bestemming.Gemeente;
         }
 

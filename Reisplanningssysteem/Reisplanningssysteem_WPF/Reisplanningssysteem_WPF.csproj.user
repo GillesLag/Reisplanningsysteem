@@ -34,7 +34,10 @@
     <Compile Update="Views\PersoonView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\ReizenBeherenView.xaml.cs">
+    <Compile Update="Views\ReisBeheerView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ReizenView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -66,7 +69,10 @@
     <Page Update="Views\PersoonView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\ReizenBeherenView.xaml">
+    <Page Update="Views\ReisBeheerView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ReizenView.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

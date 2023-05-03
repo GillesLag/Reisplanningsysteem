@@ -41,5 +41,10 @@ namespace Reisplanningssysteem_Models
                 return "";
             }
         }
+
+        public override string ToString()
+        {
+            return Naam;
+        }
     }
 }
