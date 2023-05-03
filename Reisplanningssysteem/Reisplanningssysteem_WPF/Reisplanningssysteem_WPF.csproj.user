@@ -13,6 +13,9 @@
     <Compile Update="Views\BestemmingenView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\CursusBeherenView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\CursussenView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -43,6 +46,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\BestemmingenView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\CursusBeherenView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\CursussenView.xaml">

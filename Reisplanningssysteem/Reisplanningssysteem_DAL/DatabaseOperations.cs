@@ -212,6 +212,7 @@ namespace Reisplanningssysteem_DAL
             }
         }
 
+<<<<<<< HEAD
         public static List<Reis> ReizenOphalen()
         {
             using (ReisplanningssysteemContext ctx = new())
@@ -226,12 +227,27 @@ namespace Reisplanningssysteem_DAL
         }
 
         public static int ReisToevoegen(Reis reis)
+=======
+        public static List<Cursus> CursussenOphalen()
+        {
+            using (ReisplanningssysteemContext ctx = new())
+            {
+                return ctx.Cursussen.ToList();
+            }
+        }
+
+        public static int CursusToevoegen(Cursus cursus)
+>>>>>>> main
         {
             try
             {
                 using (ReisplanningssysteemContext ctx = new())
                 {
+<<<<<<< HEAD
                     ctx.Reizen.Entry(reis).State = EntityState.Added;
+=======
+                    ctx.Cursussen.Entry(cursus).State = EntityState.Added;
+>>>>>>> main
                     return ctx.SaveChanges();
                 }
             }
@@ -241,13 +257,21 @@ namespace Reisplanningssysteem_DAL
             }
         }
 
+<<<<<<< HEAD
         public static int ReisVerwijderen(Reis reis)
+=======
+        public static int CursusVerwijderen(Cursus cursus)
+>>>>>>> main
         {
             try
             {
                 using (ReisplanningssysteemContext ctx = new())
                 {
+<<<<<<< HEAD
                     ctx.Reizen.Entry(reis).State = EntityState.Deleted;
+=======
+                    ctx.Cursussen.Entry(cursus).State = EntityState.Deleted;
+>>>>>>> main
                     return ctx.SaveChanges();
                 }
             }
@@ -257,13 +281,21 @@ namespace Reisplanningssysteem_DAL
             }
         }
 
+<<<<<<< HEAD
         public static int ReisBewerken(Reis reis)
+=======
+        public static int CursusBewerken(Cursus cursus)
+>>>>>>> main
         {
             try
             {
                 using (ReisplanningssysteemContext ctx = new())
                 {
+<<<<<<< HEAD
                     ctx.Reizen.Entry(reis).State = EntityState.Modified;
+=======
+                    ctx.Cursussen.Entry(cursus).State = EntityState.Modified;
+>>>>>>> main
                     return ctx.SaveChanges();
                 }
             }
