@@ -37,7 +37,8 @@
             Margin="5"/>
             <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
             Content="Reizen Beheren"
-            Margin="5"/>
+            Margin="5"
+            Command="{Binding}" CommandParameter="OpenReizen"/>
             <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
             Content="Bestemmingen"
             Margin="5"

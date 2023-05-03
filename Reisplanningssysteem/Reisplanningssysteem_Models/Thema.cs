@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Reisplanningssysteem_Models
 {
-    public class Thema
+    public partial class Thema
     {
         [Key, Required]
         public int Id { get; set; }

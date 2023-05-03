@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Reisplanningssysteem_Models
 {
-    public class Reis
+    public partial class Reis
     {
         [Key, Required]
         public int Id { get; set; }

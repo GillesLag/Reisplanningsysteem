@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Reisplanningssysteem_DAL;
 using Reisplanningssysteem_Models;
 using Reisplanningssysteem_WPF.Utils;
+using Reisplanningssysteem_WPF.Views;
 
 namespace Reisplanningssysteem_WPF.ViewModels
 {
@@ -106,7 +107,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
 
         private void ViewOpenen (BestemmingBeherenViewModel vm)
         {
-            Views.BestemmingBewerkenToevoegenView view = new();
+            BestemmingBeherenView view = new();
             vm.BestemmingenUpdatedEvent += Viewmodel_BestemmingenUpdatedEvent;
             view.DataContext = vm;
             view.ShowDialog();

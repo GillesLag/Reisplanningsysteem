@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace Reisplanningssysteem_WPF.Views
 {
     /// <summary>
-    /// Interaction logic for BestemmingBewerkenToevoegenView.xaml
+    /// Interaction logic for ReizenBeheerView.xaml
     /// </summary>
-    public partial class BestemmingBeherenView : Window
-    { 
-        public BestemmingBeherenView()
+    public partial class ReisBeheerView : Window
+    {
+        public ReisBeheerView()
         {
             InitializeComponent();
         }

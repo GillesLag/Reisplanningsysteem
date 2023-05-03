@@ -13,8 +13,6 @@ namespace Reisplanningssysteem_DAL
 {
     public class DatabaseOperations
     {
-
-
         public static List<Gebruiker> OphalenLijstGebruikers()
         {
             using (ReisplanningssysteemContext ctx = new ReisplanningssysteemContext())
@@ -140,11 +138,21 @@ namespace Reisplanningssysteem_DAL
             }
         }
 
-        public static List<Gemeente> GemeentenOphalen()
+        public static List<Gebruiker> HoogdmonitorenOphalen()
         {
-            using (ReisplanningssysteemContext ctx = new())
+            using (ReisplanningssysteemContext ctx = new ReisplanningssysteemContext())
             {
-                return ctx.Gemeenten.ToList();
+                return ctx.Gebruikers.
+                    Where(g => g.HoofmonitorCursus).
+                    Include(x => x.Gemeente).ToList();
+            }
+        }
+
+        public static List<Thema> ThemasOphalen()
+        {
+            using (ReisplanningssysteemContext ctx = new ReisplanningssysteemContext())
+            {
+                return ctx.Themas.ToList();
             }
         }
 
@@ -195,6 +203,67 @@ namespace Reisplanningssysteem_DAL
                 using (ReisplanningssysteemContext ctx = new())
                 {
                     ctx.LeeftijdsCategorieën.Entry(leeftijdsCategorie).State = EntityState.Modified;
+                    return ctx.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        public static List<Reis> ReizenOphalen()
+        {
+            using (ReisplanningssysteemContext ctx = new())
+            {
+                return ctx.Reizen.
+                    Include(r => r.Bestemming).
+                    Include(r => r.Hoofdmonitor).
+                    Include(r => r.Thema).
+                    Include(r => r.LeeftijdsCategorie).
+                    ToList();
+            }
+        }
+
+        public static int ReisToevoegen(Reis reis)
+        {
+            try
+            {
+                using (ReisplanningssysteemContext ctx = new())
+                {
+                    ctx.Reizen.Entry(reis).State = EntityState.Added;
+                    return ctx.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        public static int ReisVerwijderen(Reis reis)
+        {
+            try
+            {
+                using (ReisplanningssysteemContext ctx = new())
+                {
+                    ctx.Reizen.Entry(reis).State = EntityState.Deleted;
+                    return ctx.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        public static int ReisBewerken(Reis reis)
+        {
+            try
+            {
+                using (ReisplanningssysteemContext ctx = new())
+                {
+                    ctx.Reizen.Entry(reis).State = EntityState.Modified;
                     return ctx.SaveChanges();
                 }
             }

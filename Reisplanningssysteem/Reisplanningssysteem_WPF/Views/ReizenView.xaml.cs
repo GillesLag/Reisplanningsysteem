@@ -17,9 +17,9 @@ namespace Reisplanningssysteem_WPF.Views
     /// <summary>
     /// Interaction logic for ReizenBeherenView.xaml
     /// </summary>
-    public partial class ReizenBeherenView : Window
+    public partial class ReizenView : Window
     {
-        public ReizenBeherenView()
+        public ReizenView()
         {
             InitializeComponent();
         }

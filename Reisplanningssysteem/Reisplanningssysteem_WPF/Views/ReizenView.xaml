@@ -1,4 +1,4 @@
-﻿<Window x:Class="Reisplanningssysteem_WPF.Views.ReizenBeherenView"
+﻿<Window x:Class="Reisplanningssysteem_WPF.Views.ReizenView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Reisplanningssysteem_WPF.Views"
         mc:Ignorable="d"
         Title="ReizenBeherenView" Height="450" Width="800"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:reisplanningssysteem_models="clr-namespace:Reisplanningssysteem_Models;assembly=Reisplanningssysteem_Models"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -38,12 +38,22 @@
                 Margin="5"
                 Width="200px"
                 HorizontalAlignment="Right"
-                Command="{Binding}" CommandParameter="Toevoegen" />
+                Command="{Binding}" CommandParameter="OpenReisToevoegen" />
         <DataGrid x:Name="datagridStores"
-                  ItemsSource="{Binding Gebruikers}"
-                  SelectedItem="{Binding GeselecteerdeGebruiker}"
-                   Grid.Row="1" Grid.ColumnSpan="2" AutoGenerateColumns="True"
+                  ItemsSource="{Binding Reizen}"
+                  SelectedItem="{Binding GeselecteerdeReis}"
+                   Grid.Row="1" Grid.ColumnSpan="2" AutoGenerateColumns="False"
                   IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Naam}" Header="Naam"/>
+                <DataGridTextColumn Binding="{Binding BeginDatum, StringFormat=d, ConverterCulture=nl-BE}" Header="Begindatum"/>
+                <DataGridTextColumn Binding="{Binding EindDatum, StringFormat=d, ConverterCulture=nl-BE}" Header="Einddatum"/>
+                <DataGridTextColumn Binding="{Binding Bestemming.Naam}" Header="Bestemming"/>
+                <DataGridTextColumn Binding="{Binding LeeftijdsCategorie.Naam}" Header="Leeftijdscategorie"/>
+                <DataGridTextColumn Binding="{Binding Thema.Naam}" Header="Thema"/>
+                <DataGridTextColumn Binding="{Binding Prijs, StringFormat=C, ConverterCulture=nl-BE}" Header="Prijs"/>
+                <DataGridTextColumn Binding="{Binding Hoofdmonitor}" Header="Hoofdmonitor"/>
+            </DataGrid.Columns>
         </DataGrid>
         <Button Grid.Column="0"
                 Grid.Row="2"
@@ -51,7 +61,7 @@
                 ToolTip="Resource name: MaterialDesignRaisedLightButton"
                 Content="Bewerken"
                 Margin="5"
-                Command="{Binding}" CommandParameter="OpenPersoonBewerken" />
+                Command="{Binding}" CommandParameter="OpenReisBewerken" />
         <Button Grid.Column="1"
                 Grid.Row="2"
                 Style="{StaticResource MaterialDesignOutlinedLightButton}"
