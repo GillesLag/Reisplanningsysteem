@@ -121,9 +121,11 @@ namespace Reisplanningssysteem_WPF.ViewModels
             }
         }
 
-        private void GebruikersUpdated(object sender, GebruikersUpdateEventArgs e)
+
+
+        private void GebruikersUpdated(object sender, UpdateGenericListEventArgs<Gebruiker> e)
         {
-            Gebruikers = e.UpdatedGebruikers;
+            Gebruikers = e.GenericList;
         }
     }
 }

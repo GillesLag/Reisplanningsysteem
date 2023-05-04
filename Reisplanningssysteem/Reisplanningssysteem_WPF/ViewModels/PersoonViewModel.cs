@@ -147,12 +147,12 @@ namespace Reisplanningssysteem_WPF.ViewModels
             Foutmelding = "";
         }
 
-        public delegate void GebruikersUpdateEventHandler(object sender, GebruikersUpdateEventArgs e);
+        public delegate void GebruikersUpdateEventHandler(object sender, UpdateGenericListEventArgs<Gebruiker> e);
         public event GebruikersUpdateEventHandler GebruikersUpdated;
 
         private void UpdateGebruikers()
         {
-            GebruikersUpdated?.Invoke(this, new GebruikersUpdateEventArgs(DatabaseOperations.OphalenLijstGebruikers()));
+            GebruikersUpdated?.Invoke(this, new UpdateGenericListEventArgs<Gebruiker>(DatabaseOperations.OphalenLijstGebruikers()));
         }
     }
 }

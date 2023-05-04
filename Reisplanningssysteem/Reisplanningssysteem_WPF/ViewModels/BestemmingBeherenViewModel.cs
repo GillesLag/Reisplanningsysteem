@@ -152,12 +152,12 @@ namespace Reisplanningssysteem_WPF.ViewModels
             UpdateBestemmingen();
         }
 
-        public delegate void BestemmingenUpdateEventHandler(object sender, BestemmingenUpdateEventArgs e);
+        public delegate void BestemmingenUpdateEventHandler(object sender, UpdateGenericListEventArgs<Bestemming> e);
         public event BestemmingenUpdateEventHandler BestemmingenUpdatedEvent;
 
         private void UpdateBestemmingen()
         {
-            BestemmingenUpdatedEvent?.Invoke(this, new BestemmingenUpdateEventArgs(DatabaseOperations.BestemmingenOphalen()));
+            BestemmingenUpdatedEvent?.Invoke(this, new UpdateGenericListEventArgs<Bestemming>(DatabaseOperations.BestemmingenOphalen()));
         }
     }
 }

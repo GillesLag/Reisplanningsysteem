@@ -213,12 +213,12 @@ namespace Reisplanningssysteem_WPF.ViewModels
             UpdateReizen();
         }
 
-        public delegate void ReizenUpdateEventHandler(object sender, ReizenUpdateEventArgs e);
+        public delegate void ReizenUpdateEventHandler(object sender, UpdateGenericListEventArgs<Reis> e);
         public event ReizenUpdateEventHandler ReizenUpdatedEvent;
 
         private void UpdateReizen()
         {
-            ReizenUpdatedEvent?.Invoke(this, new ReizenUpdateEventArgs(DatabaseOperations.ReizenOphalen()));
+            ReizenUpdatedEvent?.Invoke(this, new UpdateGenericListEventArgs<Reis>(DatabaseOperations.ReizenOphalen()));
         }
     }
 }

@@ -91,9 +91,9 @@ namespace Reisplanningssysteem_WPF.ViewModels
             GeselecteerdeCursus = null;
         }
 
-        private void ViewModel_CursussenEventHandler(object sender, CursussenUpdateEventArgs e)
+        private void ViewModel_CursussenEventHandler(object sender, UpdateGenericListEventArgs<Cursus> e)
         {
-            Cursussen = new ObservableCollection<Cursus>(e.Cursussen);
+            Cursussen = new ObservableCollection<Cursus>(e.GenericList);
         }
 
         private void Verwijderen()

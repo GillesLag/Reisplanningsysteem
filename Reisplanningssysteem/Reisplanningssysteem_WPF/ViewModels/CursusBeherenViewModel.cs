@@ -129,13 +129,13 @@ namespace Reisplanningssysteem_WPF.ViewModels
             UpdateCursussen();
         }
 
-        public delegate void CursussenUpdateHandler(object sender, CursussenUpdateEventArgs e);
+        public delegate void CursussenUpdateHandler(object sender, UpdateGenericListEventArgs<Cursus> e);
         public event CursussenUpdateHandler CursussenEventHandler;
 
         private void UpdateCursussen()
         {
             CursussenEventHandler?
-                .Invoke(this, new CursussenUpdateEventArgs(DatabaseOperations.CursussenOphalen()));
+                .Invoke(this, new UpdateGenericListEventArgs<Cursus>(DatabaseOperations.CursussenOphalen()));
         }
     }
 }

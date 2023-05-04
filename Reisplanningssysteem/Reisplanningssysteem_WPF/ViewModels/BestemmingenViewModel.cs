@@ -114,9 +114,9 @@ namespace Reisplanningssysteem_WPF.ViewModels
 
             GeselecteerdeBestemming = null;
         }
-        private void Viewmodel_BestemmingenUpdatedEvent(object sender, BestemmingenUpdateEventArgs e)
+        private void Viewmodel_BestemmingenUpdatedEvent(object sender, UpdateGenericListEventArgs<Bestemming> e)
         {
-            Bestemmingen = new ObservableCollection<Bestemming>(e.UpdatedBestemmingen);
+            Bestemmingen = new ObservableCollection<Bestemming>(e.GenericList);
         }
     }
 }

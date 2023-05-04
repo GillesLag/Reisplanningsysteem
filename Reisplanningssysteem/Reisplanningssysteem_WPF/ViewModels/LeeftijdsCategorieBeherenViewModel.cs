@@ -129,13 +129,13 @@ namespace Reisplanningssysteem_WPF.ViewModels
             UpdateCategorieën();
         }
 
-        public delegate void LeeftijdsCategorieënUpdateHandler(object sender, LeeftijdsCategorieënUpdateEventArgs e);
+        public delegate void LeeftijdsCategorieënUpdateHandler(object sender, UpdateGenericListEventArgs<LeeftijdsCategorie> e);
         public event LeeftijdsCategorieënUpdateHandler CategoriënEventHandler;
 
         private void UpdateCategorieën()
         {
             CategoriënEventHandler?
-                .Invoke(this, new LeeftijdsCategorieënUpdateEventArgs(DatabaseOperations.LeeftijdsCategorieënOphalen()));
+                .Invoke(this, new UpdateGenericListEventArgs<LeeftijdsCategorie>(DatabaseOperations.LeeftijdsCategorieënOphalen()));
         }
     }
 }

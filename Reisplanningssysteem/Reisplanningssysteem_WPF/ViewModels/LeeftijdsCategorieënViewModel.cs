@@ -91,9 +91,9 @@ namespace Reisplanningssysteem_WPF.ViewModels
             GeselecteerdeCategorie = null;
         }
 
-        private void ViewModel_CategoriënEventHandler(object sender, LeeftijdsCategorieënUpdateEventArgs e)
+        private void ViewModel_CategoriënEventHandler(object sender, UpdateGenericListEventArgs<LeeftijdsCategorie> e)
         {
-            Categorieën = new ObservableCollection<LeeftijdsCategorie>(e.Categoriën);
+            Categorieën = new ObservableCollection<LeeftijdsCategorie>(e.GenericList);
         }
 
         private void Verwijderen()
