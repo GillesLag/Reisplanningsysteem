@@ -24,20 +24,8 @@ namespace Reisplanningssysteem_WPF.ViewModels
                 case "OpenBestemmingen": OpenBestemmingView(); break;
                 case "OpenPersonenBeheren": OpenPersonenBeherenView(); break;
                 case "OpenLeeftijdsCategorieën": OpenLeeftijdsCategorieënView(); break;
-<<<<<<< HEAD
-<<<<<<< HEAD
                 case "OpenCursussen": OpenCursussennView(); break;
-=======
-<<<<<<< HEAD
                 case "OpenReizen": OpenReizenView(); break;
-=======
-                case "OpenCursussen": OpenCursussennView(); break;
->>>>>>> main
->>>>>>> reizenbeheer
-=======
-                case "OpenReizen": OpenReizenView(); break;
-                case "OpenCursussen": OpenCursussennView(); break;
->>>>>>> reizenbeheer
             }
         }
 
@@ -74,16 +62,6 @@ namespace Reisplanningssysteem_WPF.ViewModels
             var view = new CursussenView();
             OpenView(ref viewmodel, view);
         }
-<<<<<<< HEAD
-
-        private void OpenCursussennView()
-        {
-            var viewmodel = new CursussenViewModel();
-            var view = new CursussenView();
-            OpenView(ref viewmodel, view);
-        }
-=======
->>>>>>> reizenbeheer
 
         private void OpenView<T>(ref T viewmodel, Window view)
         {
