@@ -50,6 +50,15 @@ namespace Reisplanningssysteem_WPF.ViewModels
             set { _foutmelding = value; }
         }
 
+        private string _filter;
+
+        public string Filter
+        {
+            get { return _filter; }
+            set { _filter = value; FilterBestemmingen(); }
+        }
+
+        public List<Bestemming> AlleBestemmingen { get; set; }
 
         private ObservableCollection<Bestemming> _bestemmingen;
 
@@ -67,10 +76,10 @@ namespace Reisplanningssysteem_WPF.ViewModels
             set { _geselecteerdeBestemming = value; }
         }
 
-
         public BestemmingenViewModel()
         {
-            Bestemmingen = new ObservableCollection<Bestemming>(DatabaseOperations.BestemmingenOphalen());
+            AlleBestemmingen = DatabaseOperations.BestemmingenOphalen();
+            Bestemmingen = new ObservableCollection<Bestemming>(AlleBestemmingen);
         }
 
         private void Verwijderen()
@@ -89,7 +98,8 @@ namespace Reisplanningssysteem_WPF.ViewModels
                 return;
             }
 
-            Bestemmingen = new ObservableCollection<Bestemming>(DatabaseOperations.BestemmingenOphalen());
+            AlleBestemmingen = DatabaseOperations.BestemmingenOphalen();
+            Bestemmingen = new ObservableCollection<Bestemming>(AlleBestemmingen);
             GeselecteerdeBestemming = null;
         }
 
@@ -114,8 +124,15 @@ namespace Reisplanningssysteem_WPF.ViewModels
 
             GeselecteerdeBestemming = null;
         }
+
+        private void FilterBestemmingen()
+        {
+            Bestemmingen = new ObservableCollection<Bestemming>(AlleBestemmingen.Where(b => b.Naam.ToLower().Contains(Filter.ToLower())));
+        }
+
         private void Viewmodel_BestemmingenUpdatedEvent(object sender, UpdateGenericListEventArgs<Bestemming> e)
         {
+            AlleBestemmingen = e.GenericList;
             Bestemmingen = new ObservableCollection<Bestemming>(e.GenericList);
         }
     }

@@ -21,6 +21,16 @@ namespace Reisplanningssysteem_DAL
             }
         }
 
+        public static List<Gebruiker> OphalenGefilterdeLijstGebruikers(string input)
+        {
+            using (ReisplanningssysteemContext ctx = new ReisplanningssysteemContext())
+            {
+                return ctx.Gebruikers
+                    .Where(g => g.ToString().Contains(input))
+                    .Include(x => x.Gemeente).ToList();
+            }
+        }
+
         public static List<Gemeente> OphalenGemeentes()
         {
             using (ReisplanningssysteemContext ctx = new ReisplanningssysteemContext())

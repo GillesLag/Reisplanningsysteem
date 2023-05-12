@@ -50,6 +50,15 @@ namespace Reisplanningssysteem_WPF.ViewModels
             set { _foutmelding = value; }
         }
 
+        private string _filter;
+
+        public string Filter
+        {
+            get { return _filter; }
+            set { _filter = value; FilterReizen(); }
+        }
+
+        public List<Reis> AlleReizen { get; set; }
 
         private ObservableCollection<Reis> _reizen;
 
@@ -67,10 +76,10 @@ namespace Reisplanningssysteem_WPF.ViewModels
             set { _geselecteerdeReis = value; }
         }
 
-
         public ReizenViewModel()
         {
-            Reizen = new ObservableCollection<Reis>(DatabaseOperations.ReizenOphalen());
+            AlleReizen = DatabaseOperations.ReizenOphalen();
+            Reizen = new ObservableCollection<Reis>(AlleReizen);
         }
 
         private void Verwijderen()
@@ -89,10 +98,10 @@ namespace Reisplanningssysteem_WPF.ViewModels
                 return;
             }
 
-            Reizen = new ObservableCollection<Reis>(DatabaseOperations.ReizenOphalen());
+            AlleReizen = DatabaseOperations.ReizenOphalen();
+            Reizen = new ObservableCollection<Reis>(AlleReizen);
             GeselecteerdeReis = null;
         }
-
         private void OpenReisToevoegen()
         {
             ReisBeherenViewModel viewmodel = new();
@@ -104,7 +113,6 @@ namespace Reisplanningssysteem_WPF.ViewModels
             ReisBeherenViewModel viewmodel = new(GeselecteerdeReis);
             ViewOpenen(viewmodel);
         }
-
         private void ViewOpenen(ReisBeherenViewModel vm)
         {
             ReisBeheerView view = new();
@@ -114,8 +122,15 @@ namespace Reisplanningssysteem_WPF.ViewModels
 
             GeselecteerdeReis = null;
         }
+
+        private void FilterReizen()
+        {
+            Reizen = new ObservableCollection<Reis>(AlleReizen.Where(r => r.Naam.ToLower().Contains(Filter.ToLower())));
+        }
+
         private void Viewmodel_ReizenUpdatedEvent(object sender, UpdateGenericListEventArgs<Reis> e)
         {
+            AlleReizen = e.GenericList;
             Reizen = new ObservableCollection<Reis>(e.GenericList);
         }
     }
