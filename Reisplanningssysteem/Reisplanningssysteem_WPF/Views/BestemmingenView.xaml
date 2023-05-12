@@ -17,6 +17,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
@@ -42,11 +43,16 @@
                 HorizontalAlignment="Right"
                 Command="{Binding}" CommandParameter="OpenBestemmingToevoegen" />
 
+        <StackPanel Margin="5" Orientation="Horizontal" Grid.Row="1">
+            <Label Content="Filter:"/>
+            <TextBox x:Name="txbFilter" Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}" Width="150"/>
+        </StackPanel>
+
 
         <DataGrid x:Name="datagridStores"
                   ItemsSource="{Binding Bestemmingen}"
                   SelectedItem="{Binding GeselecteerdeBestemming}"
-                  Grid.Row="1" Grid.ColumnSpan="2" AutoGenerateColumns="False"
+                  Grid.Row="2" Grid.ColumnSpan="2" AutoGenerateColumns="False"
                   IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Naam}" Header="Naam"/>
@@ -58,7 +64,7 @@
         </DataGrid>
         
         <Button Grid.Column="0"
-                Grid.Row="2"
+                Grid.Row="3"
                 Style="{StaticResource MaterialDesignRaisedLightButton}"
                 ToolTip="Resource name: MaterialDesignRaisedLightButton"
                 Content="Bewerken"
@@ -66,7 +72,7 @@
                 Command="{Binding}" CommandParameter="OpenBestemmingBewerken" />
         
         <Button Grid.Column="1"
-                Grid.Row="2"
+                Grid.Row="3"
                 Style="{StaticResource MaterialDesignOutlinedLightButton}"
                 ToolTip="Resource name: MaterialDesignOutlinedLightButton"
                 Content="Verwijderen"
@@ -74,7 +80,7 @@
                 Command="{Binding}" CommandParameter="Verwijderen" />
 
         <Label Grid.ColumnSpan="2"
-               Grid.Row="3"
+               Grid.Row="4"
                Content="{Binding Foutmelding}"
                Foreground="Red"/>
     </Grid>

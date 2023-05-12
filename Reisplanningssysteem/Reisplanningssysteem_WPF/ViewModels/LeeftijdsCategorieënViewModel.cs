@@ -16,6 +16,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
         private ObservableCollection<LeeftijdsCategorie> _Categorieën;
         private LeeftijdsCategorie _GeselecteerdeCategorie;
         private string _foutmelding;
+        private string _filter;
 
         public override string this[string columnName] => throw new NotImplementedException();
 
@@ -53,6 +54,14 @@ namespace Reisplanningssysteem_WPF.ViewModels
             set { _foutmelding = value; }
         }
 
+        public string Filter
+        {
+            get { return _filter; }
+            set { _filter = value; FilterCategorieën(); }
+        }
+
+        public List<LeeftijdsCategorie> AlleCategorieën { get; set; }
+
         public ObservableCollection<LeeftijdsCategorie> Categorieën
         {
             get { return _Categorieën; }
@@ -67,7 +76,8 @@ namespace Reisplanningssysteem_WPF.ViewModels
 
         public LeeftijdsCategorieënViewModel()
         {
-            Categorieën = new ObservableCollection<LeeftijdsCategorie>(DatabaseOperations.LeeftijdsCategorieënOphalen());
+            AlleCategorieën = DatabaseOperations.LeeftijdsCategorieënOphalen();
+            Categorieën = new ObservableCollection<LeeftijdsCategorie>(AlleCategorieën);
             GeselecteerdeCategorie = null;
         }
         private void OpenCategorieBewerken()
@@ -93,6 +103,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
 
         private void ViewModel_CategoriënEventHandler(object sender, UpdateGenericListEventArgs<LeeftijdsCategorie> e)
         {
+            AlleCategorieën = e.GenericList;
             Categorieën = new ObservableCollection<LeeftijdsCategorie>(e.GenericList);
         }
 
@@ -112,8 +123,14 @@ namespace Reisplanningssysteem_WPF.ViewModels
                 return;
             }
 
-            Categorieën = new ObservableCollection<LeeftijdsCategorie>(DatabaseOperations.LeeftijdsCategorieënOphalen());
+            AlleCategorieën = DatabaseOperations.LeeftijdsCategorieënOphalen();
+            Categorieën = new ObservableCollection<LeeftijdsCategorie>(AlleCategorieën);
             GeselecteerdeCategorie = null;
+        }
+
+        private void FilterCategorieën()
+        {
+            Categorieën = new ObservableCollection<LeeftijdsCategorie>(AlleCategorieën.Where(c => c.Naam.ToLower().Contains(Filter.ToLower())));
         }
     }
 }

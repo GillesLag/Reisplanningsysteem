@@ -16,6 +16,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
         private ObservableCollection<Cursus> _Cursussen;
         private Cursus _GeselecteerdeCursus;
         private string _foutmelding;
+        private string _filter;
 
         public override string this[string columnName] => throw new NotImplementedException();
 
@@ -53,6 +54,14 @@ namespace Reisplanningssysteem_WPF.ViewModels
             set { _foutmelding = value; }
         }
 
+        public string Filter
+        {
+            get { return _filter; }
+            set { _filter = value; FilterCursussen(); }
+        }
+
+        public List<Cursus> AlleCursussen { get; set; }
+
         public ObservableCollection<Cursus> Cursussen
         {
             get { return _Cursussen; }
@@ -67,7 +76,8 @@ namespace Reisplanningssysteem_WPF.ViewModels
 
         public CursussenViewModel()
         {
-            Cursussen = new ObservableCollection<Cursus>(DatabaseOperations.CursussenOphalen());
+            AlleCursussen = DatabaseOperations.CursussenOphalen();
+            Cursussen = new ObservableCollection<Cursus>(AlleCursussen);
             GeselecteerdeCursus = null;
         }
         private void OpenCursusBewerken()
@@ -93,6 +103,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
 
         private void ViewModel_CursussenEventHandler(object sender, UpdateGenericListEventArgs<Cursus> e)
         {
+            AlleCursussen = e.GenericList;
             Cursussen = new ObservableCollection<Cursus>(e.GenericList);
         }
 
@@ -112,8 +123,14 @@ namespace Reisplanningssysteem_WPF.ViewModels
                 return;
             }
 
-            Cursussen = new ObservableCollection<Cursus>(DatabaseOperations.CursussenOphalen());
+            AlleCursussen = DatabaseOperations.CursussenOphalen();
+            Cursussen = new ObservableCollection<Cursus>(AlleCursussen);
             GeselecteerdeCursus = null;
+        }
+
+        private void FilterCursussen()
+        {
+            Cursussen = new ObservableCollection<Cursus>(AlleCursussen.Where(c => c.Naam.ToLower().Contains(Filter.ToLower())));
         }
     }
 }
