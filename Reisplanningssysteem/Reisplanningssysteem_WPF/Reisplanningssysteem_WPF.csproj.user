@@ -40,6 +40,12 @@
     <Compile Update="Views\ReizenView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\ThemaBeherenView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ThemasView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\BestemmingBeherenView.xaml">
@@ -73,6 +79,12 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\ReizenView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ThemaBeherenView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ThemasView.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
