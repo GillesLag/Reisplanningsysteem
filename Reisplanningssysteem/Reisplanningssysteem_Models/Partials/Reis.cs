@@ -91,5 +91,10 @@ namespace Reisplanningssysteem_Models
                 return (totaalBedragLeden + totaalBedragNietLeden) * (decimal)0.05;
             }
         }
+
+        public override string ToString()
+        {
+            return Naam;
+        }
     }
 }

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Reisplanningssysteem_Models
 {
-    public class Onkost
+    public partial class Onkost
     {
         [Key, Required]
         public int Id { get; set; }

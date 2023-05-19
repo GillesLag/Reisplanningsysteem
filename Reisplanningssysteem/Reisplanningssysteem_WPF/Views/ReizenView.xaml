@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Reisplanningssysteem_WPF.Views"
         mc:Ignorable="d"
         Title="ReizenBeherenView" Height="450" Width="800"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:reisplanningssysteem_models="clr-namespace:Reisplanningssysteem_Models;assembly=Reisplanningssysteem_Models" xmlns:viewmodels="clr-namespace:Reisplanningssysteem_WPF.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:ReizenViewModel}"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:reisplanningssysteem_models="clr-namespace:Reisplanningssysteem_Models;assembly=Reisplanningssysteem_Models" 
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"

@@ -54,7 +54,7 @@
                         <Expander Header="{Binding Naam}" Height="auto" HorizontalAlignment="Left" VerticalAlignment="Center">
                             <DataGrid x:Name="datagridStores"
                                 ItemsSource="{Binding Onkosten}"
-                                SelectedItem="{Binding GeselecteerdeOnkost}"
+                                SelectedItem="{Binding GeselecteerdeOnkost, UpdateSourceTrigger=PropertyChanged}"
                                 AutoGenerateColumns="False"
                                 IsReadOnly="True">
                                 <DataGrid.Columns>
