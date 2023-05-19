@@ -285,11 +285,11 @@ namespace Reisplanningssysteem_DAL
                     Include(r => r.Hoofdmonitor).
                     Include(r => r.Thema).
                     Include(r => r.LeeftijdsCategorie).
+                    Include(r => r.Boekingen).
+                    ThenInclude(b => b.Gebruiker).
                     ToList();
             }
         }
-
-
 
         public static int ReisToevoegen(Reis reis)
         {
