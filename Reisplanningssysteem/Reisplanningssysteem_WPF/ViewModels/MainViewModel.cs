@@ -26,6 +26,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
                 case "OpenLeeftijdsCategorieën": OpenLeeftijdsCategorieënView(); break;
                 case "OpenCursussen": OpenCursussennView(); break;
                 case "OpenReizen": OpenReizenView(); break;
+                case "OpenThemas": OpenThemasView(); break;
             }
         }
 
@@ -60,6 +61,12 @@ namespace Reisplanningssysteem_WPF.ViewModels
         {
             var viewmodel = new CursussenViewModel();
             var view = new CursussenView();
+            OpenView(ref viewmodel, view);
+        }
+        private void OpenThemasView()
+        {
+            var viewmodel = new ThemasViewModel();
+            var view = new ThemasView();
             OpenView(ref viewmodel, view);
         }
 

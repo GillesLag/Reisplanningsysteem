@@ -82,6 +82,22 @@ namespace Reisplanningssysteem_DAL
             }
         }
 
+        public static int ThemaToevoegen(Thema thema)
+        {
+            try
+            {
+                using (ReisplanningssysteemContext ctx = new())
+                {
+                    ctx.Entry(thema).State = EntityState.Added;
+                    return ctx.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
         public static Gebruiker ZoekGebruikerOpId(int gebruikerId)
         {
             using (ReisplanningssysteemContext ctx = new ReisplanningssysteemContext())
@@ -91,11 +107,43 @@ namespace Reisplanningssysteem_DAL
             }
         }
 
+        public static int ThemaBewerken(Thema thema)
+        {
+            try
+            {
+                using (ReisplanningssysteemContext ctx = new())
+                {
+                    ctx.Entry(thema).State = EntityState.Modified;
+                    return ctx.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
         public static List<Bestemming> BestemmingenOphalen()
         {
             using (ReisplanningssysteemContext ctx = new())
             {
                 return ctx.Bestemmingen.Include("Gemeente").ToList();
+            }
+        }
+
+        public static int ThemaVerwijderen(Thema geselecteerdeThema)
+        {
+            try
+            {
+                using (ReisplanningssysteemContext ctx = new())
+                {
+                    ctx.Entry(geselecteerdeThema).State = EntityState.Deleted;
+                    return ctx.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                return 0;
             }
         }
 
