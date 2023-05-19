@@ -48,6 +48,10 @@
             Content="Themas"
             Margin="5"
             Command="{Binding}" CommandParameter="OpenThemas"/>
+            <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
+            Content="Onkosten"
+            Margin="5"
+            Command="{Binding}" CommandParameter="OpenOnkosten"/>
         </StackPanel>
         
     </Grid>

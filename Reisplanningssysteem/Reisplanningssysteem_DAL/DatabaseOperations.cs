@@ -287,6 +287,7 @@ namespace Reisplanningssysteem_DAL
                     Include(r => r.LeeftijdsCategorie).
                     Include(r => r.Boekingen).
                     ThenInclude(b => b.Gebruiker).
+                    Include(r => r.Onkosten).
                     ToList();
             }
         }
