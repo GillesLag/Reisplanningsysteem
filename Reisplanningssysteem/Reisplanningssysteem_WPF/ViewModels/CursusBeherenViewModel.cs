@@ -3,6 +3,7 @@ using Reisplanningssysteem_Models;
 using Reisplanningssysteem_WPF.Utils;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,13 @@ namespace Reisplanningssysteem_WPF.ViewModels
 {
     public class CursusBeherenViewModel : BaseViewModel
     {
+        private List<Gebruiker> _gebruikers;
+        public List<Gebruiker> Gebruikers
+        {
+            get { return _gebruikers; }
+            set { _gebruikers = value; }
+        }
+
         public override string this[string columnName]
         {
             get { return ""; }
@@ -55,6 +63,8 @@ namespace Reisplanningssysteem_WPF.ViewModels
             set { _bewerkenOfToevoegenButton = value; }
         }
 
+        public List<Gebruiker> AlleGebruikers { get; set; }
+
         private Cursus _cursus;
 
         public Cursus Cursus
@@ -65,6 +75,8 @@ namespace Reisplanningssysteem_WPF.ViewModels
 
         public CursusBeherenViewModel()
         {
+            AlleGebruikers = DatabaseOperations.OphalenLijstGebruikers();
+            Gebruikers = new List<Gebruiker>();
             Cursus = new Cursus();
             BewerkenOfToevoegen = "Cursus toevoegen";
             BewerkenOfToevoegenButton = "Toevoegen";
@@ -72,6 +84,9 @@ namespace Reisplanningssysteem_WPF.ViewModels
 
         public CursusBeherenViewModel(Cursus cursus)
         {
+            AlleGebruikers = DatabaseOperations.OphalenLijstGebruikers();
+            Gebruikers = AlleGebruikers?.Where(gebruiker => gebruiker.GebruikerCursussen?.Any(gc => gc.CursusId == cursus.Id) == true)?.ToList();
+
             Cursus = cursus;
             BewerkenOfToevoegen = "Cursus bewerken";
             BewerkenOfToevoegenButton = "Bewerken";

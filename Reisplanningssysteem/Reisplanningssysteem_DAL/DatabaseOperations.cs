@@ -17,7 +17,7 @@ namespace Reisplanningssysteem_DAL
             using (ReisplanningssysteemContext ctx = new ReisplanningssysteemContext())
             {
                 return ctx.Gebruikers.
-                Include(x => x.Gemeente).ToList();
+                Include(x => x.Gemeente).Include(x=> x.GebruikerCursussen).ToList();
             }
         }
 

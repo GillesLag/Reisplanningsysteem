@@ -35,8 +35,8 @@
                 FontWeight="Bold"
                 FontSize="20px"/>
 
-        <Label  Content="Naam:"
-                Grid.Row="1"
+        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2" Grid.Row="1">
+            <Label  Content="Naam:"
                 materialDesign:HintAssist.Hint="Zoekterm"
                 Style="{StaticResource MaterialDesignLabel}"
                 Margin="5"
@@ -45,11 +45,32 @@
                 HorizontalAlignment="Right"/>
 
 
-        <TextBox Grid.Column="1"
+            <TextBox
+                Width="400px"
                  Grid.Row="1"
                  Margin="5"
                  FontSize="18"
                  Text="{Binding Cursus.Naam, ValidatesOnDataErrors=True}"/>
+
+            <ComboBox HorizontalAlignment="Left" Grid.Row="2" Grid.Column="1" Name="cmbGebruikers"   
+                  Margin="5"
+                      Width="190" 
+                      ItemsSource="{Binding AlleGebruikers}"
+                      SelectedValuePath="Id"
+                      materialDesign:HintAssist.Hint="Gebruikers"
+                      Height="33px"
+                      />
+        </StackPanel>
+
+        <DataGrid x:Name="datagridStores"
+                  ItemsSource="{Binding Gebruikers}"
+                  Grid.Row="3" Grid.ColumnSpan="2" AutoGenerateColumns="False"
+                  IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Voornaam}" Header="Voornaam"/>
+                <DataGridTextColumn Binding="{Binding Achternaam}" Header="Familienaam"/>
+            </DataGrid.Columns>
+        </DataGrid>
 
         <Button Grid.ColumnSpan="2"
                 Grid.Row="4"
