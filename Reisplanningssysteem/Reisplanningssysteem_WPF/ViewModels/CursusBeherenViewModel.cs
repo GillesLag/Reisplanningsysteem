@@ -1,4 +1,5 @@
-﻿using Reisplanningssysteem_DAL;
+﻿using GalaSoft.MvvmLight.Command;
+using Reisplanningssysteem_DAL;
 using Reisplanningssysteem_Models;
 using Reisplanningssysteem_WPF.Utils;
 using System;
@@ -7,11 +8,25 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 
 namespace Reisplanningssysteem_WPF.ViewModels
 {
     public class CursusBeherenViewModel : BaseViewModel
     {
+        public Gebruiker _geselecteerdGebruiker { get; set; }
+
+        public Gebruiker GeselecteerdeGebruiker
+        {
+            get { return _geselecteerdGebruiker; }
+            set
+            {
+                _geselecteerdGebruiker = value;
+            }
+        }
+
+
         private List<Gebruiker> _gebruikers;
         public List<Gebruiker> Gebruikers
         {
@@ -35,6 +50,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
             {
                 case "Toevoegen": Toevoegen(); break;
                 case "Bewerken": Bewerken(); break;
+                case "Linken": Linken(); break;
             }
         }
 
@@ -63,6 +79,14 @@ namespace Reisplanningssysteem_WPF.ViewModels
             set { _bewerkenOfToevoegenButton = value; }
         }
 
+        private string _linkButton;
+
+        public string LinkButton
+        {
+            get { return _linkButton; }
+            set { _linkButton = value; }
+        }
+
         public List<Gebruiker> AlleGebruikers { get; set; }
 
         private Cursus _cursus;
@@ -72,6 +96,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
             get { return _cursus; }
             set { _cursus = value; }
         }
+        public ICommand SelecteerGebruiker { get; set; }
 
         public CursusBeherenViewModel()
         {
@@ -80,16 +105,20 @@ namespace Reisplanningssysteem_WPF.ViewModels
             Cursus = new Cursus();
             BewerkenOfToevoegen = "Cursus toevoegen";
             BewerkenOfToevoegenButton = "Toevoegen";
+            LinkButton = "Linken";
         }
+
+
 
         public CursusBeherenViewModel(Cursus cursus)
         {
-            AlleGebruikers = DatabaseOperations.OphalenLijstGebruikers();
-            Gebruikers = AlleGebruikers?.Where(gebruiker => gebruiker.GebruikerCursussen?.Any(gc => gc.CursusId == cursus.Id) == true)?.ToList();
+            AlleGebruikers = DatabaseOperations.OphalenLijstGebruikers()?.Where(gebruiker => gebruiker.GebruikerCursussen?.Any(gc => gc.CursusId == cursus.Id) == false)?.ToList();
+            Gebruikers = DatabaseOperations.OphalenLijstGebruikers()?.Where(gebruiker => gebruiker.GebruikerCursussen?.Any(gc => gc.CursusId == cursus.Id) == true)?.ToList();
 
             Cursus = cursus;
             BewerkenOfToevoegen = "Cursus bewerken";
             BewerkenOfToevoegenButton = "Bewerken";
+            LinkButton = "Linken";
         }
 
         private void Toevoegen()
@@ -142,6 +171,25 @@ namespace Reisplanningssysteem_WPF.ViewModels
 
             Foutmelding = "";
             UpdateCursussen();
+        }
+
+        private void Linken()
+        {
+            if (GeselecteerdeGebruiker == null)
+            {
+                Foutmelding = "Gelieven een gebruiker te selecteren";
+                return;
+            }
+            else
+            {
+                Gebruikers.Add(GeselecteerdeGebruiker);
+                AlleGebruikers.Remove(GeselecteerdeGebruiker);
+                GebruikerCursus link = new GebruikerCursus();
+                link.Gebruiker = GeselecteerdeGebruiker;
+                link.Cursus = Cursus;
+                int ok = DatabaseOperations.GebruikerLinken(link);
+                GeselecteerdeGebruiker = null;
+            }
         }
 
         public delegate void CursussenUpdateHandler(object sender, UpdateGenericListEventArgs<Cursus> e);

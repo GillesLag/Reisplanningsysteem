@@ -16,12 +16,6 @@
     <Compile Update="Views\CursusBeherenView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\CursusLinkenBeheren.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\CursusLinkenView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="Views\CursussenView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -61,12 +55,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\CursusBeherenView.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\CursusLinkenBeheren.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\CursusLinkenView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\CursussenView.xaml">

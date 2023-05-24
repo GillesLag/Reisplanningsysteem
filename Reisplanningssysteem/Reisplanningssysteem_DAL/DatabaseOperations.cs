@@ -237,6 +237,22 @@ namespace Reisplanningssysteem_DAL
             }
         }
 
+        public static int GebruikerLinken(GebruikerCursus gebruikerCursus)
+        {
+            try
+            {
+                using (ReisplanningssysteemContext ctx = new())
+                {
+                    ctx.GebruikersCursusen.Entry(gebruikerCursus).State = EntityState.Added;
+                    return ctx.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
         public static int LeeftijdsCategorieVerwijderen(LeeftijdsCategorie leeftijdsCategorie)
         {
             try

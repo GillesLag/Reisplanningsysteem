@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Reisplanningssysteem_WPF.Views"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="CursusBeherenView" Height="450" Width="800"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -51,15 +52,23 @@
                  Margin="5"
                  FontSize="18"
                  Text="{Binding Cursus.Naam, ValidatesOnDataErrors=True}"/>
-
             <ComboBox HorizontalAlignment="Left" Grid.Row="2" Grid.Column="1" Name="cmbGebruikers"   
                   Margin="5"
                       Width="190" 
-                      ItemsSource="{Binding AlleGebruikers}"
+                      ItemsSource="{Binding AlleGebruikers}"                      
+                      SelectedItem="{Binding GeselecteerdeGebruiker}"
                       SelectedValuePath="Id"
-                      materialDesign:HintAssist.Hint="Gebruikers"
-                      Height="33px"
+                      materialDesign:HintAssist.Hint="Gebruiker"
+                      Height="33px" 
                       />
+            <Button Grid.ColumnSpan="2"
+                Grid.Row="4"
+                Style="{StaticResource MaterialDesignRaisedLightButton}"
+                ToolTip="Resource name: MaterialDesignRaisedLightButton"
+                Content="+"
+                Margin="15"
+                Command="{Binding}" CommandParameter="{Binding LinkButton}" />
+
         </StackPanel>
 
         <DataGrid x:Name="datagridStores"
