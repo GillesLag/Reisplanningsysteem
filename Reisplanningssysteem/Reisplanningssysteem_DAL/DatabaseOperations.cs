@@ -82,6 +82,38 @@ namespace Reisplanningssysteem_DAL
             }
         }
 
+        public static int OnkostVerwijderen(Onkost geselecteerdeOnkost)
+        {
+            try
+            {
+                using (ReisplanningssysteemContext ctx = new())
+                {
+                    ctx.Entry(geselecteerdeOnkost).State = EntityState.Deleted;
+                    return ctx.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        public static int OnkostBewerken(Onkost onkost)
+        {
+            try
+            {
+                using (ReisplanningssysteemContext ctx = new())
+                {
+                    ctx.Entry(onkost).State = EntityState.Modified;
+                    return ctx.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
         public static int ThemaToevoegen(Thema thema)
         {
             try
@@ -89,6 +121,22 @@ namespace Reisplanningssysteem_DAL
                 using (ReisplanningssysteemContext ctx = new())
                 {
                     ctx.Entry(thema).State = EntityState.Added;
+                    return ctx.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        public static int OnkostToevoegen(Onkost onkost)
+        {
+            try
+            {
+                using (ReisplanningssysteemContext ctx = new())
+                {
+                    ctx.Entry(onkost).State = EntityState.Added;
                     return ctx.SaveChanges();
                 }
             }
@@ -301,11 +349,12 @@ namespace Reisplanningssysteem_DAL
                     Include(r => r.Hoofdmonitor).
                     Include(r => r.Thema).
                     Include(r => r.LeeftijdsCategorie).
+                    Include(r => r.Boekingen).
+                    ThenInclude(b => b.Gebruiker).
+                    Include(r => r.Onkosten).
                     ToList();
             }
         }
-
-
 
         public static int ReisToevoegen(Reis reis)
         {

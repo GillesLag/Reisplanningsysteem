@@ -28,6 +28,12 @@
     <Compile Update="Views\MainView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\OnkostBeherenView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\OnkostenView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\PersonenBeherenView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -67,6 +73,12 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\MainView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\OnkostBeherenView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\OnkostenView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\PersonenBeherenView.xaml">

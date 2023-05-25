@@ -59,5 +59,42 @@ namespace Reisplanningssysteem_Models
                 return "";
             }
         }
+
+        public int AantalLeden
+        {
+            get
+            {
+                if (Boekingen == null) return 0;
+                return Boekingen.Where(b => b.Gebruiker.IsLid && !b.IsMonitor).Count();
+            }
+        }
+        public int AantalNietLeden
+        {
+            get
+            {
+                if (Boekingen == null) return 0;
+                return Boekingen.Where(b => !b.Gebruiker.IsLid && !b.IsMonitor).Count();
+            }
+        }
+        public decimal Budget
+        {
+            get
+            {
+                if (Boekingen == null) return 0;
+
+                List<Gebruiker> leden = Boekingen.Where(b => b.Gebruiker.IsLid && !b.IsMonitor).Select(g => g.Gebruiker).ToList();
+                List<Gebruiker> nietLeden = Boekingen.Where(b => !b.Gebruiker.IsLid && !b.IsMonitor).Select(g => g.Gebruiker).ToList();
+
+                decimal totaalBedragLeden = leden.Count * (Prijs * (decimal)0.9);
+                decimal totaalBedragNietLeden = nietLeden.Count * Prijs;
+
+                return (totaalBedragLeden + totaalBedragNietLeden) * (decimal)0.05;
+            }
+        }
+
+        public override string ToString()
+        {
+            return Naam;
+        }
     }
 }

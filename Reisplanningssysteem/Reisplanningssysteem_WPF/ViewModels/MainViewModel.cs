@@ -27,7 +27,15 @@ namespace Reisplanningssysteem_WPF.ViewModels
                 case "OpenCursussen": OpenCursussennView(); break;
                 case "OpenReizen": OpenReizenView(); break;
                 case "OpenThemas": OpenThemasView(); break;
+                case "OpenOnkosten": OpenOnkostenView(); break;
             }
+        }
+
+        private void OpenOnkostenView()
+        {
+            var viewmodel = new OnkostenViewModel();
+            var view = new OnkostenView();
+            OpenView(ref viewmodel, view);
         }
 
         private void OpenBestemmingView()

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Reisplanningssysteem_WPF.Views"
         mc:Ignorable="d"
         Title="ReizenBeherenView" Height="450" Width="800"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:reisplanningssysteem_models="clr-namespace:Reisplanningssysteem_Models;assembly=Reisplanningssysteem_Models"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:reisplanningssysteem_models="clr-namespace:Reisplanningssysteem_Models;assembly=Reisplanningssysteem_Models" 
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -60,6 +60,9 @@
                 <DataGridTextColumn Binding="{Binding Thema.Naam}" Header="Thema"/>
                 <DataGridTextColumn Binding="{Binding Prijs, StringFormat=C, ConverterCulture=nl-BE}" Header="Prijs"/>
                 <DataGridTextColumn Binding="{Binding Hoofdmonitor}" Header="Hoofdmonitor"/>
+                <DataGridTextColumn Binding="{Binding AantalLeden}" Header="Leden"/>
+                <DataGridTextColumn Binding="{Binding AantalNietLeden}" Header="Niet leden"/>
+                <DataGridTextColumn Binding="{Binding Budget, StringFormat=C, ConverterCulture=nl-BE}" Header="Budget"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button Grid.Column="0"
