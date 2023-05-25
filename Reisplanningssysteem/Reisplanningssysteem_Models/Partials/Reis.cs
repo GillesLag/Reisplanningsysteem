@@ -65,7 +65,9 @@ namespace Reisplanningssysteem_Models
             get
             {
                 if (Boekingen == null) return 0;
-                return Boekingen.Where(b => b.Gebruiker.IsLid && !b.IsMonitor).Count();
+                int? aantal = Boekingen.Where(b => b.Gebruiker != null && b.Gebruiker.IsLid && !b.IsMonitor)?.Count();
+
+                return aantal == null ? 0 : aantal.Value;
             }
         }
         public int AantalNietLeden
@@ -73,7 +75,9 @@ namespace Reisplanningssysteem_Models
             get
             {
                 if (Boekingen == null) return 0;
-                return Boekingen.Where(b => !b.Gebruiker.IsLid && !b.IsMonitor).Count();
+                int? aantal = Boekingen.Where(b => b.Gebruiker != null && !b.Gebruiker.IsLid && !b.IsMonitor)?.Count();
+
+                return aantal == null ? 0 : aantal.Value;
             }
         }
         public decimal Budget
@@ -82,8 +86,8 @@ namespace Reisplanningssysteem_Models
             {
                 if (Boekingen == null) return 0;
 
-                List<Gebruiker> leden = Boekingen.Where(b => b.Gebruiker.IsLid && !b.IsMonitor).Select(g => g.Gebruiker).ToList();
-                List<Gebruiker> nietLeden = Boekingen.Where(b => !b.Gebruiker.IsLid && !b.IsMonitor).Select(g => g.Gebruiker).ToList();
+                List<Gebruiker> leden = Boekingen.Where(b => b.Gebruiker != null && b.Gebruiker.IsLid && !b.IsMonitor).Select(g => g.Gebruiker).ToList();
+                List<Gebruiker> nietLeden = Boekingen.Where(b => b.Gebruiker != null && !b.Gebruiker.IsLid && !b.IsMonitor).Select(g => g.Gebruiker).ToList();
 
                 decimal totaalBedragLeden = leden.Count * (Prijs * (decimal)0.9);
                 decimal totaalBedragNietLeden = nietLeden.Count * Prijs;
