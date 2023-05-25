@@ -3517,11 +3517,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\gilles.lagrilliere\\OneDrive - Codraft\\Documents\\school\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_Models\\Reisplanningssysteem_Models.csproj",
+      "projectUniqueName": "C:\\Users\\gilles.lagrilliere\\OneDrive - Codraft\\Documents\\test\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_Models\\Reisplanningssysteem_Models.csproj",
       "projectName": "Reisplanningssysteem_Models",
-      "projectPath": "C:\\Users\\gilles.lagrilliere\\OneDrive - Codraft\\Documents\\school\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_Models\\Reisplanningssysteem_Models.csproj",
+      "projectPath": "C:\\Users\\gilles.lagrilliere\\OneDrive - Codraft\\Documents\\test\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_Models\\Reisplanningssysteem_Models.csproj",
       "packagesPath": "C:\\Users\\gilles.lagrilliere\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\gilles.lagrilliere\\OneDrive - Codraft\\Documents\\school\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_Models\\obj\\",
+      "outputPath": "C:\\Users\\gilles.lagrilliere\\OneDrive - Codraft\\Documents\\test\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_Models\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

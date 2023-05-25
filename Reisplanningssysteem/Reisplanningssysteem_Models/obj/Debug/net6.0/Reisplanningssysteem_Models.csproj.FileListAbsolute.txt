@@ -26,3 +26,17 @@ C:\Users\gilles.lagrilliere\OneDrive - Codraft\Documents\school\Reisplanningsyst
 C:\Users\gilles.lagrilliere\OneDrive - Codraft\Documents\school\Reisplanningsysteem\Reisplanningssysteem\Reisplanningssysteem_Models\obj\Debug\net6.0\Reisplanningssysteem_Models.pdb
 C:\Users\gilles.lagrilliere\OneDrive - Codraft\Documents\school\Reisplanningsysteem\Reisplanningssysteem\Reisplanningssysteem_Models\obj\Debug\net6.0\Reisplanningssysteem_Models.genruntimeconfig.cache
 C:\Users\gilles.lagrilliere\OneDrive - Codraft\Documents\school\Reisplanningsysteem\Reisplanningssysteem\Reisplanningssysteem_Models\obj\Debug\net6.0\ref\Reisplanningssysteem_Models.dll
+C:\Users\gilles.lagrilliere\OneDrive - Codraft\Documents\test\Reisplanningsysteem\Reisplanningssysteem\Reisplanningssysteem_Models\bin\Debug\net6.0\Reisplanningssysteem_Models.deps.json
+C:\Users\gilles.lagrilliere\OneDrive - Codraft\Documents\test\Reisplanningsysteem\Reisplanningssysteem\Reisplanningssysteem_Models\bin\Debug\net6.0\Reisplanningssysteem_Models.runtimeconfig.json
+C:\Users\gilles.lagrilliere\OneDrive - Codraft\Documents\test\Reisplanningsysteem\Reisplanningssysteem\Reisplanningssysteem_Models\bin\Debug\net6.0\Reisplanningssysteem_Models.dll
+C:\Users\gilles.lagrilliere\OneDrive - Codraft\Documents\test\Reisplanningsysteem\Reisplanningssysteem\Reisplanningssysteem_Models\bin\Debug\net6.0\Reisplanningssysteem_Models.pdb
+C:\Users\gilles.lagrilliere\OneDrive - Codraft\Documents\test\Reisplanningsysteem\Reisplanningssysteem\Reisplanningssysteem_Models\obj\Debug\net6.0\Reisplanningssysteem_Models.csproj.AssemblyReference.cache
+C:\Users\gilles.lagrilliere\OneDrive - Codraft\Documents\test\Reisplanningsysteem\Reisplanningssysteem\Reisplanningssysteem_Models\obj\Debug\net6.0\Reisplanningssysteem_Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\gilles.lagrilliere\OneDrive - Codraft\Documents\test\Reisplanningsysteem\Reisplanningssysteem\Reisplanningssysteem_Models\obj\Debug\net6.0\Reisplanningssysteem_Models.AssemblyInfoInputs.cache
+C:\Users\gilles.lagrilliere\OneDrive - Codraft\Documents\test\Reisplanningsysteem\Reisplanningssysteem\Reisplanningssysteem_Models\obj\Debug\net6.0\Reisplanningssysteem_Models.AssemblyInfo.cs
+C:\Users\gilles.lagrilliere\OneDrive - Codraft\Documents\test\Reisplanningsysteem\Reisplanningssysteem\Reisplanningssysteem_Models\obj\Debug\net6.0\Reisplanningssysteem_Models.csproj.CoreCompileInputs.cache
+C:\Users\gilles.lagrilliere\OneDrive - Codraft\Documents\test\Reisplanningsysteem\Reisplanningssysteem\Reisplanningssysteem_Models\obj\Debug\net6.0\Reisplanningssysteem_Models.dll
+C:\Users\gilles.lagrilliere\OneDrive - Codraft\Documents\test\Reisplanningsysteem\Reisplanningssysteem\Reisplanningssysteem_Models\obj\Debug\net6.0\refint\Reisplanningssysteem_Models.dll
+C:\Users\gilles.lagrilliere\OneDrive - Codraft\Documents\test\Reisplanningsysteem\Reisplanningssysteem\Reisplanningssysteem_Models\obj\Debug\net6.0\Reisplanningssysteem_Models.pdb
+C:\Users\gilles.lagrilliere\OneDrive - Codraft\Documents\test\Reisplanningsysteem\Reisplanningssysteem\Reisplanningssysteem_Models\obj\Debug\net6.0\Reisplanningssysteem_Models.genruntimeconfig.cache
+C:\Users\gilles.lagrilliere\OneDrive - Codraft\Documents\test\Reisplanningsysteem\Reisplanningssysteem\Reisplanningssysteem_Models\obj\Debug\net6.0\ref\Reisplanningssysteem_Models.dll
