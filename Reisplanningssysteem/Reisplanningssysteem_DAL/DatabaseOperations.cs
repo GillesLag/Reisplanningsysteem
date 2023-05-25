@@ -17,7 +17,7 @@ namespace Reisplanningssysteem_DAL
             using (ReisplanningssysteemContext ctx = new ReisplanningssysteemContext())
             {
                 return ctx.Gebruikers.
-                Include(x => x.Gemeente).Include(x=> x.GebruikerCursussen).ToList();
+                Include(x => x.Gemeente).Include(x=> x.GebruikerCursussen).OrderBy(g => g.Voornaam).ToList();
             }
         }
 
@@ -35,7 +35,7 @@ namespace Reisplanningssysteem_DAL
         {
             using (ReisplanningssysteemContext ctx = new ReisplanningssysteemContext())
             {
-                return ctx.Gemeenten.ToList();
+                return ctx.Gemeenten.OrderBy(g => g.Naam).ToList();
             }
         }
 
@@ -175,7 +175,7 @@ namespace Reisplanningssysteem_DAL
         {
             using (ReisplanningssysteemContext ctx = new())
             {
-                return ctx.Bestemmingen.Include("Gemeente").ToList();
+                return ctx.Bestemmingen.Include("Gemeente").OrderBy(b => b.Naam).ToList();
             }
         }
 
@@ -243,7 +243,7 @@ namespace Reisplanningssysteem_DAL
             }
         }
 
-        public static List<Gebruiker> HoogdmonitorenOphalen()
+        public static List<Gebruiker> HoofdmonitorenOphalen()
         {
             using (ReisplanningssysteemContext ctx = new ReisplanningssysteemContext())
             {
@@ -257,7 +257,7 @@ namespace Reisplanningssysteem_DAL
         {
             using (ReisplanningssysteemContext ctx = new ReisplanningssysteemContext())
             {
-                return ctx.Themas.ToList();
+                return ctx.Themas.OrderBy(t => t.Naam).ToList();
             }
         }
 
@@ -265,7 +265,7 @@ namespace Reisplanningssysteem_DAL
         {
             using (ReisplanningssysteemContext ctx = new())
             {
-                return ctx.LeeftijdsCategorieën.ToList();
+                return ctx.LeeftijdsCategorieën.OrderBy(l => l.Naam).ToList();
             }
         }
 
@@ -336,7 +336,7 @@ namespace Reisplanningssysteem_DAL
         {
             using (ReisplanningssysteemContext ctx = new())
             {
-                return ctx.Cursussen.ToList();
+                return ctx.Cursussen.OrderBy(c => c.Naam).ToList();
             }
         }
 
@@ -352,6 +352,7 @@ namespace Reisplanningssysteem_DAL
                     Include(r => r.Boekingen).
                     ThenInclude(b => b.Gebruiker).
                     Include(r => r.Onkosten).
+                    OrderBy(r => r.Naam).
                     ToList();
             }
         }
