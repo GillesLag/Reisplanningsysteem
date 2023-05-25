@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "myoLJHcCN3r0oJ+ZZFvaBrl6qFuP2mxU7kWWfiV2SCOu5tWIj1nRBG8WU0XXhpa6/FQ8mKEpsvPW0eTlEZZ3+g==",
+  "dgSpecHash": "Mn1uDLW2rjl0wn4Kk5UAWd2TjtoGJpH5th5i3mk/5oDrJGi9/re80JP5BP+7864A+uxpNMHti94Kcrpj9vOPRA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\gilles.lagrilliere\\OneDrive - Codraft\\Documents\\school\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_Models\\Reisplanningssysteem_Models.csproj",
+  "projectFilePath": "C:\\Users\\gilles.lagrilliere\\OneDrive - Codraft\\Documents\\test\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_Models\\Reisplanningssysteem_Models.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\gilles.lagrilliere\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\gilles.lagrilliere\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
