@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Gilles Lagrilli\\Documents\\School\\Agile en testing\\Project\\Reisplanningssysteem\\Reisplanningssysteem_DAL\\Reisplanningssysteem_DAL.csproj": {}
+    "C:\\Users\\gilles.lagrilliere\\OneDrive - Codraft\\Documents\\school\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_DAL\\Reisplanningssysteem_DAL.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Gilles Lagrilli\\Documents\\School\\Agile en testing\\Project\\Reisplanningssysteem\\Reisplanningssysteem_DAL\\Reisplanningssysteem_DAL.csproj": {
+    "C:\\Users\\gilles.lagrilliere\\OneDrive - Codraft\\Documents\\school\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_DAL\\Reisplanningssysteem_DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Gilles Lagrilli\\Documents\\School\\Agile en testing\\Project\\Reisplanningssysteem\\Reisplanningssysteem_DAL\\Reisplanningssysteem_DAL.csproj",
+        "projectUniqueName": "C:\\Users\\gilles.lagrilliere\\OneDrive - Codraft\\Documents\\school\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_DAL\\Reisplanningssysteem_DAL.csproj",
         "projectName": "Reisplanningssysteem_DAL",
-        "projectPath": "C:\\Users\\Gilles Lagrilli\\Documents\\School\\Agile en testing\\Project\\Reisplanningssysteem\\Reisplanningssysteem_DAL\\Reisplanningssysteem_DAL.csproj",
-        "packagesPath": "C:\\Users\\Gilles Lagrilli\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Gilles Lagrilli\\Documents\\School\\Agile en testing\\Project\\Reisplanningssysteem\\Reisplanningssysteem_DAL\\obj\\",
+        "projectPath": "C:\\Users\\gilles.lagrilliere\\OneDrive - Codraft\\Documents\\school\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_DAL\\Reisplanningssysteem_DAL.csproj",
+        "packagesPath": "C:\\Users\\gilles.lagrilliere\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\gilles.lagrilliere\\OneDrive - Codraft\\Documents\\school\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_DAL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Gilles Lagrilli\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\gilles.lagrilliere\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,14 +26,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\Gilles Lagrilli\\Documents\\School\\Agile en testing\\Project\\Reisplanningssysteem\\Reisplanningssysteem_Models\\Reisplanningssysteem_Models.csproj": {
-                "projectPath": "C:\\Users\\Gilles Lagrilli\\Documents\\School\\Agile en testing\\Project\\Reisplanningssysteem\\Reisplanningssysteem_Models\\Reisplanningssysteem_Models.csproj"
+              "C:\\Users\\gilles.lagrilliere\\OneDrive - Codraft\\Documents\\school\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_Models\\Reisplanningssysteem_Models.csproj": {
+                "projectPath": "C:\\Users\\gilles.lagrilliere\\OneDrive - Codraft\\Documents\\school\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_Models\\Reisplanningssysteem_Models.csproj"
               }
             }
           }
@@ -75,7 +76,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -84,24 +86,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.311\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.105\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Gilles Lagrilli\\Documents\\School\\Agile en testing\\Project\\Reisplanningssysteem\\Reisplanningssysteem_Models\\Reisplanningssysteem_Models.csproj": {
+    "C:\\Users\\gilles.lagrilliere\\OneDrive - Codraft\\Documents\\school\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_Models\\Reisplanningssysteem_Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Gilles Lagrilli\\Documents\\School\\Agile en testing\\Project\\Reisplanningssysteem\\Reisplanningssysteem_Models\\Reisplanningssysteem_Models.csproj",
+        "projectUniqueName": "C:\\Users\\gilles.lagrilliere\\OneDrive - Codraft\\Documents\\school\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_Models\\Reisplanningssysteem_Models.csproj",
         "projectName": "Reisplanningssysteem_Models",
-        "projectPath": "C:\\Users\\Gilles Lagrilli\\Documents\\School\\Agile en testing\\Project\\Reisplanningssysteem\\Reisplanningssysteem_Models\\Reisplanningssysteem_Models.csproj",
-        "packagesPath": "C:\\Users\\Gilles Lagrilli\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Gilles Lagrilli\\Documents\\School\\Agile en testing\\Project\\Reisplanningssysteem\\Reisplanningssysteem_Models\\obj\\",
+        "projectPath": "C:\\Users\\gilles.lagrilliere\\OneDrive - Codraft\\Documents\\school\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_Models\\Reisplanningssysteem_Models.csproj",
+        "packagesPath": "C:\\Users\\gilles.lagrilliere\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\gilles.lagrilliere\\OneDrive - Codraft\\Documents\\school\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_Models\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Gilles Lagrilli\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\gilles.lagrilliere\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -110,6 +112,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -155,7 +158,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -164,7 +168,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.311\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.105\\RuntimeIdentifierGraph.json"
         }
       }
     }

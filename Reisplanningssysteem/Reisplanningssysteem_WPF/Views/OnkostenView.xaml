@@ -3,11 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Reisplanningssysteem_WPF.Views"
         mc:Ignorable="d"
         Title="OnkostenView" Height="450" Width="800"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:reisplanningssysteem_models="clr-namespace:Reisplanningssysteem_Models;assembly=Reisplanningssysteem_Models"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -54,7 +52,9 @@
                         <Expander Header="{Binding Naam}" Height="auto" HorizontalAlignment="Left" VerticalAlignment="Center">
                             <DataGrid x:Name="datagridStores"
                                 ItemsSource="{Binding Onkosten}"
-                                SelectedItem="{Binding GeselecteerdeOnkost, UpdateSourceTrigger=PropertyChanged}"
+                                SelectedItem="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}},
+                                Path=DataContext.GeselecteerdeOnkost,
+                                UpdateSourceTrigger=PropertyChanged}"
                                 AutoGenerateColumns="False"
                                 IsReadOnly="True">
                                 <DataGrid.Columns>
