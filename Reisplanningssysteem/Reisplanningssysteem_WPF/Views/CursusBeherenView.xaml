@@ -73,6 +73,7 @@
 
         <DataGrid x:Name="datagridStores"
                   ItemsSource="{Binding Gebruikers}"
+                  SelectedItem="{Binding TeVerwijderenGebruiker}"
                   Grid.Row="3" Grid.ColumnSpan="2" AutoGenerateColumns="False"
                   IsReadOnly="True">
             <DataGrid.Columns>
@@ -81,13 +82,19 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Button Grid.ColumnSpan="2"
-                Grid.Row="4"
+        <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.ColumnSpan="2">
+            <Button
                 Style="{StaticResource MaterialDesignRaisedLightButton}"
                 ToolTip="Resource name: MaterialDesignRaisedLightButton"
                 Content="{Binding BewerkenOfToevoegenButton}"
                 Margin="15"
+                Width="200px"
                 Command="{Binding}" CommandParameter="{Binding BewerkenOfToevoegenButton}" />
+            <Button Content="X" 
+                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            ToolTip="Resource name: MaterialDesignRaisedLightButton"
+                            Command="{Binding}" CommandParameter="{Binding VerwijderGebruiker}" />
+        </StackPanel>
 
         <Label Grid.ColumnSpan="2"
                Grid.Row="5"

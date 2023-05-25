@@ -155,6 +155,14 @@ namespace Reisplanningssysteem_DAL
             }
         }
 
+        public static GebruikerCursus ZoekGebruikerCursus(Gebruiker gebruiker, Cursus cursus)
+        {
+            using (ReisplanningssysteemContext ctx = new ReisplanningssysteemContext())
+            {
+                return ctx.GebruikersCursusen .Where(x => x.Gebruiker == gebruiker && x.Cursus == cursus).First();
+            }
+        }
+
         public static int ThemaBewerken(Thema thema)
         {
             try
@@ -308,6 +316,22 @@ namespace Reisplanningssysteem_DAL
                 using (ReisplanningssysteemContext ctx = new())
                 {
                     ctx.LeeftijdsCategorieën.Entry(leeftijdsCategorie).State = EntityState.Deleted;
+                    return ctx.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        public static int GebruikercursusVerwijderen(GebruikerCursus gebruikerCursus)
+        {
+            try
+            {
+                using (ReisplanningssysteemContext ctx = new())
+                {
+                    ctx.GebruikersCursusen.Entry(gebruikerCursus).State = EntityState.Deleted;
                     return ctx.SaveChanges();
                 }
             }

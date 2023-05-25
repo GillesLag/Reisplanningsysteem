@@ -25,10 +25,19 @@ namespace Reisplanningssysteem_WPF.ViewModels
                 _geselecteerdGebruiker = value;
             }
         }
+        public Gebruiker _teVerwijderenGebruiker { get; set; }
 
+        public Gebruiker TeVerwijderenGebruiker
+        {
+            get { return _teVerwijderenGebruiker; }
+            set
+            {
+                _teVerwijderenGebruiker = value;
+            }
+        }
 
-        private List<Gebruiker> _gebruikers;
-        public List<Gebruiker> Gebruikers
+        private ObservableCollection<Gebruiker> _gebruikers;
+        public ObservableCollection<Gebruiker> Gebruikers
         {
             get { return _gebruikers; }
             set { _gebruikers = value; }
@@ -51,7 +60,27 @@ namespace Reisplanningssysteem_WPF.ViewModels
                 case "Toevoegen": Toevoegen(); break;
                 case "Bewerken": Bewerken(); break;
                 case "Linken": Linken(); break;
+                case "VerwijderGebruiker": Verwijderen(); break;
             }
+
+        }
+
+        private void Verwijderen()
+        {
+            if (TeVerwijderenGebruiker==null)
+            {
+                Foutmelding = "Gelieven een te verwijderen gebruiker te selecteren";
+            }
+            else
+            {
+
+                AlleGebruikers.Add(TeVerwijderenGebruiker);
+                GebruikerCursus link = DatabaseOperations.ZoekGebruikerCursus(TeVerwijderenGebruiker, Cursus);
+                DatabaseOperations.GebruikercursusVerwijderen(link);
+                Gebruikers.Remove(TeVerwijderenGebruiker);
+                TeVerwijderenGebruiker = null;
+            }
+
         }
 
         private string _foutmelding;
@@ -87,7 +116,16 @@ namespace Reisplanningssysteem_WPF.ViewModels
             set { _linkButton = value; }
         }
 
-        public List<Gebruiker> AlleGebruikers { get; set; }
+
+        private string _verwijderGebruiker;
+
+        public string VerwijderGebruiker
+        {
+            get { return _verwijderGebruiker; }
+            set { _verwijderGebruiker = value; }
+        }
+
+        public ObservableCollection<Gebruiker> AlleGebruikers { get; set; }
 
         private Cursus _cursus;
 
@@ -96,29 +134,30 @@ namespace Reisplanningssysteem_WPF.ViewModels
             get { return _cursus; }
             set { _cursus = value; }
         }
-        public ICommand SelecteerGebruiker { get; set; }
 
         public CursusBeherenViewModel()
         {
-            AlleGebruikers = DatabaseOperations.OphalenLijstGebruikers();
-            Gebruikers = new List<Gebruiker>();
+            AlleGebruikers = new ObservableCollection<Gebruiker>(DatabaseOperations.OphalenLijstGebruikers());
+            Gebruikers = new ObservableCollection<Gebruiker>();
             Cursus = new Cursus();
             BewerkenOfToevoegen = "Cursus toevoegen";
             BewerkenOfToevoegenButton = "Toevoegen";
             LinkButton = "Linken";
+            VerwijderGebruiker = "VerwijderGebruiker";
         }
 
 
 
         public CursusBeherenViewModel(Cursus cursus)
         {
-            AlleGebruikers = DatabaseOperations.OphalenLijstGebruikers()?.Where(gebruiker => gebruiker.GebruikerCursussen?.Any(gc => gc.CursusId == cursus.Id) == false)?.ToList();
-            Gebruikers = DatabaseOperations.OphalenLijstGebruikers()?.Where(gebruiker => gebruiker.GebruikerCursussen?.Any(gc => gc.CursusId == cursus.Id) == true)?.ToList();
+            AlleGebruikers = new ObservableCollection<Gebruiker>(DatabaseOperations.OphalenLijstGebruikers()?.Where(gebruiker => gebruiker.GebruikerCursussen?.Any(gc => gc.CursusId == cursus.Id) == false)?.ToList());
+            Gebruikers = new ObservableCollection<Gebruiker>(DatabaseOperations.OphalenLijstGebruikers()?.Where(gebruiker => gebruiker.GebruikerCursussen?.Any(gc => gc.CursusId == cursus.Id) == true)?.ToList());
 
             Cursus = cursus;
             BewerkenOfToevoegen = "Cursus bewerken";
             BewerkenOfToevoegenButton = "Bewerken";
             LinkButton = "Linken";
+            VerwijderGebruiker = "VerwijderGebruiker";
         }
 
         private void Toevoegen()
@@ -178,19 +217,24 @@ namespace Reisplanningssysteem_WPF.ViewModels
             if (GeselecteerdeGebruiker == null)
             {
                 Foutmelding = "Gelieven een gebruiker te selecteren";
-                return;
             }
-            else
+            else if(Cursus.Id<=0)
             {
-                Gebruikers.Add(GeselecteerdeGebruiker);
-                AlleGebruikers.Remove(GeselecteerdeGebruiker);
-                GebruikerCursus link = new GebruikerCursus();
-                link.Gebruiker = GeselecteerdeGebruiker;
-                link.Cursus = Cursus;
-                int ok = DatabaseOperations.GebruikerLinken(link);
-                GeselecteerdeGebruiker = null;
+                DatabaseOperations.CursusToevoegen(Cursus);
+                UpdateCursussen();
+                BewerkenOfToevoegenButton = "Bewerken";
             }
+
+            Gebruikers.Add(GeselecteerdeGebruiker);
+            GebruikerCursus link = new GebruikerCursus();
+            link.Gebruiker = GeselecteerdeGebruiker;
+            link.Cursus = Cursus;
+            DatabaseOperations.GebruikerLinken(link);
+            AlleGebruikers.Remove(GeselecteerdeGebruiker);
+            GeselecteerdeGebruiker = null;
         }
+
+
 
         public delegate void CursussenUpdateHandler(object sender, UpdateGenericListEventArgs<Cursus> e);
         public event CursussenUpdateHandler CursussenEventHandler;
