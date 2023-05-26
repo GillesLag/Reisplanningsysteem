@@ -38,13 +38,13 @@
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                 VerticalAlignment="Center"
                 Margin="5" Width="380" 
-                Text="{Binding Onkost.Bedrag, ValidatesOnDataErrors=True}" />
+                Text="{Binding Onkost.Bedrag}" />
         
         <TextBox Grid.Row="2" materialDesign:HintAssist.Hint="Omschrijving"
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                 VerticalAlignment="Center"
                 Margin="5" Width="380" 
-                Text="{Binding Onkost.Omschrijving, ValidatesOnDataErrors=True}" />
+                Text="{Binding Onkost.Omschrijving}" />
 
         <Button Grid.Column="0"
                 Grid.Row="6"
@@ -58,7 +58,7 @@
                     Margin="5"
                     Width="380"
                     ItemsSource="{Binding Reizen}"
-                    SelectedValue="{Binding Onkost.ReisId, ValidatesOnDataErrors=True}"
+                    SelectedValue="{Binding Onkost.ReisId}"
                     SelectedValuePath="Id"
                     materialDesign:HintAssist.Hint="Reis"
                     Height="33px"

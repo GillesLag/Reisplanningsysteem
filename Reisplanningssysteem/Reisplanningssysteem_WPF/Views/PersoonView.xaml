@@ -40,23 +40,23 @@
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                 VerticalAlignment="Center"
                 Margin="5" Width="380" 
-                Text="{Binding GebruikerRecord.Voornaam, ValidatesOnDataErrors=True}" />
+                Text="{Binding GebruikerRecord.Voornaam}" />
         <TextBox Grid.Row="1" Grid.Column="1" materialDesign:HintAssist.Hint="Familienaam"
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                 VerticalAlignment="Center"
                 Margin="5" Width="380" 
-                Text="{Binding GebruikerRecord.Achternaam, ValidatesOnDataErrors=True}" />
+                Text="{Binding GebruikerRecord.Achternaam}" />
 
         <TextBox Grid.Row="2" materialDesign:HintAssist.Hint="Email"
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                 VerticalAlignment="Center"
                 Margin="5" Width="380" 
-                Text="{Binding GebruikerRecord.Email, ValidatesOnDataErrors=True}" />
+                Text="{Binding GebruikerRecord.Email}" />
         <TextBox Grid.Row="2" Grid.Column="1" materialDesign:HintAssist.Hint="Telefoonnummer"
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                 VerticalAlignment="Center"
                 Margin="5" Width="380" 
-                Text="{Binding GebruikerRecord.TelefoonNr, ValidatesOnDataErrors=False}" />
+                Text="{Binding GebruikerRecord.TelefoonNr}" />
 
 
         <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal">
@@ -64,19 +64,19 @@
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                 VerticalAlignment="Center"
                 Margin="5" Width="250" 
-                Text="{Binding GebruikerRecord.Straat, ValidatesOnDataErrors=True}" />
+                Text="{Binding GebruikerRecord.Straat}" />
             <TextBox materialDesign:HintAssist.Hint="Huisnummer"
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                 VerticalAlignment="Center"
                 Margin="5" Width="120" 
-                Text="{Binding GebruikerRecord.Huisnummer, ValidatesOnDataErrors=True}" />
+                Text="{Binding GebruikerRecord.Huisnummer}" />
         </StackPanel>
 
         <ComboBox HorizontalAlignment="Left" Grid.Row="3" Grid.Column="1" Name="cmbGemeentes"   
                   Margin="5"
                       Width="190" 
                       ItemsSource="{Binding Gemeentes}"
-                      SelectedValue="{Binding GebruikerRecord.GemeenteId, ValidatesOnDataErrors=True}"
+                      SelectedValue="{Binding GebruikerRecord.GemeenteId}"
                       SelectedValuePath="Id"
                       materialDesign:HintAssist.Hint="Gemeente"
                       Height="33px"
