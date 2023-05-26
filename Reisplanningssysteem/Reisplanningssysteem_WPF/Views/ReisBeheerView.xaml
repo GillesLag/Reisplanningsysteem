@@ -40,12 +40,12 @@
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                 VerticalAlignment="Center"
                 Margin="5" Width="380" 
-                Text="{Binding Reis.Naam, ValidatesOnDataErrors=True}" />
+                Text="{Binding Reis.Naam}" />
         <ComboBox HorizontalAlignment="Left" Grid.Row="1" Grid.Column="1" Name="cmbBestemmingen"   
                   Margin="5"
                       Width="190" 
                       ItemsSource="{Binding Bestemmingen}"
-                      SelectedValue="{Binding Reis.BestemmingsId, ValidatesOnDataErrors=True}"
+                      SelectedValue="{Binding Reis.BestemmingsId}"
                       SelectedValuePath="Id"
                       materialDesign:HintAssist.Hint="Bestemming"
                       Height="33px"
@@ -55,7 +55,7 @@
                   Margin="5"
                       Width="190" 
                       ItemsSource="{Binding Hoofdmonitoren}"
-                      SelectedValue="{Binding Reis.HoofdmonitorId, ValidatesOnDataErrors=True}"
+                      SelectedValue="{Binding Reis.HoofdmonitorId}"
                       SelectedValuePath="Id"
                       materialDesign:HintAssist.Hint="Hoofdmonitor"
                       Height="33px"
@@ -65,7 +65,7 @@
                   Margin="5"
                     Width="190" 
                     ItemsSource="{Binding Themas}"
-                    SelectedValue="{Binding Reis.ThemaId, ValidatesOnDataErrors=True}"
+                    SelectedValue="{Binding Reis.ThemaId}"
                     SelectedValuePath="Id"
                     materialDesign:HintAssist.Hint="Thema"
                     Height="33px"
@@ -75,20 +75,20 @@
                 Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
                 VerticalAlignment="Center"
                 Margin="5" Width="380"
-                SelectedDate="{Binding Reis.BeginDatum, ValidatesOnDataErrors=True}" />
+                SelectedDate="{Binding Reis.BeginDatum}" />
         
         <DatePicker Grid.Row="3" Grid.Column="1" materialDesign:HintAssist.Hint="Einddatum"
                 Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
                 VerticalAlignment="Center"
                 Margin="5" Width="380" 
-                SelectedDate="{Binding Reis.EindDatum, ValidatesOnDataErrors=True}" />
+                SelectedDate="{Binding Reis.EindDatum}" />
 
 
         <ComboBox HorizontalAlignment="Left" Grid.Row="4" Name="cmbLeeftijdsCategorieën"   
                   Margin="5"
                     Width="190" 
                     ItemsSource="{Binding LeeftijdsCategorieën}"
-                    SelectedValue="{Binding Reis.LeeftijdsCategorieId, ValidatesOnDataErrors=True}"
+                    SelectedValue="{Binding Reis.LeeftijdsCategorieId}"
                     SelectedValuePath="Id"
                     materialDesign:HintAssist.Hint="Leeftijdscategorie"
                     Height="33px"
@@ -99,7 +99,7 @@
             VerticalAlignment="center"
             HorizontalAlignment="Left"
             Margin="5" Width="190" 
-            Text="{Binding Reis.Prijs, ValidatesOnDataErrors=True, StringFormat=C, ConverterCulture=nl-BE}" />
+            Text="{Binding Reis.Prijs, StringFormat=C, ConverterCulture=nl-BE}" />
 
         <Button Grid.Column="0"
                 Grid.Row="6"
