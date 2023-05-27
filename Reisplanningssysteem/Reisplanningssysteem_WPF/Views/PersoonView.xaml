@@ -35,52 +35,94 @@
                 FontWeight="Bold"
                 FontSize="20px"/>
 
-
-        <TextBox Grid.Row="1" materialDesign:HintAssist.Hint="Voornaam"
-                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                VerticalAlignment="Center"
-                Margin="5" Width="380" 
-                Text="{Binding GebruikerRecord.Voornaam, ValidatesOnDataErrors=True}" />
-        <TextBox Grid.Row="1" Grid.Column="1" materialDesign:HintAssist.Hint="Familienaam"
-                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                VerticalAlignment="Center"
-                Margin="5" Width="380" 
-                Text="{Binding GebruikerRecord.Achternaam, ValidatesOnDataErrors=True}" />
-
-        <TextBox Grid.Row="2" materialDesign:HintAssist.Hint="Email"
-                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                VerticalAlignment="Center"
-                Margin="5" Width="380" 
-                Text="{Binding GebruikerRecord.Email, ValidatesOnDataErrors=True}" />
-        <TextBox Grid.Row="2" Grid.Column="1" materialDesign:HintAssist.Hint="Telefoonnummer"
-                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                VerticalAlignment="Center"
-                Margin="5" Width="380" 
-                Text="{Binding GebruikerRecord.TelefoonNr, ValidatesOnDataErrors=False}" />
-
-
-        <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal">
-            <TextBox materialDesign:HintAssist.Hint="Straat"
+        <StackPanel Orientation="Horizontal" Grid.Row="1">
+            <Label Content="Voornaam:" VerticalAlignment="Center"
+                   Style="{StaticResource MaterialDesignLabel}"
+                   Margin="5"
+                   FontWeight="Bold"
+                   FontSize="18"/>
+            <TextBox Grid.Row="1"
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                 VerticalAlignment="Center"
                 Margin="5" Width="250" 
-                Text="{Binding GebruikerRecord.Straat, ValidatesOnDataErrors=True}" />
-            <TextBox materialDesign:HintAssist.Hint="Huisnummer"
-                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                VerticalAlignment="Center"
-                Margin="5" Width="120" 
-                Text="{Binding GebruikerRecord.Huisnummer, ValidatesOnDataErrors=True}" />
+                Text="{Binding GebruikerRecord.Voornaam}" />
         </StackPanel>
 
-        <ComboBox HorizontalAlignment="Left" Grid.Row="3" Grid.Column="1" Name="cmbGemeentes"   
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
+            <Label Content="Familienaam:" VerticalAlignment="Center"
+                   Style="{StaticResource MaterialDesignLabel}"
+                   Margin="5"
+                   FontWeight="Bold"
+                   FontSize="18"/>
+            <TextBox
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                VerticalAlignment="Center"
+                Margin="5" Width="250" 
+                Text="{Binding GebruikerRecord.Achternaam}" />
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="2">
+            <Label Content="Email:" VerticalAlignment="Center"
+                   Style="{StaticResource MaterialDesignLabel}"
+                   Margin="5"
+                   FontWeight="Bold"
+                   FontSize="18"/>
+            <TextBox
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                VerticalAlignment="Center"
+                Margin="5" Width="250" 
+                Text="{Binding GebruikerRecord.Email}" />
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1">
+            <Label Content="Telefoon:" VerticalAlignment="Center"
+                   Style="{StaticResource MaterialDesignLabel}"
+                   Margin="5"
+                   FontWeight="Bold"
+                   FontSize="18"/>
+            <TextBox Grid.Row="2" Grid.Column="1"
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                VerticalAlignment="Center"
+                Margin="5" Width="250" 
+                Text="{Binding GebruikerRecord.TelefoonNr}" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal">
+            <Label Content="Straat:" VerticalAlignment="Center"
+                   Style="{StaticResource MaterialDesignLabel}"
+                   Margin="5"
+                   FontWeight="Bold"
+                   FontSize="18"/>
+            <TextBox
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                VerticalAlignment="Center"
+                Margin="5" Width="200
+                " 
+                Text="{Binding GebruikerRecord.Straat}" />
+            <Label Content="Huisnummer:" VerticalAlignment="Center"
+                   Style="{StaticResource MaterialDesignLabel}"
+                   Margin="5"
+                   FontWeight="Bold"
+                   FontSize="18"/>
+            <TextBox
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                VerticalAlignment="Center"
+                Margin="5" Width="80" 
+                Text="{Binding GebruikerRecord.Huisnummer}" />
+            <Label Content="Gemeente:" VerticalAlignment="Center"
+                   Style="{StaticResource MaterialDesignLabel}"
+                   Margin="5"
+                   FontWeight="Bold"
+                   FontSize="18"/>
+            <ComboBox HorizontalAlignment="Left" Grid.Row="3" Grid.Column="1" Name="cmbGemeentes"   
                   Margin="5"
-                      Width="190" 
+                      Width="150" 
                       ItemsSource="{Binding Gemeentes}"
-                      SelectedValue="{Binding GebruikerRecord.GemeenteId, ValidatesOnDataErrors=True}"
+                      SelectedValue="{Binding GebruikerRecord.GemeenteId}"
                       SelectedValuePath="Id"
-                      materialDesign:HintAssist.Hint="Gemeente"
                       Height="33px"
                       />
+        </StackPanel>
 
         <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Left" >
             <CheckBox Content="Lid" Margin="5" IsChecked="{Binding GebruikerRecord.IsLid}"/>
@@ -88,10 +130,19 @@
             <CheckBox Content="Hoofdmonitor" Margin="5" IsChecked="{Binding GebruikerRecord.HoofmonitorCursus}"/>
         </StackPanel>
 
-        <TextBox  Grid.Row="4" Grid.Column="1" materialDesign:HintAssist.Hint="Medische gegevens"
+        <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="1">
+            <Label Content="Medisch&#10;gegevens:" VerticalAlignment="Center"
+                   Style="{StaticResource MaterialDesignLabel}"
+                   Margin="5"
+                   FontWeight="Bold"
+                   FontSize="18"/>
+            <TextBox
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                 Margin="5"
+                Width="250"
                 Text="{Binding GebruikerRecord.MedischeGegevens}" />
+        </StackPanel>
+        
 
 
         <Button Grid.Column="0"

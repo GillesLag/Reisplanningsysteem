@@ -36,71 +36,123 @@
                 FontWeight="Bold"
                 FontSize="20px"/>
 
-
-        <TextBox Grid.Row="1" materialDesign:HintAssist.Hint="Naam"
+        <StackPanel Orientation="Horizontal" Grid.Row="1">
+            <Label Content="Naam:" VerticalAlignment="Center"
+                   Style="{StaticResource MaterialDesignLabel}"
+                   Margin="5"
+                   FontWeight="Bold"
+                   FontSize="18"/>
+            <TextBox
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                 VerticalAlignment="Center"
-                Margin="5" Width="380" 
-                Text="{Binding Reis.Naam, ValidatesOnDataErrors=True}" />
-        <ComboBox HorizontalAlignment="Left" Grid.Row="1" Grid.Column="1" Name="cmbBestemmingen"   
+                Margin="5" Width="250" 
+                Text="{Binding Reis.Naam}" />
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
+            <Label Content="Bestemming:" VerticalAlignment="Center"
+                   Style="{StaticResource MaterialDesignLabel}"
+                   Margin="5"
+                   FontWeight="Bold"
+                   FontSize="18"/>
+            <ComboBox HorizontalAlignment="Left" Grid.Row="1" Grid.Column="1" Name="cmbBestemmingen"   
                   Margin="5"
                       Width="190" 
                       ItemsSource="{Binding Bestemmingen}"
-                      SelectedValue="{Binding Reis.BestemmingsId, ValidatesOnDataErrors=True}"
+                      SelectedValue="{Binding Reis.BestemmingsId}"
                       SelectedValuePath="Id"
-                      materialDesign:HintAssist.Hint="Bestemming"
                       Height="33px"
                       />
-        
-        <ComboBox HorizontalAlignment="Left" Grid.Row="2" Name="cmbHoofdmonitoren"   
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="2">
+            <Label Content="Hoofdmonitor:" VerticalAlignment="Center"
+                   Style="{StaticResource MaterialDesignLabel}"
+                   Margin="5"
+                   FontWeight="Bold"
+                   FontSize="18"/>
+            <ComboBox HorizontalAlignment="Left" Name="cmbHoofdmonitoren"   
                   Margin="5"
                       Width="190" 
                       ItemsSource="{Binding Hoofdmonitoren}"
-                      SelectedValue="{Binding Reis.HoofdmonitorId, ValidatesOnDataErrors=True}"
+                      SelectedValue="{Binding Reis.HoofdmonitorId}"
                       SelectedValuePath="Id"
-                      materialDesign:HintAssist.Hint="Hoofdmonitor"
                       Height="33px"
                       />
+        </StackPanel>
 
-        <ComboBox HorizontalAlignment="Left" Grid.Row="2" Grid.Column="1" Name="cmbThemas"   
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1">
+            <Label Content="Thema:" VerticalAlignment="Center"
+                   Style="{StaticResource MaterialDesignLabel}"
+                   Margin="5"
+                   FontWeight="Bold"
+                   FontSize="18"/>
+            <ComboBox HorizontalAlignment="Left" Name="cmbThemas"   
                   Margin="5"
                     Width="190" 
                     ItemsSource="{Binding Themas}"
-                    SelectedValue="{Binding Reis.ThemaId, ValidatesOnDataErrors=True}"
+                    SelectedValue="{Binding Reis.ThemaId}"
                     SelectedValuePath="Id"
-                    materialDesign:HintAssist.Hint="Thema"
                     Height="33px"
                     />
+        </StackPanel>
 
-        <DatePicker Grid.Row="3" materialDesign:HintAssist.Hint="Begindatum"
+        <StackPanel Orientation="Horizontal" Grid.Row="3">
+            <Label Content="Begindatum:" VerticalAlignment="Center"
+                   Style="{StaticResource MaterialDesignLabel}"
+                   Margin="5"
+                   FontWeight="Bold"
+                   FontSize="18"/>
+            <DatePicker
                 Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
                 VerticalAlignment="Center"
-                Margin="5" Width="380"
-                SelectedDate="{Binding Reis.BeginDatum, ValidatesOnDataErrors=True}" />
-        
-        <DatePicker Grid.Row="3" Grid.Column="1" materialDesign:HintAssist.Hint="Einddatum"
+                Margin="5" Width="190"
+                SelectedDate="{Binding Reis.BeginDatum}" />
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1">
+            <Label Content="Einddatum:" VerticalAlignment="Center"
+                   Style="{StaticResource MaterialDesignLabel}"
+                   Margin="5"
+                   FontWeight="Bold"
+                   FontSize="18"/>
+            <DatePicker
                 Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
                 VerticalAlignment="Center"
-                Margin="5" Width="380" 
-                SelectedDate="{Binding Reis.EindDatum, ValidatesOnDataErrors=True}" />
+                Margin="5" Width="190" 
+                SelectedDate="{Binding Reis.EindDatum}" />
+        </StackPanel>
 
-
-        <ComboBox HorizontalAlignment="Left" Grid.Row="4" Name="cmbLeeftijdsCategorieën"   
+        <StackPanel Orientation="Horizontal" Grid.Row="4">
+            <Label Content="Leeftijdcategorie:" VerticalAlignment="Center"
+                   Style="{StaticResource MaterialDesignLabel}"
+                   Margin="5"
+                   FontWeight="Bold"
+                   FontSize="18"/>
+            <ComboBox HorizontalAlignment="Left" Name="cmbLeeftijdsCategorieën"   
                   Margin="5"
                     Width="190" 
                     ItemsSource="{Binding LeeftijdsCategorieën}"
-                    SelectedValue="{Binding Reis.LeeftijdsCategorieId, ValidatesOnDataErrors=True}"
+                    SelectedValue="{Binding Reis.LeeftijdsCategorieId}"
                     SelectedValuePath="Id"
-                    materialDesign:HintAssist.Hint="Leeftijdscategorie"
                     Height="33px"
                     />
-        
-        <TextBox Grid.Row="4" Grid.Column="1" materialDesign:HintAssist.Hint="Prijs"
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="1">
+            <Label Content="Prijs:" VerticalAlignment="Center"
+                   Style="{StaticResource MaterialDesignLabel}"
+                   Margin="5"
+                   FontWeight="Bold"
+                   FontSize="18"/>
+            <TextBox
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
             VerticalAlignment="center"
             HorizontalAlignment="Left"
             Margin="5" Width="190" 
-            Text="{Binding Reis.Prijs, ValidatesOnDataErrors=True, StringFormat=C, ConverterCulture=nl-BE}" />
+            Text="{Binding Reis.Prijs, StringFormat=C, ConverterCulture=nl-BE}" />
+        </StackPanel>
+       
 
         <Button Grid.Column="0"
                 Grid.Row="6"

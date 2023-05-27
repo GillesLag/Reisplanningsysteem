@@ -328,7 +328,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
         private void ViewOpvullen()
         {
             Themas = DatabaseOperations.ThemasOphalen();
-            Hoofdmonitoren = DatabaseOperations.HoogdmonitorenOphalen();
+            Hoofdmonitoren = DatabaseOperations.HoofdmonitorenOphalen();
             Bestemmingen = DatabaseOperations.BestemmingenOphalen();
             LeeftijdsCategorieën = DatabaseOperations.LeeftijdsCategorieënOphalen();
         }

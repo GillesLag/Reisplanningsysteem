@@ -33,18 +33,34 @@
                 FontWeight="Bold"
                 FontSize="20px"/>
 
-
-        <TextBox Grid.Row="1" Grid.Column="1" materialDesign:HintAssist.Hint="Bedrag"
-                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                VerticalAlignment="Center"
-                Margin="5" Width="380" 
-                Text="{Binding Onkost.Bedrag, ValidatesOnDataErrors=True}" />
         
-        <TextBox Grid.Row="2" materialDesign:HintAssist.Hint="Omschrijving"
+        
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
+            <Label Content="Bedrag:" VerticalAlignment="Center"
+                   Style="{StaticResource MaterialDesignLabel}"
+                   Margin="5"
+                   FontWeight="Bold"
+                   FontSize="18"/>
+            <TextBox
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                 VerticalAlignment="Center"
-                Margin="5" Width="380" 
-                Text="{Binding Onkost.Omschrijving, ValidatesOnDataErrors=True}" />
+                Margin="5" Width="300
+                " 
+                Text="{Binding Onkost.Bedrag}" />
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="2">
+            <Label Content="Omschrijving:" VerticalAlignment="Center"
+                   Style="{StaticResource MaterialDesignLabel}"
+                   Margin="5"
+                   FontWeight="Bold"
+                   FontSize="18"/>
+            <TextBox
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                VerticalAlignment="Center"
+                Margin="5" Width="250" 
+                Text="{Binding Onkost.Omschrijving}" />
+        </StackPanel>
 
         <Button Grid.Column="0"
                 Grid.Row="6"
@@ -54,15 +70,22 @@
                 Margin="5"
                 Command="{Binding}" CommandParameter="{Binding BewerkenOfToevoegenButton}" />
 
-        <ComboBox HorizontalAlignment="Left" Grid.Row="1" Grid.Column="0" Name="cmbThemas"   
+        <StackPanel Orientation="Horizontal" Grid.Row="1">
+            <Label Content="Reis:" VerticalAlignment="Center"
+                   Style="{StaticResource MaterialDesignLabel}"
+                   Margin="5"
+                   FontWeight="Bold"
+                   FontSize="18"/>
+            <ComboBox HorizontalAlignment="Left" Grid.Row="1" Grid.Column="0"   
                     Margin="5"
-                    Width="380"
+                    Width="250"
                     ItemsSource="{Binding Reizen}"
-                    SelectedValue="{Binding Onkost.ReisId, ValidatesOnDataErrors=True}"
+                    SelectedValue="{Binding Onkost.ReisId}"
                     SelectedValuePath="Id"
-                    materialDesign:HintAssist.Hint="Reis"
                     Height="33px"
                     />
+        </StackPanel>
+        
 
         <Label Grid.Column="1"
                Grid.Row="6"
