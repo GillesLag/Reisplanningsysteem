@@ -17,7 +17,7 @@ namespace Reisplanningssysteem_DAL
             using (ReisplanningssysteemContext ctx = new ReisplanningssysteemContext())
             {
                 return ctx.Gebruikers.
-                Include(x => x.Gemeente).Include(x=> x.GebruikerCursussen).ToList();
+                Include(x => x.Gemeente).Include(x=> x.GebruikerCursussen).Include(x => x.Boekingen).ToList();
             }
         }
 
@@ -160,6 +160,14 @@ namespace Reisplanningssysteem_DAL
             using (ReisplanningssysteemContext ctx = new ReisplanningssysteemContext())
             {
                 return ctx.GebruikersCursusen .Where(x => x.Gebruiker == gebruiker && x.Cursus == cursus).First();
+            }
+        }
+
+        public static Boeking ZoekBoeking(Gebruiker gebruiker, Reis reis)
+        {
+            using (ReisplanningssysteemContext ctx = new ReisplanningssysteemContext())
+            {
+                return ctx.Boekingen.Where(x => x.Gebruiker == gebruiker && x.Reis == reis).First();
             }
         }
 
@@ -309,6 +317,22 @@ namespace Reisplanningssysteem_DAL
             }
         }
 
+        public static int BoekingAanmaken(Boeking boeking)
+        {
+            try
+            {
+                using (ReisplanningssysteemContext ctx = new())
+                {
+                    ctx.Boekingen.Entry(boeking).State = EntityState.Added;
+                    return ctx.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
         public static int LeeftijdsCategorieVerwijderen(LeeftijdsCategorie leeftijdsCategorie)
         {
             try
@@ -332,6 +356,38 @@ namespace Reisplanningssysteem_DAL
                 using (ReisplanningssysteemContext ctx = new())
                 {
                     ctx.GebruikersCursusen.Entry(gebruikerCursus).State = EntityState.Deleted;
+                    return ctx.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        public static int BoekingVerwijderen(Boeking boeking)
+        {
+            try
+            {
+                using (ReisplanningssysteemContext ctx = new())
+                {
+                    ctx.Boekingen.Entry(boeking).State = EntityState.Deleted;
+                    return ctx.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        public static int BoekingBewerken(Boeking boeking)
+        {
+            try
+            {
+                using (ReisplanningssysteemContext ctx = new())
+                {
+                    ctx.Boekingen.Entry(boeking).State = EntityState.Modified;
                     return ctx.SaveChanges();
                 }
             }

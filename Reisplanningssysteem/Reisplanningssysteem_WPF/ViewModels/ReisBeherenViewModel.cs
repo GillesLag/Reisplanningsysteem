@@ -6,11 +6,42 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Reisplanningssysteem_DAL;
+using System.Collections.ObjectModel;
+using System.Windows.Documents;
+using System.Threading;
 
 namespace Reisplanningssysteem_WPF.ViewModels
 {
     public class ReisBeherenViewModel : BaseViewModel
     {
+        public Gebruiker _geselecteerdGebruiker { get; set; }
+
+        public Gebruiker GeselecteerdeGebruiker
+        {
+            get { return _geselecteerdGebruiker; }
+            set
+            {
+                _geselecteerdGebruiker = value;
+            }
+        }
+        public Gebruiker _teVerwijderenGebruiker { get; set; }
+
+        public Gebruiker TeVerwijderenGebruiker
+        {
+            get { return _teVerwijderenGebruiker; }
+            set
+            {
+                _teVerwijderenGebruiker = value;
+            }
+        }
+
+        private ObservableCollection<Gebruiker> _gebruikers;
+        public ObservableCollection<Gebruiker> Gebruikers
+        {
+            get { return _gebruikers; }
+            set { _gebruikers = value; }
+        }
+
         public override string this[string columnName]
         {
             get { return ""; }
@@ -25,8 +56,30 @@ namespace Reisplanningssysteem_WPF.ViewModels
             {
                 case "Toevoegen": Toevoegen(); break;
                 case "Bewerken": Bewerken(); break;
+                case "Linken": Linken(); break;
+                case "VerwijderGebruiker": Verwijderen(); break;
+                case "MaakHoofdmonitor": hoofMonitorLinken(); break;
             }
         }
+
+        private string _linkButton;
+
+        public string LinkButton
+        {
+            get { return _linkButton; }
+            set { _linkButton = value; }
+        }
+
+
+        private string _verwijderGebruiker;
+
+        public string VerwijderGebruiker
+        {
+            get { return _verwijderGebruiker; }
+            set { _verwijderGebruiker = value; }
+        }
+
+        public ObservableCollection<Gebruiker> AlleGebruikers { get; set; }
 
         private string _foutmelding;
 
@@ -42,6 +95,14 @@ namespace Reisplanningssysteem_WPF.ViewModels
         {
             get { return _bewerkengOfToevoegen; }
             set { _bewerkengOfToevoegen = value; }
+        }
+
+        private string _maakHoofdmonitor;
+
+        public string MaakHoofdmonitor
+        {
+            get { return _maakHoofdmonitor; }
+            set { _maakHoofdmonitor = value; }
         }
 
         private string _bewerkenOfToevoegenButton;
@@ -92,6 +153,14 @@ namespace Reisplanningssysteem_WPF.ViewModels
             set { _geselecteerdeBestemming = value; }
         }
 
+        private string _monitor;
+
+        public string Monitor
+        {
+            get { return _monitor; }
+            set { _monitor = value; }
+        }
+
         private List<Gebruiker> _hoofdmonitoren;
 
         public List<Gebruiker> Hoofdmonitoren
@@ -127,6 +196,8 @@ namespace Reisplanningssysteem_WPF.ViewModels
 
         public ReisBeherenViewModel()
         {
+            AlleGebruikers = new ObservableCollection<Gebruiker>(DatabaseOperations.OphalenLijstGebruikers());
+            Gebruikers = new ObservableCollection<Gebruiker>();
             Reis = new Reis();
             BewerkenOfToevoegen = "Reis toevoegen";
             BewerkenOfToevoegenButton = "Toevoegen";
@@ -136,17 +207,123 @@ namespace Reisplanningssysteem_WPF.ViewModels
             GeselecteerdeThema = null;
             Reis.BeginDatum = DateTime.Now;
             Reis.EindDatum = Reis.BeginDatum;
+            LinkButton = "Linken";
+            VerwijderGebruiker = "VerwijderGebruiker";
+            MaakHoofdmonitor = "MaakHoofdmonitor";
 
             ViewOpvullen();
         }
 
         public ReisBeherenViewModel(Reis reis)
         {
+            AlleGebruikers = new ObservableCollection<Gebruiker>(DatabaseOperations.OphalenLijstGebruikers()?.Where(gebruiker => gebruiker.Boekingen?.Any(gr => gr.ReisId == reis.Id) == false)?.ToList());
+            Gebruikers = new ObservableCollection<Gebruiker>(DatabaseOperations.OphalenLijstGebruikers()?.Where(gebruiker => gebruiker.Boekingen?.Any(gr => gr.ReisId == reis.Id) == true)?.ToList());
+
             Reis = reis;
             BewerkenOfToevoegen = "Reis bewerken";
             BewerkenOfToevoegenButton = "Bewerken";
+            LinkButton = "Linken";
+            VerwijderGebruiker = "VerwijderGebruiker";
+            MaakHoofdmonitor = "MaakHoofdmonitor";
+            Gebruiker geselecteerdeMonitor = reis.Boekingen.Where(b=>b.IsMonitor).Select(b=>b.Gebruiker).FirstOrDefault();
+
+            toonMonitor(geselecteerdeMonitor);
 
             ViewOpvullen();
+        }
+
+        private void toonMonitor(Gebruiker monitor)
+        {
+            if (monitor != null)
+            {
+                Monitor = $"Monitor: {monitor.Voornaam} {monitor.Achternaam}";
+            }
+            else
+            {
+                Monitor = "";
+            }
+        }
+
+
+        private void Verwijderen()
+        {
+            if (TeVerwijderenGebruiker == null)
+            {
+                Foutmelding = "Gelieven een te verwijderen gebruiker te selecteren";
+            }
+            else
+            {
+
+                AlleGebruikers.Add(TeVerwijderenGebruiker);
+                Boeking boeking = DatabaseOperations.ZoekBoeking(TeVerwijderenGebruiker, Reis);
+                if (boeking.IsMonitor)
+                {
+                    toonMonitor(null);
+                }
+                DatabaseOperations.BoekingVerwijderen(boeking);
+                Gebruikers.Remove(TeVerwijderenGebruiker);
+                TeVerwijderenGebruiker = null;
+            }
+
+        }
+
+
+        private void hoofMonitorLinken()
+        {
+            if (TeVerwijderenGebruiker == null)
+            {
+                Foutmelding = "Gelieven een gebruiker te selecteren";
+            }
+            else
+            {
+
+                if (!TeVerwijderenGebruiker.HoofmonitorCursus)
+                {
+                    Foutmelding = "Deze gebruiker heeft geen hoofdmonitor cursus behaald";
+                }else if (Reis.Boekingen.Any(b=> b.IsMonitor))
+                {
+                    Foutmelding = "Er is al een monitor gelinkt aan deze reis";
+                }
+                else
+                {
+                    Boeking boeking = DatabaseOperations.ZoekBoeking(TeVerwijderenGebruiker, Reis);
+                    boeking.IsMonitor= true;
+                    DatabaseOperations.BoekingBewerken(boeking);
+                    toonMonitor(TeVerwijderenGebruiker);
+                }
+            }
+        }
+
+        private void Linken()
+        {
+            if (GeselecteerdeGebruiker == null)
+            {
+                Foutmelding = "Gelieven een gebruiker te selecteren";
+            }
+            else if (Reis.Id <= 0)
+            {
+                DatabaseOperations.ReisToevoegen(Reis);
+                UpdateReizen();
+                BewerkenOfToevoegenButton = "Bewerken";
+            }
+
+            if (GeselecteerdeGebruiker != null)
+            {
+
+                Gebruikers.Add(GeselecteerdeGebruiker);
+                Boeking boeking = new Boeking
+                {
+                    Gebruiker = GeselecteerdeGebruiker,
+                    Reis = Reis,
+                    Status = "",
+                    IsMonitor = false,
+                    InschrijvingsDatum = DateTime.Now
+                };
+                DatabaseOperations.BoekingAanmaken(boeking);
+                AlleGebruikers.Remove(GeselecteerdeGebruiker);
+                GeselecteerdeGebruiker = null;
+            }
+
         }
         private void ViewOpvullen()
         {

@@ -224,14 +224,17 @@ namespace Reisplanningssysteem_WPF.ViewModels
                 UpdateCursussen();
                 BewerkenOfToevoegenButton = "Bewerken";
             }
+            if (GeselecteerdeGebruiker != null)
+            {
+                Gebruikers.Add(GeselecteerdeGebruiker);
+                GebruikerCursus link = new GebruikerCursus();
+                link.Gebruiker = GeselecteerdeGebruiker;
+                link.Cursus = Cursus;
+                DatabaseOperations.GebruikerLinken(link);
+                AlleGebruikers.Remove(GeselecteerdeGebruiker);
+                GeselecteerdeGebruiker = null;
+            }
 
-            Gebruikers.Add(GeselecteerdeGebruiker);
-            GebruikerCursus link = new GebruikerCursus();
-            link.Gebruiker = GeselecteerdeGebruiker;
-            link.Cursus = Cursus;
-            DatabaseOperations.GebruikerLinken(link);
-            AlleGebruikers.Remove(GeselecteerdeGebruiker);
-            GeselecteerdeGebruiker = null;
         }
 
 
