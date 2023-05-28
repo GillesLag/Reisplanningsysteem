@@ -100,7 +100,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
             GeselecteerdeGemeente = bestemming.Gemeente;
         }
 
-        private void Toevoegen()
+        public void Toevoegen()
         {
             if (Bestemming == null)
             {
@@ -128,7 +128,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
             UpdateBestemmingen();
         }
 
-        private void Bewerken()
+        public void Bewerken()
         {
             if (Bestemming == null)
             {

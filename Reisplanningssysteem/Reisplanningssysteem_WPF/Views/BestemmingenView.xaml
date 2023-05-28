@@ -41,19 +41,20 @@
                 Margin="5"
                 Width="200px"
                 HorizontalAlignment="Right"
-                Command="{Binding}" CommandParameter="OpenBestemmingToevoegen" />
+                Command="{Binding}" CommandParameter="OpenBestemmingToevoegen"
+                AutomationProperties.AutomationId="Toevoegen"/>
 
         <StackPanel Margin="5" Orientation="Horizontal" Grid.Row="1">
             <Label Content="Filter:"/>
             <TextBox x:Name="txbFilter" Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}" Width="150"/>
         </StackPanel>
 
-
         <DataGrid x:Name="datagridStores"
                   ItemsSource="{Binding Bestemmingen}"
                   SelectedItem="{Binding GeselecteerdeBestemming}"
                   Grid.Row="2" Grid.ColumnSpan="2" AutoGenerateColumns="False"
-                  IsReadOnly="True">
+                  IsReadOnly="True"
+                  AutomationProperties.AutomationId="Datagrid">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Naam}" Header="Naam"/>
                 <DataGridTextColumn Binding="{Binding Land}" Header="Land"/>

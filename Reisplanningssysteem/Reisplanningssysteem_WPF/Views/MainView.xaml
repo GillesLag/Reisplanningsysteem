@@ -43,6 +43,7 @@
             <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
             Content="Bestemmingen"
             Margin="5"
+            AutomationProperties.AutomationId="Bestemmingen"
             Command="{Binding}" CommandParameter="OpenBestemmingen"/>
             <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
             Content="Themas"
