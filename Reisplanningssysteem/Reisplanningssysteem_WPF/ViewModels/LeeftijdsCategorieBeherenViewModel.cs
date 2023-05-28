@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 using Reisplanningssysteem_WPF.Utils;
 using Reisplanningssysteem_DAL;
 using Reisplanningssysteem_Models;
+using Reisplanningssysteem_DAL.Data.UnitOfWork;
 
 namespace Reisplanningssysteem_WPF.ViewModels
 {
-    public class LeeftijdsCategorieBeherenViewModel : BaseViewModel
+    public class LeeftijdsCategorieBeherenViewModel : BaseViewModel, IDisposable
     {
+        private IUnitOfWork _unitOfWork = new UnitOfWork(new ReisplanningssysteemContext());
         public override string this[string columnName]
         {
             get { return ""; }
@@ -91,7 +93,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
                 return;
             }
 
-            int ok = DatabaseOperations.LeeftijdsCategorieToevoegen(Categorie);
+            int ok = _unitOfWork.LeeftijdsCategorieRepo.Toevoegen(Categorie);
 
             if (ok == 0)
             {
@@ -117,7 +119,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
                 return;
             }
 
-            int ok = DatabaseOperations.LeeftijdsCategorieBewerken(Categorie);
+            int ok = _unitOfWork.LeeftijdsCategorieRepo.Bewerken(Categorie);
 
             if (ok == 0)
             {
@@ -135,7 +137,12 @@ namespace Reisplanningssysteem_WPF.ViewModels
         private void UpdateCategorieën()
         {
             CategoriënEventHandler?
-                .Invoke(this, new UpdateGenericListEventArgs<LeeftijdsCategorie>(DatabaseOperations.LeeftijdsCategorieënOphalen()));
+                .Invoke(this, new UpdateGenericListEventArgs<LeeftijdsCategorie>(_unitOfWork.LeeftijdsCategorieRepo.Ophalen().OrderBy(l => l.Naam).ToList()));
+        }
+
+        public void Dispose()
+        {
+            _unitOfWork.Dispose();
         }
     }
 }

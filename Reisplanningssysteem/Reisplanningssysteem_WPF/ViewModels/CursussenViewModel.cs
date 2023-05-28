@@ -8,11 +8,13 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Reisplanningssysteem_DAL.Data.UnitOfWork;
 
 namespace Reisplanningssysteem_WPF.ViewModels
 {
-    public class CursussenViewModel : BaseViewModel
+    public class CursussenViewModel : BaseViewModel, IDisposable
     {
+        private IUnitOfWork _unitOfWork = new UnitOfWork(new ReisplanningssysteemContext());
         private ObservableCollection<Cursus> _Cursussen;
         private Cursus _GeselecteerdeCursus;
         private string _foutmelding;
@@ -76,7 +78,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
 
         public CursussenViewModel()
         {
-            AlleCursussen = DatabaseOperations.CursussenOphalen();
+            AlleCursussen = _unitOfWork.CursusRepo.Ophalen().OrderBy(c => c.Naam).ToList();
             Cursussen = new ObservableCollection<Cursus>(AlleCursussen);
             GeselecteerdeCursus = null;
         }
@@ -115,7 +117,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
                 return;
             }
 
-            int ok = DatabaseOperations.CursusVerwijderen(GeselecteerdeCursus);
+            int ok = _unitOfWork.CursusRepo.Verwijderen(GeselecteerdeCursus);
 
             if (ok == 0)
             {
@@ -123,7 +125,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
                 return;
             }
 
-            AlleCursussen = DatabaseOperations.CursussenOphalen();
+            AlleCursussen = _unitOfWork.CursusRepo.Ophalen().OrderBy(c => c.Naam).ToList();
             Cursussen = new ObservableCollection<Cursus>(AlleCursussen);
             GeselecteerdeCursus = null;
         }
@@ -131,6 +133,11 @@ namespace Reisplanningssysteem_WPF.ViewModels
         private void FilterCursussen()
         {
             Cursussen = new ObservableCollection<Cursus>(AlleCursussen.Where(c => c.Naam.ToLower().Contains(Filter.ToLower())));
+        }
+
+        public void Dispose()
+        {
+            _unitOfWork.Dispose();
         }
     }
 }

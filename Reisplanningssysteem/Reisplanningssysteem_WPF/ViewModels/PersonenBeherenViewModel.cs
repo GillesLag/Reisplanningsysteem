@@ -11,18 +11,20 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
+using Reisplanningssysteem_DAL.Data.UnitOfWork;
 
 namespace Reisplanningssysteem_WPF.ViewModels
 {
-    public class PersonenBeherenViewModel : BaseViewModel
+    public class PersonenBeherenViewModel : BaseViewModel, IDisposable
     {
+        private IUnitOfWork _unitOfWork = new UnitOfWork(new ReisplanningssysteemContext());
         private ObservableCollection<Gebruiker> _gebruikers;
         private Gebruiker _geselecteerdeGebruiker;
         private string _foutmelding;
 
         public PersonenBeherenViewModel()
         {
-            AlleGebruikers = DatabaseOperations.OphalenLijstGebruikers();
+            AlleGebruikers = _unitOfWork.GebruikerRepo.Ophalen(p => p.Gemeente, p => p.GebruikerCursussen, p => p.Boekingen).OrderBy(g => g.ToString()).ToList();
             Gebruikers = new ObservableCollection<Gebruiker>(AlleGebruikers);
         }
 
@@ -107,10 +109,10 @@ namespace Reisplanningssysteem_WPF.ViewModels
         {
             if (GeselecteerdeGebruiker != null)
             {
-                int ok = DatabaseOperations.VerwijderGebruiker(GeselecteerdeGebruiker);
+                int ok = _unitOfWork.GebruikerRepo.Verwijderen(GeselecteerdeGebruiker);
                 if (ok > 0)
                 {
-                    AlleGebruikers = DatabaseOperations.OphalenLijstGebruikers();
+                    AlleGebruikers = _unitOfWork.GebruikerRepo.Ophalen(p => p.Gemeente, p => p.GebruikerCursussen, p => p.Boekingen).OrderBy(g => g.ToString()).ToList();
                     Gebruikers = new ObservableCollection<Gebruiker>(AlleGebruikers);
                     GeselecteerdeGebruiker = null;
                     Foutmelding = "";
@@ -135,6 +137,11 @@ namespace Reisplanningssysteem_WPF.ViewModels
         {
             AlleGebruikers = e.GenericList;
             Gebruikers = new ObservableCollection<Gebruiker>(e.GenericList);
+        }
+
+        public void Dispose()
+        {
+            _unitOfWork.Dispose();
         }
     }
 }

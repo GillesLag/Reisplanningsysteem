@@ -9,11 +9,13 @@ using Reisplanningssysteem_DAL;
 using System.Collections.ObjectModel;
 using System.Windows.Documents;
 using System.Threading;
+using Reisplanningssysteem_DAL.Data.UnitOfWork;
 
 namespace Reisplanningssysteem_WPF.ViewModels
 {
-    public class ReisBeherenViewModel : BaseViewModel
+    public class ReisBeherenViewModel : BaseViewModel, IDisposable
     {
+        private IUnitOfWork _unitOfWork = new UnitOfWork(new ReisplanningssysteemContext());
         public Gebruiker _geselecteerdGebruiker { get; set; }
 
         public Gebruiker GeselecteerdeGebruiker
@@ -196,7 +198,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
 
         public ReisBeherenViewModel()
         {
-            AlleGebruikers = new ObservableCollection<Gebruiker>(DatabaseOperations.OphalenLijstGebruikers());
+            AlleGebruikers = new ObservableCollection<Gebruiker>(_unitOfWork.GebruikerRepo.Ophalen().OrderBy(g => g.ToString()));
             Gebruikers = new ObservableCollection<Gebruiker>();
             Reis = new Reis();
             BewerkenOfToevoegen = "Reis toevoegen";
@@ -216,8 +218,13 @@ namespace Reisplanningssysteem_WPF.ViewModels
 
         public ReisBeherenViewModel(Reis reis)
         {
-            AlleGebruikers = new ObservableCollection<Gebruiker>(DatabaseOperations.OphalenLijstGebruikers()?.Where(gebruiker => gebruiker.Boekingen?.Any(gr => gr.ReisId == reis.Id) == false)?.ToList());
-            Gebruikers = new ObservableCollection<Gebruiker>(DatabaseOperations.OphalenLijstGebruikers()?.Where(gebruiker => gebruiker.Boekingen?.Any(gr => gr.ReisId == reis.Id) == true)?.ToList());
+            AlleGebruikers = new ObservableCollection<Gebruiker>(_unitOfWork.GebruikerRepo.Ophalen(g => g.Boekingen
+            .Any(b => b.ReisId == reis.Id) == false,
+            g => g.Boekingen));
+
+            Gebruikers = new ObservableCollection<Gebruiker>(_unitOfWork.GebruikerRepo.Ophalen(g => g.Boekingen
+            .Any(b => b.ReisId == reis.Id) == true,
+            g => g.Boekingen));
 
             Reis = reis;
             BewerkenOfToevoegen = "Reis bewerken";
@@ -227,12 +234,12 @@ namespace Reisplanningssysteem_WPF.ViewModels
             MaakHoofdmonitor = "MaakHoofdmonitor";
             Gebruiker geselecteerdeMonitor = reis.Boekingen.Where(b=>b.IsMonitor).Select(b=>b.Gebruiker).FirstOrDefault();
 
-            toonMonitor(geselecteerdeMonitor);
+            ToonMonitor(geselecteerdeMonitor);
 
             ViewOpvullen();
         }
 
-        private void toonMonitor(Gebruiker monitor)
+        private void ToonMonitor(Gebruiker monitor)
         {
             if (monitor != null)
             {
@@ -255,16 +262,15 @@ namespace Reisplanningssysteem_WPF.ViewModels
             {
 
                 AlleGebruikers.Add(TeVerwijderenGebruiker);
-                Boeking boeking = DatabaseOperations.ZoekBoeking(TeVerwijderenGebruiker, Reis);
+                Boeking boeking = _unitOfWork.BoekingRepo.Ophalen(x => x.Gebruiker == TeVerwijderenGebruiker && x.Reis == Reis).First();
                 if (boeking.IsMonitor)
                 {
-                    toonMonitor(null);
+                    ToonMonitor(null);
                 }
-                DatabaseOperations.BoekingVerwijderen(boeking);
+                _unitOfWork.BoekingRepo.Verwijderen(boeking);
                 Gebruikers.Remove(TeVerwijderenGebruiker);
                 TeVerwijderenGebruiker = null;
             }
-
         }
 
 
@@ -286,10 +292,10 @@ namespace Reisplanningssysteem_WPF.ViewModels
                 }
                 else
                 {
-                    Boeking boeking = DatabaseOperations.ZoekBoeking(TeVerwijderenGebruiker, Reis);
+                    Boeking boeking = _unitOfWork.BoekingRepo.Ophalen(x => x.Gebruiker == TeVerwijderenGebruiker && x.Reis == Reis).First();
                     boeking.IsMonitor= true;
-                    DatabaseOperations.BoekingBewerken(boeking);
-                    toonMonitor(TeVerwijderenGebruiker);
+                    _unitOfWork.BoekingRepo.Bewerken(boeking);
+                    ToonMonitor(TeVerwijderenGebruiker);
                 }
             }
         }
@@ -302,7 +308,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
             }
             else if (Reis.Id <= 0)
             {
-                DatabaseOperations.ReisToevoegen(Reis);
+                _unitOfWork.ReisRepo.Toevoegen(Reis);
                 UpdateReizen();
                 BewerkenOfToevoegenButton = "Bewerken";
             }
@@ -319,7 +325,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
                     IsMonitor = false,
                     InschrijvingsDatum = DateTime.Now
                 };
-                DatabaseOperations.BoekingAanmaken(boeking);
+                _unitOfWork.BoekingRepo.Toevoegen(boeking);
                 AlleGebruikers.Remove(GeselecteerdeGebruiker);
                 GeselecteerdeGebruiker = null;
             }
@@ -327,10 +333,10 @@ namespace Reisplanningssysteem_WPF.ViewModels
         }
         private void ViewOpvullen()
         {
-            Themas = DatabaseOperations.ThemasOphalen();
-            Hoofdmonitoren = DatabaseOperations.HoofdmonitorenOphalen();
-            Bestemmingen = DatabaseOperations.BestemmingenOphalen();
-            LeeftijdsCategorieën = DatabaseOperations.LeeftijdsCategorieënOphalen();
+            Themas = _unitOfWork.ThemaRepo.Ophalen().ToList();
+            Hoofdmonitoren = _unitOfWork.GebruikerRepo.Ophalen(g => g.HoofmonitorCursus, g => g.Gemeente).ToList();
+            Bestemmingen = _unitOfWork.BestemmingRepo.Ophalen().ToList();
+            LeeftijdsCategorieën = _unitOfWork.LeeftijdsCategorieRepo.Ophalen().ToList();
         }
 
         private void Bewerken()
@@ -347,7 +353,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
                 return;
             }
 
-            int ok = DatabaseOperations.ReisBewerken(Reis);
+            int ok = _unitOfWork.ReisRepo.Bewerken(Reis);
 
             if (ok == 0)
             {
@@ -373,7 +379,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
                 return;
             }
 
-            int ok = DatabaseOperations.ReisToevoegen(Reis);
+            int ok = _unitOfWork.ReisRepo.Toevoegen(Reis);
 
             if (ok == 0)
             {
@@ -395,7 +401,29 @@ namespace Reisplanningssysteem_WPF.ViewModels
 
         private void UpdateReizen()
         {
-            ReizenUpdatedEvent?.Invoke(this, new UpdateGenericListEventArgs<Reis>(DatabaseOperations.ReizenOphalen()));
+            List<Reis> reizen = _unitOfWork.ReisRepo.Ophalen(r => r.Bestemming,
+                r => r.Hoofdmonitor,
+                r => r.Thema,
+                r => r.LeeftijdsCategorie,
+                r => r.Boekingen,
+                r => r.Onkosten).OrderBy(r => r.Naam).ToList();
+
+            IEnumerable<Gebruiker> gebruikers = _unitOfWork.GebruikerRepo.Ophalen();
+
+            foreach (Reis reis in reizen)
+            {
+                foreach (Boeking boeking in reis.Boekingen)
+                {
+                    boeking.Gebruiker = gebruikers.First(g => g.Id == boeking.GebruikerId);
+                }
+            }
+
+            ReizenUpdatedEvent?.Invoke(this, new UpdateGenericListEventArgs<Reis>(reizen));
+        }
+
+        public void Dispose()
+        {
+            _unitOfWork.Dispose();
         }
     }
 }

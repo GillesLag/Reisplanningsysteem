@@ -8,11 +8,13 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Reisplanningssysteem_DAL.Data.UnitOfWork;
 
 namespace Reisplanningssysteem_WPF.ViewModels
 {
-    public class ThemasViewModel : BaseViewModel
+    public class ThemasViewModel : BaseViewModel, IDisposable
     {
+        private IUnitOfWork _unitOfWork = new UnitOfWork(new ReisplanningssysteemContext());
         private ObservableCollection<Thema> _themas;
         private Thema _geselecteerdeThema;
         private string _foutmelding;
@@ -69,7 +71,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
 
         public ThemasViewModel()
         {
-            AlleThemas = DatabaseOperations.ThemasOphalen();
+            AlleThemas = _unitOfWork.ThemaRepo.Ophalen().OrderBy(t => t.Naam).ToList();
             Themas = new ObservableCollection<Thema>(AlleThemas);
             GeselecteerdeThema = null;
         }
@@ -108,7 +110,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
                 return;
             }
 
-            int ok = DatabaseOperations.ThemaVerwijderen(GeselecteerdeThema);
+            int ok = _unitOfWork.ThemaRepo.Verwijderen(GeselecteerdeThema);
 
             if (ok == 0)
             {
@@ -116,7 +118,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
                 return;
             }
 
-            AlleThemas = DatabaseOperations.ThemasOphalen();
+            AlleThemas = _unitOfWork.ThemaRepo.Ophalen().OrderBy(t => t.Naam).ToList();
             Themas = new ObservableCollection<Thema>(AlleThemas);
             GeselecteerdeThema = null;
         }
@@ -124,6 +126,11 @@ namespace Reisplanningssysteem_WPF.ViewModels
         private void FilterCategorieën()
         {
             Themas = new ObservableCollection<Thema>(AlleThemas.Where(c => c.Naam.ToLower().Contains(Filter.ToLower())));
+        }
+
+        public void Dispose()
+        {
+            _unitOfWork.Dispose();
         }
     }
 }

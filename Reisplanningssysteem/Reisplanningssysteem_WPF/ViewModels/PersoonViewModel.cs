@@ -12,11 +12,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Documents;
+using Reisplanningssysteem_DAL.Data.UnitOfWork;
 
 namespace Reisplanningssysteem_WPF.ViewModels
 {
-    public class PersoonViewModel : BaseViewModel
+    public class PersoonViewModel : BaseViewModel, IDisposable
     {
+        private IUnitOfWork _unitOfWork = new UnitOfWork(new ReisplanningssysteemContext());
         private Gebruiker _gebruikerRecord;
         private string _foutmelding;
         private bool _bewerkModus;
@@ -27,7 +29,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
         {
             GebruikerRecord = gebruikerRecord;
             Bewerkmodus = true;
-            List<Gemeente> gemeentes = DatabaseOperations.OphalenGemeentes();
+            List<Gemeente> gemeentes = _unitOfWork.GemeenteRepo.Ophalen().OrderBy(g => g.Naam).ToList();
             Gemeentes = new ObservableCollection<Gemeente>(gemeentes);
         }
 
@@ -44,7 +46,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
         {
             GebruikerRecord = new Gebruiker();
             Bewerkmodus = false;
-            List<Gemeente> gemeentes = DatabaseOperations.OphalenGemeentes();
+            List<Gemeente> gemeentes = _unitOfWork.GemeenteRepo.Ophalen().OrderBy(g => g.Naam).ToList();
             Gemeentes = new ObservableCollection<Gemeente>(gemeentes);
         }
 
@@ -100,7 +102,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
                 {
                     if (!Bewerkmodus)
                     {
-                        int ok = DatabaseOperations.VoegGebruikerToe(GebruikerRecord);
+                        int ok = _unitOfWork.GebruikerRepo.Toevoegen(GebruikerRecord);
                         if (ok > 0)
                         {
                             UpdateGebruikers();
@@ -114,7 +116,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
                     }
                     else
                     {
-                        int ok = DatabaseOperations.UpdateGebruiker(GebruikerRecord);
+                        int ok = _unitOfWork.GebruikerRepo.Bewerken(GebruikerRecord);
                         if (ok > 0)
                         {
                             MessageBox.Show($"{GebruikerRecord.Voornaam} {GebruikerRecord.Achternaam} is aangepast");
@@ -152,7 +154,12 @@ namespace Reisplanningssysteem_WPF.ViewModels
 
         private void UpdateGebruikers()
         {
-            GebruikersUpdated?.Invoke(this, new UpdateGenericListEventArgs<Gebruiker>(DatabaseOperations.OphalenLijstGebruikers()));
+            GebruikersUpdated?.Invoke(this, new UpdateGenericListEventArgs<Gebruiker>(_unitOfWork.GebruikerRepo.Ophalen(p => p.Gemeente, p => p.GebruikerCursussen, p => p.Boekingen).OrderBy(g => g.ToString()).ToList()));
+        }
+
+        public void Dispose()
+        {
+            _unitOfWork.Dispose();
         }
     }
 }

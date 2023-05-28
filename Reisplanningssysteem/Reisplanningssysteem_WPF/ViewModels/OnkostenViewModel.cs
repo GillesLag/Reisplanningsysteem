@@ -8,11 +8,13 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Reisplanningssysteem_DAL.Data.UnitOfWork;
 
 namespace Reisplanningssysteem_WPF.ViewModels
 {
-    public class OnkostenViewModel : BaseViewModel
+    public class OnkostenViewModel : BaseViewModel, IDisposable
     {
+        private IUnitOfWork _unitOfWork = new UnitOfWork(new ReisplanningssysteemContext());
         public override string this[string columnName] => throw new NotImplementedException();
 
         public override bool CanExecute(object parameter)
@@ -72,7 +74,13 @@ namespace Reisplanningssysteem_WPF.ViewModels
 
         public OnkostenViewModel()
         {
-            AlleReizen = DatabaseOperations.ReizenOphalen();
+            AlleReizen = _unitOfWork.ReisRepo.Ophalen(r => r.Bestemming,
+                r => r.Hoofdmonitor,
+                r => r.Thema,
+                r => r.LeeftijdsCategorie,
+                r => r.Boekingen,
+                r => r.Onkosten).OrderBy(r => r.Naam).ToList();
+
             Reizen = new ObservableCollection<Reis>(AlleReizen);
         }
 
@@ -84,7 +92,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
                 return;
             }
 
-            int ok = DatabaseOperations.OnkostVerwijderen(GeselecteerdeOnkost);
+            int ok = _unitOfWork.OnkostRepo.Verwijderen(GeselecteerdeOnkost);
 
             if (ok == 0)
             {
@@ -92,7 +100,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
                 return;
             }
 
-            AlleReizen = DatabaseOperations.ReizenOphalen();
+            AlleReizen = _unitOfWork.ReisRepo.Ophalen(r => r.Onkosten).OrderBy(r => r.Naam).ToList();
             Reizen = new ObservableCollection<Reis>(AlleReizen);
             GeselecteerdeOnkost = null;
         }
@@ -126,6 +134,11 @@ namespace Reisplanningssysteem_WPF.ViewModels
         {
             AlleReizen = e.GenericList;
             Reizen = new ObservableCollection<Reis>(e.GenericList);
+        }
+
+        public void Dispose()
+        {
+            _unitOfWork.Dispose();
         }
     }
 }

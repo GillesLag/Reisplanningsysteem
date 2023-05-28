@@ -10,11 +10,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using Reisplanningssysteem_DAL.Data.UnitOfWork;
 
 namespace Reisplanningssysteem_WPF.ViewModels
 {
-    public class CursusBeherenViewModel : BaseViewModel
+    public class CursusBeherenViewModel : BaseViewModel, IDisposable
     {
+        private IUnitOfWork _unitOfWork = new UnitOfWork(new ReisplanningssysteemContext());
         public Gebruiker _geselecteerdGebruiker { get; set; }
 
         public Gebruiker GeselecteerdeGebruiker
@@ -75,8 +77,8 @@ namespace Reisplanningssysteem_WPF.ViewModels
             {
 
                 AlleGebruikers.Add(TeVerwijderenGebruiker);
-                GebruikerCursus link = DatabaseOperations.ZoekGebruikerCursus(TeVerwijderenGebruiker, Cursus);
-                DatabaseOperations.GebruikercursusVerwijderen(link);
+                GebruikerCursus link = _unitOfWork.GebruikersCursusRepo.Ophalen(x => x.Gebruiker == TeVerwijderenGebruiker && x.Cursus == Cursus).First();
+                _unitOfWork.GebruikersCursusRepo.Verwijderen(link);
                 Gebruikers.Remove(TeVerwijderenGebruiker);
                 TeVerwijderenGebruiker = null;
             }
@@ -137,7 +139,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
 
         public CursusBeherenViewModel()
         {
-            AlleGebruikers = new ObservableCollection<Gebruiker>(DatabaseOperations.OphalenLijstGebruikers());
+            AlleGebruikers = new ObservableCollection<Gebruiker>(_unitOfWork.GebruikerRepo.Ophalen());
             Gebruikers = new ObservableCollection<Gebruiker>();
             Cursus = new Cursus();
             BewerkenOfToevoegen = "Cursus toevoegen";
@@ -150,8 +152,13 @@ namespace Reisplanningssysteem_WPF.ViewModels
 
         public CursusBeherenViewModel(Cursus cursus)
         {
-            AlleGebruikers = new ObservableCollection<Gebruiker>(DatabaseOperations.OphalenLijstGebruikers()?.Where(gebruiker => gebruiker.GebruikerCursussen?.Any(gc => gc.CursusId == cursus.Id) == false)?.ToList());
-            Gebruikers = new ObservableCollection<Gebruiker>(DatabaseOperations.OphalenLijstGebruikers()?.Where(gebruiker => gebruiker.GebruikerCursussen?.Any(gc => gc.CursusId == cursus.Id) == true)?.ToList());
+            AlleGebruikers = new ObservableCollection<Gebruiker>(_unitOfWork.GebruikerRepo.Ophalen(g => g.GebruikerCursussen
+                .Any(gc => gc.GebruikerId == cursus.Id) == false)
+                .OrderBy(g => g.ToString()));
+              
+            Gebruikers = new ObservableCollection<Gebruiker>(_unitOfWork.GebruikerRepo.Ophalen(g => g.GebruikerCursussen
+                .Any(gc => gc.GebruikerId == cursus.Id) == true, g => g.GebruikerCursussen)
+                .OrderBy(g => g.ToString()));
 
             Cursus = cursus;
             BewerkenOfToevoegen = "Cursus bewerken";
@@ -174,7 +181,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
                 return;
             }
 
-            int ok = DatabaseOperations.CursusToevoegen(Cursus);
+            int ok = _unitOfWork.CursusRepo.Toevoegen(Cursus);
 
             if (ok == 0)
             {
@@ -200,7 +207,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
                 return;
             }
 
-            int ok = DatabaseOperations.CursusBewerken(Cursus);
+            int ok = _unitOfWork.CursusRepo.Bewerken(Cursus);
 
             if (ok == 0)
             {
@@ -220,7 +227,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
             }
             else if(Cursus.Id<=0)
             {
-                DatabaseOperations.CursusToevoegen(Cursus);
+                _unitOfWork.CursusRepo.Toevoegen(Cursus);
                 UpdateCursussen();
                 BewerkenOfToevoegenButton = "Bewerken";
             }
@@ -230,14 +237,11 @@ namespace Reisplanningssysteem_WPF.ViewModels
                 GebruikerCursus link = new GebruikerCursus();
                 link.Gebruiker = GeselecteerdeGebruiker;
                 link.Cursus = Cursus;
-                DatabaseOperations.GebruikerLinken(link);
+                _unitOfWork.GebruikersCursusRepo.Toevoegen(link);
                 AlleGebruikers.Remove(GeselecteerdeGebruiker);
                 GeselecteerdeGebruiker = null;
             }
-
         }
-
-
 
         public delegate void CursussenUpdateHandler(object sender, UpdateGenericListEventArgs<Cursus> e);
         public event CursussenUpdateHandler CursussenEventHandler;
@@ -245,7 +249,12 @@ namespace Reisplanningssysteem_WPF.ViewModels
         private void UpdateCursussen()
         {
             CursussenEventHandler?
-                .Invoke(this, new UpdateGenericListEventArgs<Cursus>(DatabaseOperations.CursussenOphalen()));
+                .Invoke(this, new UpdateGenericListEventArgs<Cursus>(_unitOfWork.CursusRepo.Ophalen().OrderBy(c => c.Naam).ToList()));
+        }
+
+        public void Dispose()
+        {
+            _unitOfWork.Dispose();
         }
     }
 }
