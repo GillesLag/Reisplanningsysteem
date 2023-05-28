@@ -8,11 +8,13 @@ using Reisplanningssysteem_Models;
 using Reisplanningssysteem_DAL;
 using Reisplanningssysteem_WPF.Views;
 using Reisplanningssysteem_WPF.Utils;
+using Reisplanningssysteem_DAL.Data.UnitOfWork;
 
 namespace Reisplanningssysteem_WPF.ViewModels
 {
-    public class LeeftijdsCategorieënViewModel : BaseViewModel
+    public class LeeftijdsCategorieënViewModel : BaseViewModel, IDisposable
     {
+        private IUnitOfWork _unitOfWork = new UnitOfWork(new ReisplanningssysteemContext());
         private ObservableCollection<LeeftijdsCategorie> _Categorieën;
         private LeeftijdsCategorie _GeselecteerdeCategorie;
         private string _foutmelding;
@@ -76,7 +78,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
 
         public LeeftijdsCategorieënViewModel()
         {
-            AlleCategorieën = DatabaseOperations.LeeftijdsCategorieënOphalen();
+            AlleCategorieën = _unitOfWork.LeeftijdsCategorieRepo.Ophalen().OrderBy(l => l.Naam).ToList();
             Categorieën = new ObservableCollection<LeeftijdsCategorie>(AlleCategorieën);
             GeselecteerdeCategorie = null;
         }
@@ -115,7 +117,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
                 return;
             }
 
-            int ok = DatabaseOperations.LeeftijdsCategorieVerwijderen(GeselecteerdeCategorie);
+            int ok = _unitOfWork.LeeftijdsCategorieRepo.Verwijderen(GeselecteerdeCategorie);
 
             if (ok == 0)
             {
@@ -123,7 +125,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
                 return;
             }
 
-            AlleCategorieën = DatabaseOperations.LeeftijdsCategorieënOphalen();
+            AlleCategorieën = _unitOfWork.LeeftijdsCategorieRepo.Ophalen().OrderBy(l => l.Naam).ToList();
             Categorieën = new ObservableCollection<LeeftijdsCategorie>(AlleCategorieën);
             GeselecteerdeCategorie = null;
         }
@@ -131,6 +133,11 @@ namespace Reisplanningssysteem_WPF.ViewModels
         private void FilterCategorieën()
         {
             Categorieën = new ObservableCollection<LeeftijdsCategorie>(AlleCategorieën.Where(c => c.Naam.ToLower().Contains(Filter.ToLower())));
+        }
+
+        public void Dispose()
+        {
+            _unitOfWork.Dispose();
         }
     }
 }

@@ -7,11 +7,13 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Reisplanningssysteem_DAL.Data.UnitOfWork;
 
 namespace Reisplanningssysteem_WPF.ViewModels
 {
-    public class ThemaBeherenViewModel : BaseViewModel
+    public class ThemaBeherenViewModel : BaseViewModel, IDisposable
     {
+        private IUnitOfWork _unitOfWork = new UnitOfWork(new ReisplanningssysteemContext());
         public override string this[string columnName]
         {
             get { return ""; }
@@ -30,7 +32,6 @@ namespace Reisplanningssysteem_WPF.ViewModels
                 case "Bewerken": Bewerken(); break;
             }
         }
-
 
         private string _foutmelding;
 
@@ -93,7 +94,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
                 return;
             }
 
-            int ok = DatabaseOperations.ThemaToevoegen(Thema);
+            int ok = _unitOfWork.ThemaRepo.Toevoegen(Thema);
 
             if (ok == 0)
             {
@@ -120,7 +121,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
                 return;
             }
 
-            int ok = DatabaseOperations.ThemaBewerken(Thema);
+            int ok = _unitOfWork.ThemaRepo.Bewerken(Thema);
 
             if (ok == 0)
             {
@@ -137,7 +138,12 @@ namespace Reisplanningssysteem_WPF.ViewModels
 
         private void UpdateThemas()
         {
-            ThemasUpdatedEvent?.Invoke(this, new UpdateGenericListEventArgs<Thema>(DatabaseOperations.ThemasOphalen()));
+            ThemasUpdatedEvent?.Invoke(this, new UpdateGenericListEventArgs<Thema>(_unitOfWork.ThemaRepo.Ophalen().OrderBy(t => t.Naam).ToList()));
+        }
+
+        public void Dispose()
+        {
+            _unitOfWork.Dispose();
         }
     }
 }

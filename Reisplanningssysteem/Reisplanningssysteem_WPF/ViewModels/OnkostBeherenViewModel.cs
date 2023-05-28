@@ -7,11 +7,13 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Reisplanningssysteem_DAL.Data.UnitOfWork;
 
 namespace Reisplanningssysteem_WPF.ViewModels
 {
-    public class OnkostBeherenViewModel : BaseViewModel
+    public class OnkostBeherenViewModel : BaseViewModel, IDisposable
     {
+        private IUnitOfWork _unitOfWork = new UnitOfWork(new ReisplanningssysteemContext());
         public override string this[string columnName]
         {
             get { return ""; }
@@ -89,7 +91,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
         }
         private void ViewOpvullen()
         {
-            Reizen = new ObservableCollection<Reis>(DatabaseOperations.ReizenOphalen());
+            Reizen = new ObservableCollection<Reis>(_unitOfWork.ReisRepo.Ophalen(r => r.Onkosten).OrderBy(r => r.Naam));
         }
 
         private void Bewerken()
@@ -106,7 +108,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
                 return;
             }
 
-            int ok = DatabaseOperations.OnkostBewerken(Onkost);
+            int ok = _unitOfWork.OnkostRepo.Bewerken(Onkost);
 
             if (ok == 0)
             {
@@ -132,7 +134,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
                 return;
             }
 
-            int ok = DatabaseOperations.OnkostToevoegen(Onkost);
+            int ok = _unitOfWork.OnkostRepo.Toevoegen(Onkost);
 
             if (ok == 0)
             {
@@ -150,7 +152,13 @@ namespace Reisplanningssysteem_WPF.ViewModels
 
         private void UpdateReizen()
         {
-            ReizenUpdatedEvent?.Invoke(this, new UpdateGenericListEventArgs<Reis>(DatabaseOperations.ReizenOphalen()));
+            ReizenUpdatedEvent?.Invoke(this, new UpdateGenericListEventArgs<Reis>(_unitOfWork.ReisRepo.Ophalen(r => r.Onkosten)
+                .OrderBy(r => r.Naam).ToList()));
+        }
+
+        public void Dispose()
+        {
+            _unitOfWork.Dispose();
         }
     }
 }

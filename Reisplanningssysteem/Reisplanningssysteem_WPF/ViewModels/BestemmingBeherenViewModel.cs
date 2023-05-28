@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 using Reisplanningssysteem_Models;
 using Reisplanningssysteem_DAL;
 using Reisplanningssysteem_WPF.Utils;
+using Reisplanningssysteem_DAL.Data.UnitOfWork;
 
 namespace Reisplanningssysteem_WPF.ViewModels
 {
-    public class BestemmingBeherenViewModel : BaseViewModel
+    public class BestemmingBeherenViewModel : BaseViewModel, IDisposable
     {
+        private IUnitOfWork _unitOfWork = new UnitOfWork(new ReisplanningssysteemContext());
         public override string this[string columnName]
         {
             get { return ""; }
@@ -86,7 +88,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
             Bestemming = new Bestemming();
             BewerkenOfToevoegen = "Bestemming toevoegen";
             BewerkenOfToevoegenButton = "Toevoegen";
-            Gemeenten = new ObservableCollection<Gemeente>(DatabaseOperations.OphalenGemeentes());
+            Gemeenten = new ObservableCollection<Gemeente>(_unitOfWork.GemeenteRepo.Ophalen().OrderBy(g => g.Naam));
         }
 
         public BestemmingBeherenViewModel(Bestemming bestemming)
@@ -94,7 +96,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
             Bestemming = bestemming;
             BewerkenOfToevoegen = "Bestemming bewerken";
             BewerkenOfToevoegenButton = "Bewerken";
-            Gemeenten = new ObservableCollection<Gemeente>(DatabaseOperations.OphalenGemeentes());
+            Gemeenten = new ObservableCollection<Gemeente>(_unitOfWork.GemeenteRepo.Ophalen().OrderBy(g => g.Naam));
             GeselecteerdeGemeente = bestemming.Gemeente;
         }
 
@@ -112,7 +114,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
                 return;
             }
 
-            int ok = DatabaseOperations.BestemmingToevoegen(Bestemming);
+            int ok = _unitOfWork.BestemmingRepo.Toevoegen(Bestemming);
 
             if (ok == 0)
             {
@@ -140,7 +142,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
                 return;
             }
 
-            int ok = DatabaseOperations.BestemmingBewerken(Bestemming);
+            int ok = _unitOfWork.BestemmingRepo.Bewerken(Bestemming);
 
             if (ok == 0)
             {
@@ -157,7 +159,13 @@ namespace Reisplanningssysteem_WPF.ViewModels
 
         private void UpdateBestemmingen()
         {
-            BestemmingenUpdatedEvent?.Invoke(this, new UpdateGenericListEventArgs<Bestemming>(DatabaseOperations.BestemmingenOphalen()));
+            BestemmingenUpdatedEvent?.Invoke(this,
+                new UpdateGenericListEventArgs<Bestemming>(_unitOfWork.BestemmingRepo.Ophalen().OrderBy(b => b.Naam).ToList()));
+        }
+
+        public void Dispose()
+        {
+            _unitOfWork.Dispose();
         }
     }
 }

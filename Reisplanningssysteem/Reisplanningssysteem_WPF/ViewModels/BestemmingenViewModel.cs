@@ -5,14 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Reisplanningssysteem_DAL;
+using Reisplanningssysteem_DAL.Data.UnitOfWork;
 using Reisplanningssysteem_Models;
 using Reisplanningssysteem_WPF.Utils;
 using Reisplanningssysteem_WPF.Views;
 
 namespace Reisplanningssysteem_WPF.ViewModels
 {
-    public class BestemmingenViewModel : BaseViewModel
+    public class BestemmingenViewModel : BaseViewModel, IDisposable
     {
+        private IUnitOfWork _unitOfWork = new UnitOfWork(new ReisplanningssysteemContext());
         public override string this[string columnName] => throw new NotImplementedException(); 
         
         public override bool CanExecute(object parameter)
@@ -78,7 +80,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
 
         public BestemmingenViewModel()
         {
-            AlleBestemmingen = DatabaseOperations.BestemmingenOphalen();
+            AlleBestemmingen = _unitOfWork.BestemmingRepo.Ophalen(b => b.Gemeente).OrderBy(b => b.Naam).ToList();
             Bestemmingen = new ObservableCollection<Bestemming>(AlleBestemmingen);
         }
 
@@ -90,7 +92,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
                 return;
             }
 
-            int ok =  DatabaseOperations.BestemmingVerwijderen(GeselecteerdeBestemming);
+            int ok = _unitOfWork.BestemmingRepo.Verwijderen(GeselecteerdeBestemming);
 
             if (ok == 0)
             {
@@ -98,7 +100,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
                 return;
             }
 
-            AlleBestemmingen = DatabaseOperations.BestemmingenOphalen();
+            AlleBestemmingen = _unitOfWork.BestemmingRepo.Ophalen(b => b.Gemeente).OrderBy(b => b.Naam).ToList();
             Bestemmingen = new ObservableCollection<Bestemming>(AlleBestemmingen);
             GeselecteerdeBestemming = null;
         }
@@ -134,6 +136,11 @@ namespace Reisplanningssysteem_WPF.ViewModels
         {
             AlleBestemmingen = e.GenericList;
             Bestemmingen = new ObservableCollection<Bestemming>(e.GenericList);
+        }
+
+        public void Dispose()
+        {
+            _unitOfWork.Dispose();
         }
     }
 }
