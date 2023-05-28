@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Reisplanningssysteem_WPF.Views"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
-        Title="CursusBeherenView" Height="450" Width="800"
+        Title="CursusBeherenView" Height="450" Width="850"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -38,6 +38,7 @@
 
         <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2" Grid.Row="1">
             <Label  Content="Naam:"
+                VerticalAlignment="Center"
                 materialDesign:HintAssist.Hint="Zoekterm"
                 Style="{StaticResource MaterialDesignLabel}"
                 Margin="5"
@@ -45,15 +46,23 @@
                 FontSize="18px"
                 HorizontalAlignment="Right"/>
 
-
             <TextBox
                 Width="400px"
                  Grid.Row="1"
                  Margin="5"
                  FontSize="18"
                  Text="{Binding Cursus.Naam, ValidatesOnDataErrors=True}"/>
+            <Label  Content="Gebruiker:"
+                VerticalAlignment="Center"
+                materialDesign:HintAssist.Hint="Zoekterm"
+                Style="{StaticResource MaterialDesignLabel}"
+                Margin="5"
+                FontWeight="Bold"
+                FontSize="18px"
+                HorizontalAlignment="Right"/>
             <ComboBox HorizontalAlignment="Left" Grid.Row="2" Grid.Column="1" Name="cmbGebruikers"   
                   Margin="5"
+                      VerticalAlignment="Bottom"
                       Width="190" 
                       ItemsSource="{Binding AlleGebruikers}"                      
                       SelectedItem="{Binding GeselecteerdeGebruiker}"
