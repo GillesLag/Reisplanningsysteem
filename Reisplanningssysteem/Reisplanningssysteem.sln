@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reisplanningssysteem_Models
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reisplanningssysteem_DAL", "Reisplanningssysteem_DAL\Reisplanningssysteem_DAL.csproj", "{EB1D7A82-8E86-40D4-93DA-A384ED62F2BB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reisplanningssysteem_UnitTests", "Reisplanningssysteem_UnitTests\Reisplanningssysteem_UnitTests.csproj", "{E48B3BDF-CD98-4668-88DA-692502EDD764}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{EB1D7A82-8E86-40D4-93DA-A384ED62F2BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB1D7A82-8E86-40D4-93DA-A384ED62F2BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB1D7A82-8E86-40D4-93DA-A384ED62F2BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E48B3BDF-CD98-4668-88DA-692502EDD764}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E48B3BDF-CD98-4668-88DA-692502EDD764}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E48B3BDF-CD98-4668-88DA-692502EDD764}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E48B3BDF-CD98-4668-88DA-692502EDD764}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
