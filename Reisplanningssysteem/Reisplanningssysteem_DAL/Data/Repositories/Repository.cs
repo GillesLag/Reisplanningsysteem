@@ -25,7 +25,7 @@ namespace Reisplanningssysteem_DAL.Data.Repositories
 
         public int Toevoegen(T entity)
         {
-            Context.Set<T>().Add(entity);
+            Context.Entry(entity).State = EntityState.Added;
             return Context.SaveChanges();
         }
 
