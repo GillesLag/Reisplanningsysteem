@@ -24,36 +24,54 @@
         </Grid.RowDefinitions>
 
         <StackPanel VerticalAlignment="Center">
-            <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
-            Content="Personen Beheren"
-            Margin="5"
-            Command="{Binding}" CommandParameter="OpenPersonenBeheren"/>
-            <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
-            Content="Leeftijds Categorieën"
-            Margin="5"
-            Command="{Binding}" CommandParameter="OpenLeeftijdsCategorieën"/>
-            <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
-            Content="Cursussen"
-            Margin="5"                    
-            Command="{Binding}" CommandParameter="OpenCursussen"/>
-            <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
-            Content="Reizen Beheren"
-            Margin="5"
-            Command="{Binding}" CommandParameter="OpenReizen"/>
-            <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
-            Content="Bestemmingen"
-            Margin="5"
-            AutomationProperties.AutomationId="Bestemmingen"
-            Command="{Binding}" CommandParameter="OpenBestemmingen"/>
-            <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
-            Content="Themas"
-            Margin="5"
-            Command="{Binding}" CommandParameter="OpenThemas"/>
-            <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
-            Content="Onkosten"
-            Margin="5"
-            Command="{Binding}" CommandParameter="OpenOnkosten"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
+                    Content="Personen&#x0a;Beheren"
+                    Margin="5"
+                    Width="130"
+                    Height="100"
+                    Command="{Binding}" CommandParameter="OpenPersonenBeheren"/>
+                <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
+                    Content="Leeftijds&#x0a;Categorieën"
+                    Margin="5"
+                    Width="130"
+                    Height="100"
+                    Command="{Binding}" CommandParameter="OpenLeeftijdsCategorieën"/>
+                <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
+                    Content="Cursussen"
+                    Margin="5"   
+                    Width="130"
+                    Height="100"
+                    Command="{Binding}" CommandParameter="OpenCursussen"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
+                    Content="Reizen Beheren"
+                    Margin="5"
+                    Width="130"
+                    Height="100"
+                    Command="{Binding}" CommandParameter="OpenReizen"/>
+                <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
+                    Content="Bestemmingen"
+                    Margin="5"
+                    Width="130"
+                    Height="100"
+                    Command="{Binding}" CommandParameter="OpenBestemmingen"/>
+                <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
+                    Content="Themas"
+                    Margin="5"
+                    Width="130"
+                    Height="100"
+                    Command="{Binding}" CommandParameter="OpenThemas"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
+                    Content="Onkosten"
+                    Margin="5"
+                    Width="130"
+                    Height="100"
+                    Command="{Binding}" CommandParameter="OpenOnkosten"/>
+            </StackPanel>
         </StackPanel>
-        
     </Grid>
 </Window>
