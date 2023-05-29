@@ -44,6 +44,15 @@ namespace Reisplanningssysteem_WPF.ViewModels
             set { _gebruikers = value; }
         }
 
+
+        private ObservableCollection<Gebruiker> _monitors;
+        public ObservableCollection<Gebruiker> Monitors
+        {
+            get { return _monitors; }
+            set { _monitors = value; }
+        }
+
+
         public override string this[string columnName]
         {
             get { return ""; }
@@ -226,6 +235,8 @@ namespace Reisplanningssysteem_WPF.ViewModels
             .Any(b => b.ReisId == reis.Id) == true,
             g => g.Boekingen));
 
+            Monitors = new ObservableCollection<Gebruiker>(Gebruikers.Where(b => b.Boekingen.Where(b=>b.ReisId==reis.Id).Any(b => b.IsMonitor)));
+
             Reis = reis;
             BewerkenOfToevoegen = "Reis bewerken";
             BewerkenOfToevoegenButton = "Bewerken";
@@ -234,21 +245,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
             MaakHoofdmonitor = "MaakHoofdmonitor";
             Gebruiker geselecteerdeMonitor = reis.Boekingen.Where(b=>b.IsMonitor).Select(b=>b.Gebruiker).FirstOrDefault();
 
-            ToonMonitor(geselecteerdeMonitor);
-
             ViewOpvullen();
-        }
-
-        private void ToonMonitor(Gebruiker monitor)
-        {
-            if (monitor != null)
-            {
-                Monitor = $"Monitor: {monitor.Voornaam} {monitor.Achternaam}";
-            }
-            else
-            {
-                Monitor = "";
-            }
         }
 
 
@@ -260,13 +257,12 @@ namespace Reisplanningssysteem_WPF.ViewModels
             }
             else
             {
-
+                if (Monitors.Contains(TeVerwijderenGebruiker))
+                {
+                    Monitors.Remove(TeVerwijderenGebruiker);
+                }
                 AlleGebruikers.Add(TeVerwijderenGebruiker);
                 Boeking boeking = _unitOfWork.BoekingRepo.Ophalen(x => x.Gebruiker == TeVerwijderenGebruiker && x.Reis == Reis).First();
-                if (boeking.IsMonitor)
-                {
-                    ToonMonitor(null);
-                }
                 _unitOfWork.BoekingRepo.Verwijderen(boeking);
                 Gebruikers.Remove(TeVerwijderenGebruiker);
                 TeVerwijderenGebruiker = null;
@@ -283,19 +279,16 @@ namespace Reisplanningssysteem_WPF.ViewModels
             else
             {
 
-                if (!TeVerwijderenGebruiker.HoofmonitorCursus)
+                if (!TeVerwijderenGebruiker.BasisCursus)
                 {
-                    Foutmelding = "Deze gebruiker heeft geen hoofdmonitor cursus behaald";
-                }else if (Reis.Boekingen.Any(b=> b.IsMonitor))
-                {
-                    Foutmelding = "Er is al een monitor gelinkt aan deze reis";
-                }
-                else
+                    Foutmelding = "Deze gebruiker heeft geen monitor cursus behaald";
+                }else
                 {
                     Boeking boeking = _unitOfWork.BoekingRepo.Ophalen(x => x.Gebruiker == TeVerwijderenGebruiker && x.Reis == Reis).First();
                     boeking.IsMonitor= true;
+                    Monitors.Add(TeVerwijderenGebruiker);
                     _unitOfWork.BoekingRepo.Bewerken(boeking);
-                    ToonMonitor(TeVerwijderenGebruiker);
+
                 }
             }
         }
@@ -315,8 +308,6 @@ namespace Reisplanningssysteem_WPF.ViewModels
 
             if (GeselecteerdeGebruiker != null)
             {
-
-                Gebruikers.Add(GeselecteerdeGebruiker);
                 Boeking boeking = new Boeking
                 {
                     Gebruiker = GeselecteerdeGebruiker,
@@ -325,6 +316,10 @@ namespace Reisplanningssysteem_WPF.ViewModels
                     IsMonitor = false,
                     InschrijvingsDatum = DateTime.Now
                 };
+
+                GeselecteerdeGebruiker.Boekingen.Add(boeking);
+
+                Gebruikers.Add(GeselecteerdeGebruiker);
                 _unitOfWork.BoekingRepo.Toevoegen(boeking);
                 AlleGebruikers.Remove(GeselecteerdeGebruiker);
                 GeselecteerdeGebruiker = null;

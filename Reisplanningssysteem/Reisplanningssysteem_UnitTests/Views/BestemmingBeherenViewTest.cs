@@ -15,7 +15,7 @@ namespace Reisplanningssysteem_UnitTests.Views
         [Test]
         public void BestemmingToevoegen()
         {
-            var app = Application.Launch(@"C:\Users\Gilles Lagrilli\Documents\School\Agile en testing\Project\Reisplanningsysteem\Reisplanningssysteem\Reisplanningssysteem_WPF\bin\Debug\net6.0-windows\Reisplanningssysteem_WPF.exe");
+            var app = Application.Launch(@"C:\Users\Dre\OneDrive\Desktop\tm\agile\Reisplanningsysteem\Reisplanningssysteem\Reisplanningssysteem_WPF\bin\Debug\net6.0-windows\Reisplanningssysteem_WPF.exe");
             using (var automation = new UIA3Automation())
             {
                 //Arrange
