@@ -79,7 +79,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
             BewerkenOfToevoegenButton = "Bewerken";
         }
 
-        private void Toevoegen()
+        public void Toevoegen()
         {
             if (Categorie == null)
             {

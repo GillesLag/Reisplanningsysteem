@@ -60,5 +60,46 @@ namespace Reisplanningssysteem_UnitTests.Data.UnitOfWork
             Assert.NotNull(gemeentes);
             Assert.IsInstanceOf<ObservableCollection<Gemeente>>(gemeentes);
         }
+        [Test]
+        public void Ophalen_ReturnsObservableCollectionOfTypeThema()
+        {
+            //Arrange
+            ObservableCollection<Thema> themas;
+
+            //Act
+            themas = new ObservableCollection<Thema>(_unitOfWork.ThemaRepo.Ophalen());
+
+            //Assert
+            Assert.NotNull(themas);
+            Assert.IsInstanceOf<ObservableCollection<Thema>>(themas);
+        }
+
+        [Test]
+        public void Ophalen_ReturnsObservableCollectionOfTypeLeeftijdsCategorie()
+        {
+            //Arrange
+            ObservableCollection<LeeftijdsCategorie> leeftijdscategorieen;
+
+            //Act
+            leeftijdscategorieen = new ObservableCollection<LeeftijdsCategorie>(_unitOfWork.LeeftijdsCategorieRepo.Ophalen());
+
+            //Assert
+            Assert.NotNull(leeftijdscategorieen);
+            Assert.IsInstanceOf<ObservableCollection<LeeftijdsCategorie>>(leeftijdscategorieen);
+        }
+
+        [Test]
+        public void Ophalen_ReturnsObservableCollectionOfCursus()
+        {
+            //Arrange
+            ObservableCollection<Cursus> cursussen;
+
+            //Act
+            cursussen = new ObservableCollection<Cursus>(_unitOfWork.CursusRepo.Ophalen());
+
+            //Assert
+            Assert.NotNull(cursussen);
+            Assert.IsInstanceOf<ObservableCollection<Cursus>>(cursussen);
+        }
     }
 }

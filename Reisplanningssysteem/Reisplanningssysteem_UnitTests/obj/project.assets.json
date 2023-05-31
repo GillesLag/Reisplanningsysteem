@@ -11155,11 +11155,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Dre\\OneDrive\\Desktop\\tm\\agile\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_UnitTests\\Reisplanningssysteem_UnitTests.csproj",
+      "projectUniqueName": "C:\\Users\\Dre\\OneDrive\\Desktop\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_UnitTests\\Reisplanningssysteem_UnitTests.csproj",
       "projectName": "Reisplanningssysteem_UnitTests",
-      "projectPath": "C:\\Users\\Dre\\OneDrive\\Desktop\\tm\\agile\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_UnitTests\\Reisplanningssysteem_UnitTests.csproj",
+      "projectPath": "C:\\Users\\Dre\\OneDrive\\Desktop\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_UnitTests\\Reisplanningssysteem_UnitTests.csproj",
       "packagesPath": "C:\\Users\\Dre\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Dre\\OneDrive\\Desktop\\tm\\agile\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_UnitTests\\obj\\",
+      "outputPath": "C:\\Users\\Dre\\OneDrive\\Desktop\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_UnitTests\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Dre\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -11176,11 +11176,11 @@
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "projectReferences": {
-            "C:\\Users\\Dre\\OneDrive\\Desktop\\tm\\agile\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_DAL\\Reisplanningssysteem_DAL.csproj": {
-              "projectPath": "C:\\Users\\Dre\\OneDrive\\Desktop\\tm\\agile\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_DAL\\Reisplanningssysteem_DAL.csproj"
+            "C:\\Users\\Dre\\OneDrive\\Desktop\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_DAL\\Reisplanningssysteem_DAL.csproj": {
+              "projectPath": "C:\\Users\\Dre\\OneDrive\\Desktop\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_DAL\\Reisplanningssysteem_DAL.csproj"
             },
-            "C:\\Users\\Dre\\OneDrive\\Desktop\\tm\\agile\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_WPF\\Reisplanningssysteem_WPF.csproj": {
-              "projectPath": "C:\\Users\\Dre\\OneDrive\\Desktop\\tm\\agile\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_WPF\\Reisplanningssysteem_WPF.csproj"
+            "C:\\Users\\Dre\\OneDrive\\Desktop\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_WPF\\Reisplanningssysteem_WPF.csproj": {
+              "projectPath": "C:\\Users\\Dre\\OneDrive\\Desktop\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_WPF\\Reisplanningssysteem_WPF.csproj"
             }
           }
         }
