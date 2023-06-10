@@ -152,5 +152,10 @@
                 Content="Bevestig"
                 Margin="5"
                 Command="{Binding}" CommandParameter="Bevestig" />
+
+        <Label Grid.Column="1"
+               Grid.Row="6"
+               Content="{Binding Foutmelding}"
+               Foreground="Red"/>
     </Grid>
 </Window>

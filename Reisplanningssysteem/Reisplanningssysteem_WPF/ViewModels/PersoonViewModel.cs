@@ -45,6 +45,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
         public PersoonViewModel()
         {
             GebruikerRecord = new Gebruiker();
+            GebruikerRecord.GemeenteId = -1;
             Bewerkmodus = false;
             List<Gemeente> gemeentes = _unitOfWork.GemeenteRepo.Ophalen().OrderBy(g => g.Naam).ToList();
             Gemeentes = new ObservableCollection<Gemeente>(gemeentes);
@@ -53,7 +54,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
         public string Foutmelding
         {
             get { return _foutmelding; }
-            set { _foutmelding = value; NotifyPropertyChanged(); }
+            set { _foutmelding = value; }
         }
         public bool Bewerkmodus
         {
@@ -64,30 +65,19 @@ namespace Reisplanningssysteem_WPF.ViewModels
 
         public override string this[string columnName]
         {
-            get
-            {
-                return "";
-            }
+            get { return ""; }
         }
 
         public Gebruiker GebruikerRecord
         {
             get { return _gebruikerRecord; }
-            set
-            {
-                _gebruikerRecord = value;
-                NotifyPropertyChanged();
-            }
+            set { _gebruikerRecord = value; }
         }
 
         public ObservableCollection<Gemeente> Gemeentes
         {
             get { return _gemeentes; }
-            set
-            {
-                _gemeentes = value;
-                NotifyPropertyChanged();
-            }
+            set { _gemeentes = value; }
         }
 
         public void Bevestig()
@@ -126,6 +116,10 @@ namespace Reisplanningssysteem_WPF.ViewModels
                             Foutmelding = "Gebruiker is niet aangepast!";
                         }
                     }
+                }
+                else
+                {
+                    Foutmelding = GebruikerRecord.Error;
                 }
             }
         }

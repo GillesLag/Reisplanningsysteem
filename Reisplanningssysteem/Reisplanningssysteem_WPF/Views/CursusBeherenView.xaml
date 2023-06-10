@@ -51,7 +51,7 @@
                  Grid.Row="1"
                  Margin="5"
                  FontSize="18"
-                 Text="{Binding Cursus.Naam, ValidatesOnDataErrors=True}"/>
+                 Text="{Binding Cursus.Naam}"/>
             <Label  Content="Gebruiker:"
                 VerticalAlignment="Center"
                 materialDesign:HintAssist.Hint="Zoekterm"

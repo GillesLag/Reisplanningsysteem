@@ -13,27 +13,43 @@ namespace Reisplanningssysteem_Models
         {
             get
             {
-                if (columnName == "Voornaam" && string.IsNullOrWhiteSpace(Voornaam))
+                if (columnName == nameof(Voornaam) && string.IsNullOrWhiteSpace(Voornaam))
                 {
                     return "Voornaam moet ingevuld zijn";
                 }
-                if (columnName == "Achternaam" && string.IsNullOrWhiteSpace(Achternaam))
+                if (columnName == nameof(Achternaam) && string.IsNullOrWhiteSpace(Achternaam))
                 {
                     return "Achternaam moet ingevuld zijn";
                 }
-                if (columnName == "Email" && string.IsNullOrWhiteSpace(Email))
+                if (columnName == nameof(Email) && string.IsNullOrWhiteSpace(Email))
                 {
                     return "Email moet ingevuld zijn";
                 }
-                if (columnName == "Straat" && string.IsNullOrWhiteSpace(Straat))
+                if (columnName == nameof(Email) && !string.IsNullOrWhiteSpace(Email))
+                {
+                    string error1 = string.Empty;
+                    string error2 = string.Empty;
+                    if (!Email.Contains('@'))
+                    {
+                        error1 = "Emailadres moet een '@' bevatten.";
+                    }
+
+                    if (!Email.Contains('.'))
+                    {
+                        error2 = "Emailadres moet een '.' bevatten";
+                    }
+
+                    return string.Join(Environment.NewLine, error1, error2);
+                }
+                if (columnName == nameof(Straat) && string.IsNullOrWhiteSpace(Straat))
                 {
                     return "Straat moet ingevuld zijn";
                 }
-                if (columnName == "Huisnummer" && string.IsNullOrWhiteSpace(Huisnummer))
+                if (columnName == nameof(Huisnummer) && string.IsNullOrWhiteSpace(Huisnummer))
                 {
                     return "Huisnummer moet ingevuld zijn";
                 }
-                if (columnName == "GemeenteId" && GemeenteId==null)
+                if (columnName == nameof(GemeenteId) && GemeenteId == -1)
                 {
                     return "Gemeente moet geselecteerd zijn";
                 }

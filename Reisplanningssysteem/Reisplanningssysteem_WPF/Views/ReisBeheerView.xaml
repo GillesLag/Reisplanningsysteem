@@ -28,7 +28,7 @@
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <Label  Content="Reis"              
+        <Label  Content="{Binding BewerkenOfToevoegen}"              
                 materialDesign:HintAssist.Hint="Zoekterm"
                 Style="{StaticResource MaterialDesignLabel}"
                 VerticalAlignment="Center"

@@ -36,22 +36,9 @@ namespace Reisplanningssysteem_Models
                     }
                 }
 
-                if (columnName == nameof(LeeftijdMaximum))
+                if (columnName == nameof(LeeftijdMaximum) && LeeftijdMaximum < 0)
                 {
-                    if (LeeftijdMaximum - LeeftijdMinimum == 0)
-                    {
-                        return "Minimum en maximum leeftijd moet verschillend zijn.";
-                    }
-
-                    if (LeeftijdMinimum > LeeftijdMaximum)
-                    {
-                        return "Maximum leeftijd kan niet lager liggen dan minimum leeftijd";
-                    }
-
-                    if (LeeftijdMaximum < 0)
-                    {
-                        return "Maximum leeftijd kan niet minder zijn dan 0";
-                    }
+                    return "Maximum leeftijd kan niet minder zijn dan 0";
                 }
 
                 return "";

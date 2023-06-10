@@ -228,12 +228,12 @@ namespace Reisplanningssysteem_WPF.ViewModels
         public ReisBeherenViewModel(Reis reis)
         {
             AlleGebruikers = new ObservableCollection<Gebruiker>(_unitOfWork.GebruikerRepo.Ophalen(g => g.Boekingen
-            .Any(b => b.ReisId == reis.Id) == false,
-            g => g.Boekingen));
+                .Any(b => b.ReisId == reis.Id) == false,
+                g => g.Boekingen));
 
             Gebruikers = new ObservableCollection<Gebruiker>(_unitOfWork.GebruikerRepo.Ophalen(g => g.Boekingen
-            .Any(b => b.ReisId == reis.Id) == true,
-            g => g.Boekingen));
+                .Any(b => b.ReisId == reis.Id) == true,
+                g => g.Boekingen));
 
             Monitors = new ObservableCollection<Gebruiker>(Gebruikers.Where(b => b.Boekingen.Where(b=>b.ReisId==reis.Id).Any(b => b.IsMonitor)));
 
@@ -248,7 +248,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
             ViewOpvullen();
         }
 
-
+            
         private void Verwijderen()
         {
             if (TeVerwijderenGebruiker == null)
@@ -282,7 +282,12 @@ namespace Reisplanningssysteem_WPF.ViewModels
                 if (!TeVerwijderenGebruiker.BasisCursus)
                 {
                     Foutmelding = "Deze gebruiker heeft geen monitor cursus behaald";
-                }else
+                }
+                else if (Monitors.Contains(TeVerwijderenGebruiker))
+                {
+                    Foutmelding = "Deze gebruiker is al een monitor.";
+                }
+                else
                 {
                     Boeking boeking = _unitOfWork.BoekingRepo.Ophalen(x => x.Gebruiker == TeVerwijderenGebruiker && x.Reis == Reis).First();
                     boeking.IsMonitor= true;
@@ -299,11 +304,16 @@ namespace Reisplanningssysteem_WPF.ViewModels
             {
                 Foutmelding = "Gelieven een gebruiker te selecteren";
             }
-            else if (Reis.Id <= 0)
+            else if (Reis.IsGeldig() && Reis.Id <= 0)
             {
                 _unitOfWork.ReisRepo.Toevoegen(Reis);
                 UpdateReizen();
                 BewerkenOfToevoegenButton = "Bewerken";
+            }
+            else
+            {
+                Foutmelding = Reis.Error;
+                return;
             }
 
             if (GeselecteerdeGebruiker != null)
