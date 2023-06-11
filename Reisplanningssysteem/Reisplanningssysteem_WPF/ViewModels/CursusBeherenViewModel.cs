@@ -153,11 +153,11 @@ namespace Reisplanningssysteem_WPF.ViewModels
         public CursusBeherenViewModel(Cursus cursus)
         {
             AlleGebruikers = new ObservableCollection<Gebruiker>(_unitOfWork.GebruikerRepo.Ophalen(g => g.GebruikerCursussen
-                .Any(gc => gc.GebruikerId == cursus.Id) == false)
+                .Any(gc => gc.CursusId == cursus.Id) == false)
                 .OrderBy(g => g.ToString()));
               
             Gebruikers = new ObservableCollection<Gebruiker>(_unitOfWork.GebruikerRepo.Ophalen(g => g.GebruikerCursussen
-                .Any(gc => gc.GebruikerId == cursus.Id) == true, g => g.GebruikerCursussen)
+                .Any(gc => gc.CursusId == cursus.Id) == true, g => g.GebruikerCursussen)
                 .OrderBy(g => g.ToString()));
 
             Cursus = cursus;

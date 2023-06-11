@@ -1,3 +1,0 @@
-- validatie pas toepassen na het invullen of een zachter kleur gebruiken.
-- een view gebruiken en dit updaten met andere viewmodels.
-- zoekfunctie toevoegen aan usecase personen beheren en andere usecases.

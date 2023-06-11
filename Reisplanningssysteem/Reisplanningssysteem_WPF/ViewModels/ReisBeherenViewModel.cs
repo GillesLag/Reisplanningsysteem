@@ -10,6 +10,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Documents;
 using System.Threading;
 using Reisplanningssysteem_DAL.Data.UnitOfWork;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Reisplanningssysteem_WPF.ViewModels
 {
@@ -310,7 +311,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
                 UpdateReizen();
                 BewerkenOfToevoegenButton = "Bewerken";
             }
-            else
+            if (!string.IsNullOrEmpty(Reis.Error))
             {
                 Foutmelding = Reis.Error;
                 return;
@@ -327,6 +328,10 @@ namespace Reisplanningssysteem_WPF.ViewModels
                     InschrijvingsDatum = DateTime.Now
                 };
 
+                if (GeselecteerdeGebruiker.Boekingen==null)
+                {
+                    GeselecteerdeGebruiker.Boekingen=new List<Boeking>();
+                }
                 GeselecteerdeGebruiker.Boekingen.Add(boeking);
 
                 Gebruikers.Add(GeselecteerdeGebruiker);
