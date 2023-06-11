@@ -1,9 +1,9 @@
 # Reisplanningsysteem
 
-## Github
+##Github
 https://github.com/GillesLag/Reisplanningsysteem
 
-## Setup
+##Setup
 1.	Start reisplanningssysteem solution
 2.	Tools  Nuget Package manager  Package Manager Console
 3.	Selecteer Reisplannningssysteem_DAL bij default project
