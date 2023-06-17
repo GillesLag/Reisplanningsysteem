@@ -61,7 +61,10 @@ namespace Reisplanningssysteem_WPF.ViewModels
         public ObservableCollection<Reis> Reizen
         {
             get { return _reizen; }
-            set { _reizen = value; }
+            set { 
+                _reizen = value;
+                NotifyPropertyChanged();
+            }
         }
 
         private Onkost _geselecteerdeOnkost;
@@ -104,8 +107,6 @@ namespace Reisplanningssysteem_WPF.ViewModels
             Reizen = new ObservableCollection<Reis>(AlleReizen);
             GeselecteerdeOnkost = null;
             
-
-
         }
         private void OpenOnkostToevoegen()
         {
