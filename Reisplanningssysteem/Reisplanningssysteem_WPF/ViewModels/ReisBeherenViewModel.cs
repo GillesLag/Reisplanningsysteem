@@ -268,8 +268,9 @@ namespace Reisplanningssysteem_WPF.ViewModels
                 Gebruikers.Remove(TeVerwijderenGebruiker);
                 TeVerwijderenGebruiker = null;
             }
-        }
 
+            UpdateReizen();
+        }
 
         private void hoofMonitorLinken()
         {

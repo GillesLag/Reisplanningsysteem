@@ -103,6 +103,9 @@ namespace Reisplanningssysteem_WPF.ViewModels
             AlleReizen = _unitOfWork.ReisRepo.Ophalen(r => r.Onkosten).OrderBy(r => r.Naam).ToList();
             Reizen = new ObservableCollection<Reis>(AlleReizen);
             GeselecteerdeOnkost = null;
+            
+
+
         }
         private void OpenOnkostToevoegen()
         {

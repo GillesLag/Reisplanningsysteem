@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using Reisplanningssysteem_WPF.Utils;
 using Reisplanningssysteem_WPF.Views;
 using Reisplanningssysteem_DAL.Data.UnitOfWork;
+using System.Windows;
 
 namespace Reisplanningssysteem_WPF.ViewModels
 {
@@ -91,13 +92,21 @@ namespace Reisplanningssysteem_WPF.ViewModels
 
         private void Verwijderen()
         {
+            int ok = 0;
             if (GeselecteerdeReis == null)
             {
                 Foutmelding = "Selecteer eerst een Reis!";
                 return;
             }
 
-            int ok = _unitOfWork.ReisRepo.Verwijderen(GeselecteerdeReis);
+            try
+            {
+                ok = _unitOfWork.ReisRepo.Verwijderen(GeselecteerdeReis);
+            }catch(Exception ex)
+            {
+                MessageBox.Show("Er zijn leden ingeschreven voor deze reis. Gelieven de boekingen eerst te verwijderen");
+                return;
+            }
 
             if (ok == 0)
             {

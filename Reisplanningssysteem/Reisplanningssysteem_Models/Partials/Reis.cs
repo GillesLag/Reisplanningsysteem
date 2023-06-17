@@ -52,7 +52,7 @@ namespace Reisplanningssysteem_Models
                     int datumVergelijking = DateTime.Compare(BeginDatum, EindDatum);
                     if (datumVergelijking >= 0)
                     {
-                        return "Einddatum moet voor begindatum liggen";
+                        return "Einddatum moet na begindatum liggen";
                     }
                 }
 
