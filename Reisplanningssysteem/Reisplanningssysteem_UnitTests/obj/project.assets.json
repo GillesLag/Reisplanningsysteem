@@ -11150,19 +11150,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Dre\\.nuget\\packages\\": {}
+    "C:\\Users\\Gilles Lagrilli\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Dre\\OneDrive\\Desktop\\Reisplanningssysteem\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_UnitTests\\Reisplanningssysteem_UnitTests.csproj",
+      "projectUniqueName": "C:\\Users\\Gilles Lagrilli\\Documents\\School\\Agile en testing\\Project juist\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_UnitTests\\Reisplanningssysteem_UnitTests.csproj",
       "projectName": "Reisplanningssysteem_UnitTests",
-      "projectPath": "C:\\Users\\Dre\\OneDrive\\Desktop\\Reisplanningssysteem\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_UnitTests\\Reisplanningssysteem_UnitTests.csproj",
-      "packagesPath": "C:\\Users\\Dre\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Dre\\OneDrive\\Desktop\\Reisplanningssysteem\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_UnitTests\\obj\\",
+      "projectPath": "C:\\Users\\Gilles Lagrilli\\Documents\\School\\Agile en testing\\Project juist\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_UnitTests\\Reisplanningssysteem_UnitTests.csproj",
+      "packagesPath": "C:\\Users\\Gilles Lagrilli\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Gilles Lagrilli\\Documents\\School\\Agile en testing\\Project juist\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_UnitTests\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Dre\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Gilles Lagrilli\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -11170,17 +11175,18 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "projectReferences": {
-            "C:\\Users\\Dre\\OneDrive\\Desktop\\Reisplanningssysteem\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_DAL\\Reisplanningssysteem_DAL.csproj": {
-              "projectPath": "C:\\Users\\Dre\\OneDrive\\Desktop\\Reisplanningssysteem\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_DAL\\Reisplanningssysteem_DAL.csproj"
+            "C:\\Users\\Gilles Lagrilli\\Documents\\School\\Agile en testing\\Project juist\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_DAL\\Reisplanningssysteem_DAL.csproj": {
+              "projectPath": "C:\\Users\\Gilles Lagrilli\\Documents\\School\\Agile en testing\\Project juist\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_DAL\\Reisplanningssysteem_DAL.csproj"
             },
-            "C:\\Users\\Dre\\OneDrive\\Desktop\\Reisplanningssysteem\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_WPF\\Reisplanningssysteem_WPF.csproj": {
-              "projectPath": "C:\\Users\\Dre\\OneDrive\\Desktop\\Reisplanningssysteem\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_WPF\\Reisplanningssysteem_WPF.csproj"
+            "C:\\Users\\Gilles Lagrilli\\Documents\\School\\Agile en testing\\Project juist\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_WPF\\Reisplanningssysteem_WPF.csproj": {
+              "projectPath": "C:\\Users\\Gilles Lagrilli\\Documents\\School\\Agile en testing\\Project juist\\Reisplanningsysteem\\Reisplanningssysteem\\Reisplanningssysteem_WPF\\Reisplanningssysteem_WPF.csproj"
             }
           }
         }
@@ -11244,7 +11250,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.103\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
       }
     }
   },

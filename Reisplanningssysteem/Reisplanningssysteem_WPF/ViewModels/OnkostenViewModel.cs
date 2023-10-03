@@ -61,10 +61,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
         public ObservableCollection<Reis> Reizen
         {
             get { return _reizen; }
-            set { 
-                _reizen = value;
-                NotifyPropertyChanged();
-            }
+            set { _reizen = value; }
         }
 
         private Onkost _geselecteerdeOnkost;
@@ -77,12 +74,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
 
         public OnkostenViewModel()
         {
-            AlleReizen = _unitOfWork.ReisRepo.Ophalen(r => r.Bestemming,
-                r => r.Hoofdmonitor,
-                r => r.Thema,
-                r => r.LeeftijdsCategorie,
-                r => r.Boekingen,
-                r => r.Onkosten).OrderBy(r => r.Naam).ToList();
+            AlleReizen = _unitOfWork.ReisRepo.Ophalen(r => r.Onkosten).OrderBy(r => r.Naam).ToList();
 
             Reizen = new ObservableCollection<Reis>(AlleReizen);
         }
@@ -96,6 +88,7 @@ namespace Reisplanningssysteem_WPF.ViewModels
             }
 
             int ok = _unitOfWork.OnkostRepo.Verwijderen(GeselecteerdeOnkost);
+            _unitOfWork.Save();
 
             if (ok == 0)
             {
@@ -106,7 +99,6 @@ namespace Reisplanningssysteem_WPF.ViewModels
             AlleReizen = _unitOfWork.ReisRepo.Ophalen(r => r.Onkosten).OrderBy(r => r.Naam).ToList();
             Reizen = new ObservableCollection<Reis>(AlleReizen);
             GeselecteerdeOnkost = null;
-            
         }
         private void OpenOnkostToevoegen()
         {

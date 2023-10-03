@@ -21,6 +21,6 @@ namespace Reisplanningssysteem_DAL.Data.UnitOfWork
         IRepository<Reis> ReisRepo { get; }
         IRepository<Thema> ThemaRepo { get; }
 
-        int Save();
+        Task<int> Save();
     }
 }

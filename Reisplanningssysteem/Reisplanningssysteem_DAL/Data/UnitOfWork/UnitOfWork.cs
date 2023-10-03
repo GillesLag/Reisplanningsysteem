@@ -153,9 +153,9 @@ namespace Reisplanningssysteem_DAL.Data.UnitOfWork
             Context.Dispose();
         }
 
-        public int Save()
+        public Task<int> Save()
         {
-            return Context.SaveChanges();
+            return Context.SaveChangesAsync();
         }
     }
 }
